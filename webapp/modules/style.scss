@@ -1,0 +1,51 @@
+@import 'variable.scss';
+@import "base/base.scss";
+@import "login/login.scss";
+@import "home/home.scss";
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+@import "../node_modules/angular-material/angular-material.min.css";
+@import "../vendor/styles/bootstrap.min.css";
+
+body,
+html,
+ui-view {
+    height: 100%;
+    width: 100%;
+    * {
+        outline: none;
+    }
+}
+
+body {
+    overflow: hidden;
+    font-family: $app-font-family;
+    font-size: $app-font-size;
+    background: transparent;
+}
+
+.center-content {
+    ui-view.ng-leave {}
+    ui-view.ng-enter {
+        transition: all .8s;
+        display: block;
+        opacity: 0;
+        transform: none;
+    }
+    ui-view.ng-enter.ng-enter-active {
+        opacity: 1;
+        transform: none;
+    }
+    ui-view.ng-leave.ng-leave-active {
+        opacity: 0;
+        transform: none;
+    }
+}
+
+.animate-show-hide.ng-hide {
+    opacity: 0;
+}
+
+.animate-show-hide.ng-hide-add,
+.animate-show-hide.ng-hide-remove {
+    transition: all linear 0.5s;
+}

@@ -1,0 +1,35 @@
+<!-- MultiStep Form -->
+<div class="home">
+
+    <div id="form_wrapper" style="display: none;">
+        <!-- progressbar -->
+        <ul id="progressbar" class="row">
+            <li class="active col-2 text-center">Stage 1</li>
+            <li class="col-2 text-center">Stage 2</li>
+            <li class="col-2 text-center">Stage 3</li>
+            <li class="col-2 text-center">Stage 4</li>
+            <li class="col-2 text-center">Stage 5</li>
+            <li class="col-2 text-center">Stage 6</li>
+        </ul>
+        <form>
+            Form goes here
+        </form>
+    </div>
+
+    <div class="dashboard" id="dashboard">
+        <div class="heading clearfix">
+            <h3 class="pull-left">Welcome, Test </h3>
+            <button class="btn btn-info btn-sm pull-right" ng-click="vm.showForm(1);">Complete Stage</button>
+        </div>
+        <div class="mt-4">
+            <div class="clearfix">
+                <div class="pull-left">Your Progress</div>
+                <div class="pull-right">Stage 1/6</div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.MultiStep Form -->

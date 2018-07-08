@@ -1,0 +1,28 @@
+ header {
+     background-color: $primary-color;
+     height: 50px;
+     .header-content {
+         max-width: 80%;
+         margin: 0 auto;
+         height: 100%;
+         line-height: 50px;
+         img {
+             height: 100%;
+         }
+     }
+ }
+
+ .center-wrapper {
+     .center-container {
+         max-width: 80%;
+         margin: 0 auto;
+         height: 100%;
+     }
+ }
+
+ footer {
+     height: 50px;
+     background-color: #333;
+     color: #fff;
+     line-height: 50px;
+ }
