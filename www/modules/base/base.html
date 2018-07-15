@@ -1,11 +1,18 @@
 <header>
     <div class="header-content clearfix">
         <img class="img-fluid pull-left" src="images/login/logo.png" />
-        <div class="pull-right text-right text-white" ng-click="vm.logout();">
+        <div class="pull-right text-right text-white" ng-click="vm.logout();" style="cursor: pointer;">
             Logout
         </div>
     </div>
 </header>
+<nav>
+    <div class="nav-content">
+        <span class="nav-item" ng-repeat="item in vm.navList" ng-class="{'active':item.active}" ng-click="vm.changeNavigation(item, $index)">
+        {{item.title}}
+        </span>
+    </div>
+</nav>
 
 
 

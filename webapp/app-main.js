@@ -15,8 +15,7 @@
                 templateUrl: 'modules/base/base.html',
                 controller: 'mainController',
                 controllerAs: 'vm'
-            })
-            .state('login', {
+            }).state('login', {
                 url: '/login',
                 params: {
                     id: undefined
@@ -24,11 +23,15 @@
                 templateUrl: 'modules/login/login.html',
                 controller: 'loginController',
                 controllerAs: 'vm'
-            })
-            .state('app.home', {
+            }).state('app.home', {
                 url: 'home',
                 templateUrl: 'modules/home/home.html',
                 controller: 'homeController',
+                controllerAs: 'vm'
+            }).state('app.workbook', {
+                url: 'workbook',
+                templateUrl: 'modules/workbook/workbook.html',
+                controller: 'workbookController',
                 controllerAs: 'vm'
             });
 

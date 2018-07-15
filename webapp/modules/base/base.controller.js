@@ -29,6 +29,18 @@
                         vm.setCenterheight();
                     }, 100)
             });
+
+            vm.navList = [{
+                title: "Home",
+                active: true,
+                href: "app.home"
+            }, {
+                title: "WorkBook",
+                active: false,
+                href: "app.workbook"
+            }];
+
+            vm.currentNavIdx = 0;
         };
 
         /**
@@ -42,16 +54,27 @@
                 hHeight = (document.getElementsByTagName('header')[0]) ? document.getElementsByTagName('header')[0].offsetHeight : 0,
                 centerContent = $('#center-wrapper');
 
-            if (centerContent) { 
+            if (centerContent) {
                 centerContent.css("minHeight", html.clientHeight - (100) + "px");
             }
             vm.adjusting = false;
         };
-
+        /**
+         *
+         */
+        vm.changeNavigation = function (item, index) {
+            vm.navList[vm.currentNavIdx].active = false;
+            vm.currentNavIdx = index;            
+            item.active = true;
+            $state.go(item.href);
+            $timeout();
+        }
         /**
          * logout action
          **/
         vm.logout = function () {
+            apiService.logout();
+            return;
             var confirm = $mdDialog.confirm()
                 .title('Confirm logout?')
                 .ok('Yes')

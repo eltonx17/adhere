@@ -15,17 +15,28 @@
 
         function init() {
             vm.appTitle = appConfig.title; // binds app title from config
+            vm.getComments();
         };
 
-        vm.showForm = function (action) {
-            if (action) {
-                $("#dashboard").hide();
-                $("#form_wrapper").slideToggle();
-            } else {
-                $("#form_wrapper").hide();
-                $("#dashboard").slideToggle();
-            }
+        vm.getComments = function () {
+            vm.commentList = [{
+                comment: "This is a test comment from Nidhin",
+                from : "Nidhin",
+                pic : "",
+                time : new Date(),
+                id : "123"
+            },{
+                comment: "This is a test comment from Sourabh",
+                from : "Sourabh",
+                pic : "",
+                time : new Date(),
+                id : "864"
+            }];
         };
+        vm.showReplySection = function(id){
+            debugger
+            $("#comment-reply-"+id).slideToggle();
+        }
 
         init();
 

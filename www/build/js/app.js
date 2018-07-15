@@ -16,8 +16,7 @@
                 templateUrl: 'modules/base/base.html',
                 controller: 'mainController',
                 controllerAs: 'vm'
-            })
-            .state('login', {
+            }).state('login', {
                 url: '/login',
                 params: {
                     id: undefined
@@ -25,11 +24,15 @@
                 templateUrl: 'modules/login/login.html',
                 controller: 'loginController',
                 controllerAs: 'vm'
-            })
-            .state('app.home', {
+            }).state('app.home', {
                 url: 'home',
                 templateUrl: 'modules/home/home.html',
                 controller: 'homeController',
+                controllerAs: 'vm'
+            }).state('app.workbook', {
+                url: 'workbook',
+                templateUrl: 'modules/workbook/workbook.html',
+                controller: 'workbookController',
                 controllerAs: 'vm'
             });
 
@@ -44,79 +47,6 @@
 
     }
 
-
-})();
-/**
- * Adhere
- **/
-(function () {
-    "use strict";
-
-    mainController.$inject = ["$scope", "$state", "$window", "$timeout", "$transitions", "$http", "appConfig", "apiService", "$rootScope", "$mdDialog"];
-    angular
-        .module('adhere')
-        .controller('mainController', mainController);
-
-    /* ngInject */
-    function mainController($scope, $state, $window, $timeout, $transitions, $http, appConfig, apiService, $rootScope, $mdDialog) {
-        var vm = this;
-        vm.online = true;
-
-        /**
-         * exection starts here
-         **/
-        function init() {
-
-            /** set the center div height **/
-            vm.setCenterheight();
-
-            /** set the center div height on resize **/
-            angular.element($window).bind('resize', function () {
-                if (!vm.adjusting)
-                    $timeout(function () {
-                        vm.adjusting = true;
-                        vm.setCenterheight();
-                    }, 100)
-            });
-        };
-
-        /**
-         * set the center div height
-         **/
-        vm.setCenterheight = function () {
-            if (!document.getElementsByTagName('header'))
-                return; // retruns if view is not rendereded(login page)
-
-            var html = document.documentElement,
-                hHeight = (document.getElementsByTagName('header')[0]) ? document.getElementsByTagName('header')[0].offsetHeight : 0,
-                centerContent = $('#center-wrapper');
-
-            if (centerContent) { 
-                centerContent.css("minHeight", html.clientHeight - (100) + "px");
-            }
-            vm.adjusting = false;
-        };
-
-        /**
-         * logout action
-         **/
-        vm.logout = function () {
-            var confirm = $mdDialog.confirm()
-                .title('Confirm logout?')
-                .ok('Yes')
-                .cancel('No');
-
-            $mdDialog.show(confirm).then(function () {
-                apiService.logout();
-            }, function () {
-
-            });
-        };
-
-
-        init();
-
-    }
 
 })();
 //set global configuration of application and it can be accessed by injecting appConstants in any modules
@@ -223,6 +153,102 @@
 (function () {
     "use strict";
 
+    mainController.$inject = ["$scope", "$state", "$window", "$timeout", "$transitions", "$http", "appConfig", "apiService", "$rootScope", "$mdDialog"];
+    angular
+        .module('adhere')
+        .controller('mainController', mainController);
+
+    /* ngInject */
+    function mainController($scope, $state, $window, $timeout, $transitions, $http, appConfig, apiService, $rootScope, $mdDialog) {
+        var vm = this;
+        vm.online = true;
+
+        /**
+         * exection starts here
+         **/
+        function init() {
+
+            /** set the center div height **/
+            vm.setCenterheight();
+
+            /** set the center div height on resize **/
+            angular.element($window).bind('resize', function () {
+                if (!vm.adjusting)
+                    $timeout(function () {
+                        vm.adjusting = true;
+                        vm.setCenterheight();
+                    }, 100)
+            });
+
+            vm.navList = [{
+                title: "Home",
+                active: true,
+                href: "app.home"
+            }, {
+                title: "WorkBook",
+                active: false,
+                href: "app.workbook"
+            }];
+
+            vm.currentNavIdx = 0;
+        };
+
+        /**
+         * set the center div height
+         **/
+        vm.setCenterheight = function () {
+            if (!document.getElementsByTagName('header'))
+                return; // retruns if view is not rendereded(login page)
+
+            var html = document.documentElement,
+                hHeight = (document.getElementsByTagName('header')[0]) ? document.getElementsByTagName('header')[0].offsetHeight : 0,
+                centerContent = $('#center-wrapper');
+
+            if (centerContent) {
+                centerContent.css("minHeight", html.clientHeight - (100) + "px");
+            }
+            vm.adjusting = false;
+        };
+        /**
+         *
+         */
+        vm.changeNavigation = function (item, index) {
+            vm.navList[vm.currentNavIdx].active = false;
+            vm.currentNavIdx = index;            
+            item.active = true;
+            $state.go(item.href);
+            $timeout();
+        }
+        /**
+         * logout action
+         **/
+        vm.logout = function () {
+            apiService.logout();
+            return;
+            var confirm = $mdDialog.confirm()
+                .title('Confirm logout?')
+                .ok('Yes')
+                .cancel('No');
+
+            $mdDialog.show(confirm).then(function () {
+                apiService.logout();
+            }, function () {
+
+            });
+        };
+
+
+        init();
+
+    }
+
+})();
+/**
+ * Adhere
+ **/
+(function () {
+    "use strict";
+
     homeController.$inject = ["$scope", "appConfig", "$timeout", "apiService", "$rootScope", "$state"];
     angular
         .module('adhere')
@@ -235,17 +261,28 @@
 
         function init() {
             vm.appTitle = appConfig.title; // binds app title from config
+            vm.getComments();
         };
 
-        vm.showForm = function (action) {
-            if (action) {
-                $("#dashboard").hide();
-                $("#form_wrapper").slideToggle();
-            } else {
-                $("#form_wrapper").hide();
-                $("#dashboard").slideToggle();
-            }
+        vm.getComments = function () {
+            vm.commentList = [{
+                comment: "This is a test comment from Nidhin",
+                from : "Nidhin",
+                pic : "",
+                time : new Date(),
+                id : "123"
+            },{
+                comment: "This is a test comment from Sourabh",
+                from : "Sourabh",
+                pic : "",
+                time : new Date(),
+                id : "864"
+            }];
         };
+        vm.showReplySection = function(id){
+            debugger
+            $("#comment-reply-"+id).slideToggle();
+        }
 
         init();
 
@@ -298,6 +335,31 @@
             $state.go("app.home")
         };
 
+
+        init();
+
+    }
+
+})();
+/**
+ * Adhere
+ **/
+(function () {
+    "use strict";
+
+    workbookController.$inject = ["$scope", "appConfig", "$timeout", "apiService", "$rootScope", "$state"];
+    angular
+        .module('adhere')
+        .controller('workbookController', workbookController);
+
+    /* ngInject */
+    function workbookController($scope, appConfig, $timeout, apiService, $rootScope, $state) {
+        var vm = this;
+
+
+        function init() {
+            vm.appTitle = appConfig.title; // binds app title from config
+        };
 
         init();
 
