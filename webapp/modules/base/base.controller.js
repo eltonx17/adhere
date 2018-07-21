@@ -17,6 +17,7 @@
          * exection starts here
          **/
         function init() {
+            vm.user = window.localStorage.getItem('user') ? angular.fromJson(window.localStorage.getItem('user')) : undefined;
 
             /** set the center div height **/
             vm.setCenterheight();
@@ -29,20 +30,41 @@
                         vm.setCenterheight();
                     }, 100)
             });
-
-            vm.navList = [{
-                title: "Home",
-                active: true,
-                href: "app.home"
-            }, {
-                title: "WorkBook",
-                active: false,
-                href: "app.workbook"
-            }];
-
             vm.currentNavIdx = 0;
+            vm.setNav();
         };
-
+        /**
+         * set the center div height
+         **/
+        vm.setNav = function () {
+            if (vm.user.type == "admin") {
+                vm.navList = [{
+                    title: "Home",
+                    active: true,
+                    href: "app.home"
+            }];
+            } else {
+                vm.navList = [{
+                    title: "Home",
+                    active: true,
+                    href: "app.home"
+            }, {
+                    title: "WorkBook",
+                    active: false,
+                    href: "app.workbook"
+            }];
+            }
+        };
+        /**
+         *
+         */
+        vm.changeNavigation = function (item, index) {
+            vm.navList[vm.currentNavIdx].active = false;
+            vm.currentNavIdx = index;
+            item.active = true;
+            $state.go(item.href);
+            $timeout();
+        }
         /**
          * set the center div height
          **/
@@ -59,16 +81,7 @@
             }
             vm.adjusting = false;
         };
-        /**
-         *
-         */
-        vm.changeNavigation = function (item, index) {
-            vm.navList[vm.currentNavIdx].active = false;
-            vm.currentNavIdx = index;            
-            item.active = true;
-            $state.go(item.href);
-            $timeout();
-        }
+
         /**
          * logout action
          **/

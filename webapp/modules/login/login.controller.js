@@ -15,11 +15,8 @@
 
         function init() {
 
-            vm.appTitle = appConfig.title; // binds app title from config            
-
-            $timeout(function () {
-                vm.showScreen = true;
-            });
+            vm.appTitle = appConfig.title; // binds app title from config  
+            vm.formData = {};
 
             // binds the resize event
             angular.element(window).bind('resize', function () {
@@ -36,11 +33,21 @@
          * login function
          **/
         vm.login = function (ev) {
-
             if (ev)
                 ev.stopPropagation();
 
-            $state.go("app.home")
+            if (vm.formData.username && vm.formData.password) {
+                var userInfo = {};
+                if (vm.formData.username == "admin") {
+                    userInfo.type = "admin";
+                    window.localStorage.setItem('user', angular.toJson(userInfo));
+                    $state.go("app.adminHome")
+                } else {
+                    userInfo.type = "user";
+                    window.localStorage.setItem('user', angular.toJson(userInfo));
+                    $state.go("app.home")
+                }
+            }
         };
 
 

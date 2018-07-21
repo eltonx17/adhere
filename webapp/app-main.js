@@ -28,6 +28,11 @@
                 templateUrl: 'modules/home/home.html',
                 controller: 'homeController',
                 controllerAs: 'vm'
+            }).state('app.adminHome', {
+                url: 'adminHome',
+                templateUrl: 'modules/adminHome/adminHome.html',
+                controller: 'adminHomeController',
+                controllerAs: 'vm'
             }).state('app.workbook', {
                 url: 'workbook',
                 templateUrl: 'modules/workbook/workbook.html',

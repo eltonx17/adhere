@@ -2,6 +2,7 @@
 @import "base/base.scss";
 @import "login/login.scss";
 @import "home/home.scss";
+@import "adminHome/adminHome.scss";
 @import "workbook/workbook.scss";
 @import "../node_modules/font-awesome/css/font-awesome.min.css";
 @import "../node_modules/angular-material/angular-material.min.css";
@@ -19,6 +20,7 @@ ui-view {
 
 body {
     overflow: hidden;
+    overflow-y: auto;
     font-family: $app-font-family;
     font-size: $app-font-size;
     background: transparent;

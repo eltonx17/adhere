@@ -29,6 +29,11 @@
                 templateUrl: 'modules/home/home.html',
                 controller: 'homeController',
                 controllerAs: 'vm'
+            }).state('app.adminHome', {
+                url: 'adminHome',
+                templateUrl: 'modules/adminHome/adminHome.html',
+                controller: 'adminHomeController',
+                controllerAs: 'vm'
             }).state('app.workbook', {
                 url: 'workbook',
                 templateUrl: 'modules/workbook/workbook.html',
@@ -47,6 +52,160 @@
 
     }
 
+
+})();
+/**
+ * Adhere
+ **/
+(function () {
+    "use strict";
+
+    adminHomeController.$inject = ["$scope", "appConfig", "$timeout", "apiService", "$rootScope", "$state"];
+    angular
+        .module('adhere')
+        .controller('adminHomeController', adminHomeController);
+
+    /* ngInject */
+    function adminHomeController($scope, appConfig, $timeout, apiService, $rootScope, $state) {
+        var vm = this;
+
+        function init() {
+            vm.appTitle = appConfig.title; // binds app title from config
+            vm.getMentePList();
+        };
+
+        vm.getMentePList = function () {
+            vm.progressList = [{
+                stageInfo: "Stage 1/6",
+                from : "Nidhin",
+                pic : "",
+                time : new Date(),
+                id : "123"
+            },{
+                 stageInfo: "Stage 3/6",
+                from : "Sourabh",
+                pic : "",
+                time : new Date(),
+                id : "864"
+            }];
+        };
+        
+        vm.showReplySection = function(id){
+            $("#comment-reply-"+id).slideToggle();
+        }
+
+        init();
+
+    }
+
+})();
+/**
+ * Adhere
+ **/
+(function () {
+    "use strict";
+
+    mainController.$inject = ["$scope", "$state", "$window", "$timeout", "$transitions", "$http", "appConfig", "apiService", "$rootScope", "$mdDialog"];
+    angular
+        .module('adhere')
+        .controller('mainController', mainController);
+
+    /* ngInject */
+    function mainController($scope, $state, $window, $timeout, $transitions, $http, appConfig, apiService, $rootScope, $mdDialog) {
+        var vm = this;
+        vm.online = true;
+
+        /**
+         * exection starts here
+         **/
+        function init() {
+            vm.user = window.localStorage.getItem('user') ? angular.fromJson(window.localStorage.getItem('user')) : undefined;
+
+            /** set the center div height **/
+            vm.setCenterheight();
+
+            /** set the center div height on resize **/
+            angular.element($window).bind('resize', function () {
+                if (!vm.adjusting)
+                    $timeout(function () {
+                        vm.adjusting = true;
+                        vm.setCenterheight();
+                    }, 100)
+            });
+            vm.currentNavIdx = 0;
+            vm.setNav();
+        };
+        /**
+         * set the center div height
+         **/
+        vm.setNav = function () {
+            if (vm.user.type == "admin") {
+                vm.navList = [{
+                    title: "Home",
+                    active: true,
+                    href: "app.home"
+            }];
+            } else {
+                vm.navList = [{
+                    title: "Home",
+                    active: true,
+                    href: "app.home"
+            }, {
+                    title: "WorkBook",
+                    active: false,
+                    href: "app.workbook"
+            }];
+            }
+        };
+        /**
+         *
+         */
+        vm.changeNavigation = function (item, index) {
+            vm.navList[vm.currentNavIdx].active = false;
+            vm.currentNavIdx = index;
+            item.active = true;
+            $state.go(item.href);
+            $timeout();
+        }
+        /**
+         * set the center div height
+         **/
+        vm.setCenterheight = function () {
+            if (!document.getElementsByTagName('header'))
+                return; // retruns if view is not rendereded(login page)
+
+            var html = document.documentElement,
+                hHeight = (document.getElementsByTagName('header')[0]) ? document.getElementsByTagName('header')[0].offsetHeight : 0,
+                centerContent = $('#center-wrapper');
+
+            if (centerContent) {
+                centerContent.css("minHeight", html.clientHeight - (100) + "px");
+            }
+            vm.adjusting = false;
+        };
+
+        /**
+         * logout action
+         **/
+        vm.logout = function () {
+            apiService.logout();
+            return;
+            var confirm = $mdDialog.confirm()
+                .title('Confirm logout?')
+                .ok('Yes')
+                .cancel('No');
+
+            $mdDialog.show(confirm).then(function () {
+                apiService.logout();
+            }, function () {
+
+            });
+        };
+
+
+        init();
+
+    }
 
 })();
 //set global configuration of application and it can be accessed by injecting appConstants in any modules
@@ -153,102 +312,6 @@
 (function () {
     "use strict";
 
-    mainController.$inject = ["$scope", "$state", "$window", "$timeout", "$transitions", "$http", "appConfig", "apiService", "$rootScope", "$mdDialog"];
-    angular
-        .module('adhere')
-        .controller('mainController', mainController);
-
-    /* ngInject */
-    function mainController($scope, $state, $window, $timeout, $transitions, $http, appConfig, apiService, $rootScope, $mdDialog) {
-        var vm = this;
-        vm.online = true;
-
-        /**
-         * exection starts here
-         **/
-        function init() {
-
-            /** set the center div height **/
-            vm.setCenterheight();
-
-            /** set the center div height on resize **/
-            angular.element($window).bind('resize', function () {
-                if (!vm.adjusting)
-                    $timeout(function () {
-                        vm.adjusting = true;
-                        vm.setCenterheight();
-                    }, 100)
-            });
-
-            vm.navList = [{
-                title: "Home",
-                active: true,
-                href: "app.home"
-            }, {
-                title: "WorkBook",
-                active: false,
-                href: "app.workbook"
-            }];
-
-            vm.currentNavIdx = 0;
-        };
-
-        /**
-         * set the center div height
-         **/
-        vm.setCenterheight = function () {
-            if (!document.getElementsByTagName('header'))
-                return; // retruns if view is not rendereded(login page)
-
-            var html = document.documentElement,
-                hHeight = (document.getElementsByTagName('header')[0]) ? document.getElementsByTagName('header')[0].offsetHeight : 0,
-                centerContent = $('#center-wrapper');
-
-            if (centerContent) {
-                centerContent.css("minHeight", html.clientHeight - (100) + "px");
-            }
-            vm.adjusting = false;
-        };
-        /**
-         *
-         */
-        vm.changeNavigation = function (item, index) {
-            vm.navList[vm.currentNavIdx].active = false;
-            vm.currentNavIdx = index;            
-            item.active = true;
-            $state.go(item.href);
-            $timeout();
-        }
-        /**
-         * logout action
-         **/
-        vm.logout = function () {
-            apiService.logout();
-            return;
-            var confirm = $mdDialog.confirm()
-                .title('Confirm logout?')
-                .ok('Yes')
-                .cancel('No');
-
-            $mdDialog.show(confirm).then(function () {
-                apiService.logout();
-            }, function () {
-
-            });
-        };
-
-
-        init();
-
-    }
-
-})();
-/**
- * Adhere
- **/
-(function () {
-    "use strict";
-
     homeController.$inject = ["$scope", "appConfig", "$timeout", "apiService", "$rootScope", "$state"];
     angular
         .module('adhere')
@@ -267,21 +330,20 @@
         vm.getComments = function () {
             vm.commentList = [{
                 comment: "This is a test comment from Nidhin",
-                from : "Nidhin",
-                pic : "",
-                time : new Date(),
-                id : "123"
-            },{
+                from: "Nidhin",
+                pic: "",
+                time: new Date(),
+                id: "123"
+            }, {
                 comment: "This is a test comment from Sourabh",
-                from : "Sourabh",
-                pic : "",
-                time : new Date(),
-                id : "864"
+                from: "Sourabh",
+                pic: "",
+                time: new Date(),
+                id: "864"
             }];
         };
-        vm.showReplySection = function(id){
-            debugger
-            $("#comment-reply-"+id).slideToggle();
+        vm.showReplySection = function (id) {
+            $("#comment-reply-" + id).slideToggle();
         }
 
         init();
@@ -307,11 +369,8 @@
 
         function init() {
 
-            vm.appTitle = appConfig.title; // binds app title from config            
-
-            $timeout(function () {
-                vm.showScreen = true;
-            });
+            vm.appTitle = appConfig.title; // binds app title from config  
+            vm.formData = {};
 
             // binds the resize event
             angular.element(window).bind('resize', function () {
@@ -328,11 +387,21 @@
          * login function
          **/
         vm.login = function (ev) {
-
             if (ev)
                 ev.stopPropagation();
 
-            $state.go("app.home")
+            if (vm.formData.username && vm.formData.password) {
+                var userInfo = {};
+                if (vm.formData.username == "admin") {
+                    userInfo.type = "admin";
+                    window.localStorage.setItem('user', angular.toJson(userInfo));
+                    $state.go("app.adminHome")
+                } else {
+                    userInfo.type = "user";
+                    window.localStorage.setItem('user', angular.toJson(userInfo));
+                    $state.go("app.home")
+                }
+            }
         };
 
 
@@ -359,6 +428,25 @@
 
         function init() {
             vm.appTitle = appConfig.title; // binds app title from config
+            vm.stageList =[{
+                title :"Stage 1",
+                active:  true
+            },{
+                title :"Stage 2",
+                active:  false
+            },{
+                title :"Stage 3",
+                active:  false
+            },{
+                title :"Stage 4",
+                active:  false
+            },{
+                title :"Stage 5",
+                active:  false
+            },{
+                title :"Stage 6",
+                active:  false
+            }]
         };
 
         init();

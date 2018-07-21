@@ -12,21 +12,25 @@
             <div class="col">
                 <div class="loginBx">
                     <h3 class="mb-4">Sign Into Your Account</h3>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Username"/>
+                    <form ng-submit="vm.login();">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Username" ng-model="vm.formData.username" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" ng-model="vm.formData.password" required />
+                        </div>
+                        <div class="form-group clearfix">
+                            <small class="pull-right text-info">Can't Login?</small>
+                        </div>
+                        <div class="form-group clearfix">
+                            <button type="submit" class="btn btn-success w-100">Login</button>
+                        </div>
+                    </form>
+                    <div class="outer-div">
+                        <div class="seperator">OR</div>
                     </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password"/>
-                    </div>
-                     <div class="form-group clearfix">
-                        <small class="pull-right text-info">Can't Login?</small>
-                    </div>
-                     <div class="form-group clearfix">
-                       <button class="btn btn-success w-100" ng-click="vm.login();">Login</button>
-                    </div>
-                    <div class="outer-div"><div class="seperator">OR</div></div>
-                     <div class="form-group clearfix">
-                       <button class="btn btn-info w-100">Register</button>
+                    <div class="form-group clearfix">
+                        <button class="btn btn-info w-100">Register</button>
                     </div>
                 </div>
             </div>
