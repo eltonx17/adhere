@@ -26,7 +26,7 @@
         "angular-aria": "^1.6.5",
         "angular-material": "^1.1.4",
         "angular-messages": "^1.6.7",
-        "angular-ui-router": "^1.0.3",       
+        "angular-ui-router": "^1.0.3",
         "font-awesome": "^4.7.0"
     }
 }
