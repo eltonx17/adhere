@@ -12,9 +12,9 @@
 
         $self.title = "Ad-built Plus"; // app name     
         $self.version = "1.0.0";
-
+        $self.baseURL = 'services/'; // app service URL  
         $self.requestURL = {
-            login: 'api/security/loginwithaccount'
+            login: 'login/login.php'
         };
 
     }

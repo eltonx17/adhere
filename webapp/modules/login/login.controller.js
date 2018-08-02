@@ -38,6 +38,29 @@
 
             if (vm.formData.username && vm.formData.password) {
                 var userInfo = {};
+                // sent login request to server
+                apiService.serviceRequest({
+                        method: 'POST',
+                        url: appConfig.requestURL.login,
+                        params: {
+                            Email: vm.formData.username,
+                            Password: vm.formData.password
+                        }
+                    }, function (data) {
+
+                        if (data && data.error) { // error from server
+                            apiService.toast(data.error.message, {
+                                type: 'f'
+                            });
+                            vm.logging = false;
+                            vm.formData.password = undefined;
+                        } else {
+
+                        }
+                    },
+                    function (fail) { // service fails
+                        vm.logging = false;
+                    });
                 if (vm.formData.username == "admin") {
                     userInfo.type = "admin";
                     window.localStorage.setItem('user', angular.toJson(userInfo));

@@ -15,7 +15,7 @@
             var requestParams = angular.merge({
 
                 method: config.method || "GET",
-                url: appConfig.getbaseURL() + config.url,
+                url: appConfig.baseURL + config.url,
                 params: config.params || {},
                 data: config.data || {}
             }, config.addOns);

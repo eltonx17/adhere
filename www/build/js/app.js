@@ -208,6 +208,104 @@
     }
 
 })();
+//set global configuration of application and it can be accessed by injecting appConstants in any modules
+
+(function () {
+    'use strict';
+
+    angular.module('adhere')
+        .service('appConfig', appConfig);
+
+    /** @ngInject */
+    function appConfig() {
+        var $self = this;
+
+        $self.title = "Ad-built Plus"; // app name     
+        $self.version = "1.0.0";
+        $self.baseURL = 'services/'; // app service URL  
+        $self.requestURL = {
+            login: 'login/login.php'
+        };
+
+    }
+})();
+(function () {
+    apiService.$inject = ["$rootScope", "$http", "$q", "$state", "appConfig", "$mdToast", "$document", "$rootScope", "$timeout"];
+    angular
+        .module('adhere')
+        .service('apiService', apiService);
+
+    function apiService($rootScope, $http, $q, $state, appConfig, $mdToast, $document, $rootScope, $timeout) {
+
+        var $self = this;
+
+        /**
+         * function to place http request
+         */
+        $self.serviceRequest = function (config, success, fail) {
+
+            var requestParams = angular.merge({
+
+                method: config.method || "GET",
+                url: appConfig.baseURL + config.url,
+                params: config.params || {},
+                data: config.data || {}
+            }, config.addOns);
+
+            var request = $http(requestParams);
+
+            request.then(function successCallback(response) {
+                if (response && response.status == 200) {
+                    if (success)
+                        success(response.data);
+                    else {
+                        if (fail)
+                            fail(response.data);
+                    }
+                } else {
+                    if (fail)
+                        fail(response.data);
+                }
+            }, function errorCallback(response) {
+                if (fail)
+                    fail(response.data);
+            });
+        };
+
+        /**
+         * function to place async service request
+         */
+        $self.asyncServiceRequest = function (params) {
+            var deferred = $q.defer(); // creating the promise object
+
+            serviceRequest(params, function (response) {
+                deferred.resolve(response); // resolving the promise
+            }, function (response) {
+                deferred.reject(response); // rejecting the promise
+            });
+
+            return deferred.promise; // returning the promise object
+        };
+
+        /**
+         * to toasts to the user
+         */
+        $self.toast = function (text, param) {
+            $mdToast.show(
+                $mdToast.simple()
+                .textContent(text || 'Take2')
+                .hideDelay(1500)
+            );
+        };
+
+        /**
+         * function to log user out and clear session settings
+         */
+        $self.logout = function (param) {
+            $state.go('login'); // navigate to login
+        };
+    }
+})();
 /**
  * Adhere
  **/
@@ -294,6 +392,30 @@
 
             if (vm.formData.username && vm.formData.password) {
                 var userInfo = {};
+                // sent login request to server
+                apiService.serviceRequest({
+                        method: 'POST',
+                        url: appConfig.requestURL.login,
+                        params: {
+                            Email: vm.formData.username,
+                            Password: vm.formData.password
+                        }
+                    },
+                    function (data) {
+
+                        if (data && data.error) { // error from server
+                            apiService.toast(data.error.message, {
+                                type: 'f'
+                            });
+                            vm.logging = false;
+                            vm.formData.password = undefined;
+                        } else {
+
+                        }
+                    },
+                    function (fail) { // service fails
+                        vm.logging = false;
+                    });
                 if (vm.formData.username == "admin") {
                     userInfo.type = "admin";
                     window.localStorage.setItem('user', angular.toJson(userInfo));
@@ -311,104 +433,6 @@
 
     }
 
-})();
-//set global configuration of application and it can be accessed by injecting appConstants in any modules
-
-(function () {
-    'use strict';
-
-    angular.module('adhere')
-        .service('appConfig', appConfig);
-
-    /** @ngInject */
-    function appConfig() {
-        var $self = this;
-
-        $self.title = "Ad-built Plus"; // app name     
-        $self.version = "1.0.0";
-
-        $self.requestURL = {
-            login: 'api/security/loginwithaccount'
-        };
-
-    }
-})();
-(function () {
-    apiService.$inject = ["$rootScope", "$http", "$q", "$state", "appConfig", "$mdToast", "$document", "$rootScope", "$timeout"];
-    angular
-        .module('adhere')
-        .service('apiService', apiService);
-
-    function apiService($rootScope, $http, $q, $state, appConfig, $mdToast, $document, $rootScope, $timeout) {
-
-        var $self = this;
-
-        /**
-         * function to place http request
-         */
-        $self.serviceRequest = function (config, success, fail) {
-
-            var requestParams = angular.merge({
-
-                method: config.method || "GET",
-                url: appConfig.getbaseURL() + config.url,
-                params: config.params || {},
-                data: config.data || {}
-            }, config.addOns);
-
-            var request = $http(requestParams);
-
-            request.then(function successCallback(response) {
-                if (response && response.status == 200) {
-                    if (success)
-                        success(response.data);
-                    else {
-                        if (fail)
-                            fail(response.data);
-                    }
-                } else {
-                    if (fail)
-                        fail(response.data);
-                }
-            }, function errorCallback(response) {
-                if (fail)
-                    fail(response.data);
-            });
-        };
-
-        /**
-         * function to place async service request
-         */
-        $self.asyncServiceRequest = function (params) {
-            var deferred = $q.defer(); // creating the promise object
-
-            serviceRequest(params, function (response) {
-                deferred.resolve(response); // resolving the promise
-            }, function (response) {
-                deferred.reject(response); // rejecting the promise
-            });
-
-            return deferred.promise; // returning the promise object
-        };
-
-        /**
-         * to toasts to the user
-         */
-        $self.toast = function (text, param) {
-            $mdToast.show(
-                $mdToast.simple()
-                .textContent(text || 'Take2')
-                .hideDelay(1500)
-            );
-        };
-
-        /**
-         * function to log user out and clear session settings
-         */
-        $self.logout = function (param) {
-            $state.go('login'); // navigate to login
-        };
-    }
 })();
 /**
  * Adhere
