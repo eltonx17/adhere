@@ -43,8 +43,8 @@
                         method: 'POST',
                         url: appConfig.requestURL.login,
                         params: {
-                            Email: vm.formData.username,
-                            Password: vm.formData.password
+                            email: vm.formData.username,
+                            password: vm.formData.password
                         }
                     }, function (data) {
 
