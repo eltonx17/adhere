@@ -14,7 +14,8 @@
         $self.version = "1.0.0";
         $self.baseURL = 'services/'; // app service URL  
         $self.requestURL = {
-            login: 'login/login.php'
+            login: 'login/login.php',
+            register: 'register/register.php'
         };
 
     }

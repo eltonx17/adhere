@@ -23,6 +23,11 @@
                 templateUrl: 'modules/login/login.html',
                 controller: 'loginController',
                 controllerAs: 'vm'
+            }).state('register', {
+                url: '/register',
+                templateUrl: 'modules/register/register.html',
+                controller: 'registerController',
+                controllerAs: 'vm'
             }).state('app.home', {
                 url: 'home',
                 templateUrl: 'modules/home/home.html',

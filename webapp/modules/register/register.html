@@ -1,0 +1,59 @@
+<!--------------------------!
+            AdHere
+!--------------------------->
+<div class="register">
+
+    <header>
+        <img class="img-fluid" src="images/login/logo.png" />
+    </header>
+
+    <div class="content">
+        <div class="row align-items-center loginBx_wrapper">
+            <div class="col">
+                <div class="loginBx">
+                    <h3 class="mb-4">Sign Into Your Account</h3>
+                    <form ng-submit="vm.login();">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Firstname" ng-model="vm.formData.firstName" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Lastname" ng-model="vm.formData.lastName" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email" ng-model="vm.formData.email" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Password" ng-model="vm.formData.password" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Confirm Password" ng-model="vm.formData.cpassword" required />
+                        </div>
+                        <div class="form-group text-center">
+                            <md-radio-group ng-model="vm.formData.userType">
+                                <md-radio-button value="1" class="md-primary">Mentor</md-radio-button>
+                                <md-radio-button value="0" class="md-primary"> Mentee </md-radio-button>
+                            </md-radio-group>
+                        </div>
+                        <div class="form-group" ng-show="vm.formData.userType == 1">
+                            <select ng-model="vm.formData.mentorId">
+                                <option value="1">Mentor 1</option>
+                                <option value="2">Mentor 2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success w-100">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center">
+        <small>Copyright © ADHERE 2018</small>
+    </footer>
+
+</div>
+<!--------------------------!
+            AdHere
+!--------------------------->
