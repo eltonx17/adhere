@@ -1,5 +1,5 @@
 <?php
-
+header('Content-type: application/json');
 //$obj = json_decode($_POST["x"], false);
 
 // initializing variables
@@ -31,7 +31,7 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
 
   	}else {
   		array_push($errors, "Wrong username/password combination");
-           echo 'Failed';
+           echo json_encode($errors);
   	}
   }
 
