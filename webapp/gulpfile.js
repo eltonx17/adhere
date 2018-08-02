@@ -18,7 +18,7 @@ var appJs = ['app-main.js', 'app-route.js', 'modules/*/*.js', 'modules/*/*/*.js'
 
     appSass = ['modules/*.scss', 'modules/*/*.scss', 'modules/*/*/*.scss'],
 
-    buildFiles = ['index.html', 'images/**', 'build/**', 'modules/**', '!modules/*.scss', '!modules/*/*.scss', '!modules/*/*/*.scss', '!modules/*/*.js', '!modules/*/*/*.js'];
+    buildFiles = ['index.html', 'images/**', 'build/**', 'modules/**', '!modules/*.scss', '!modules/*/*.scss', '!modules/*/*/*.scss', '!modules/*/*.js', '!modules/*/*/*.js', 'services/**'];
 
 
 /**
