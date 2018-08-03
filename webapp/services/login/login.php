@@ -24,14 +24,16 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
   	
       if (mysqli_num_rows($results) == 1) {
           
-          $outp = array();
-          $outp = $results->fetch_all(MYSQLI_ASSOC);
+          $data = array();
+          $data = $results->fetch_all(MYSQLI_ASSOC);
           
-          echo json_encode($outp);
+          echo json_encode($data);
 
   	}else {
-  		array_push($errors, "Wrong username/password combination");
-           echo json_encode($errors);
+        $error = array(
+            'data'=>'null', 'error'=>array('msg'=>'Error','code'=>'46')
+        );
+        echo json_encode($error);
   	}
   }
 
