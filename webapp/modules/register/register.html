@@ -31,10 +31,10 @@
                         <div class="form-group text-center">
                             <md-radio-group ng-model="vm.formData.userType">
                                 <md-radio-button value="1" class="md-primary">Mentor</md-radio-button>
-                                <md-radio-button value="0" class="md-primary"> Mentee </md-radio-button>
+                                <md-radio-button value="2" class="md-primary"> Mentee </md-radio-button>
                             </md-radio-group>
                         </div>
-                        <div class="form-group" ng-show="vm.formData.userType == 0">
+                        <div class="form-group" ng-show="vm.formData.userType == 2">
                             <select ng-model="vm.formData.mentorId">
                                 <option value="1">Mentor 1</option>
                                 <option value="2">Mentor 2</option>
