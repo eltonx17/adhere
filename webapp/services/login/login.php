@@ -25,14 +25,18 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
   	
       if (mysqli_num_rows($results) == 1) {
           
-          $data = array();
+          //$data = array();
           $data = $results->fetch_all(MYSQLI_ASSOC);
           
-          echo json_encode($data);
+          $success = array(
+              'data'=>$data[0], 'error'=>0
+          );
+          
+          echo json_encode($success);
 
   	}else {
         $error = array(
-            'data'=>'null', 'error'=>array('msg'=>'Error','code'=>'46')
+            'data'=>0, 'error'=>array('msg'=>'Wrong username/password. Please try again.','code'=>'154')
         );
         echo json_encode($error);
   	}

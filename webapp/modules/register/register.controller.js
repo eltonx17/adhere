@@ -27,16 +27,38 @@
                     document.activeElement.scrollIntoView(); // to bring the focus element to view when keyboard is on
                 }
             });
+
+            apiService.serviceRequest({
+                    method: 'POST',
+                    url: appConfig.requestURL.mentorList
+                }, function (data) {
+                    if (data && data.error && data.error.msg) { // error from server
+                        apiService.toast(data.error.msg, {
+                            type: 'f'
+                        });
+                    } else {
+                        if (data && data.length && data.length > 0) {
+                            vm.mentorList = data;
+                        } else {
+                            // false condition goes here
+                        }
+                    }
+                },
+                function (fail) { // service fails
+                    // false condition goes here
+                });
         };
 
         /**
          * login function
          **/
-        vm.login = function (ev) {
+        vm.register = function (ev) {
             if (ev)
                 ev.stopPropagation();
 
             if (vm.formData.firstName && vm.formData.lastName && vm.formData.email && vm.formData.password && vm.formData.cpassword && vm.formData.userType) {
+                vm.registering = true;
+                
                 var userInfo = {};
                 // sent login request to server
                 apiService.serviceRequest({
@@ -51,29 +73,24 @@
                             mentorId: vm.formData.mentorId
                         }
                     }, function (data) {
- 
-                        if (data && data.error) { // error from server
-                            apiService.toast(data.error.message, {
+
+                        if (data && data.error && data.error.msg) { // error from server
+                            apiService.toast(data.error.msg, {
                                 type: 'f'
-                            });
-                            vm.logging = false;
+                            });                            
                             vm.formData.password = undefined;
                         } else {
-
+                            apiService.toast(data.data, {
+                                type: 'f'
+                            });
+                            $state.go('login',{
+                                email: vm.formData.email
+                            });
                         }
                     },
                     function (fail) { // service fails
-                        vm.logging = false;
+                        vm.registering = false;
                     });
-                if (vm.formData.username == "admin") {
-                    userInfo.type = "admin";
-                    window.localStorage.setItem('user', angular.toJson(userInfo));
-                    $state.go("app.adminHome")
-                } else {
-                    userInfo.type = "user";
-                    window.localStorage.setItem('user', angular.toJson(userInfo));
-                    $state.go("app.home")
-                }
             }
         };
 

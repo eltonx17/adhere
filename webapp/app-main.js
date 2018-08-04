@@ -18,7 +18,7 @@
             }).state('login', {
                 url: '/login',
                 params: {
-                    id: undefined
+                    email: undefined
                 },
                 templateUrl: 'modules/login/login.html',
                 controller: 'loginController',
@@ -33,7 +33,7 @@
                 templateUrl: 'modules/home/home.html',
                 controller: 'homeController',
                 controllerAs: 'vm'
-            }).state('app.adminHome', {
+            }).state('app.mentorHome', {
                 url: 'adminHome',
                 templateUrl: 'modules/adminHome/adminHome.html',
                 controller: 'adminHomeController',

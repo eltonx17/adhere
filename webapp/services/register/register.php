@@ -24,24 +24,42 @@ $password = md5($password_1);
 
 //Query to register user info into db
 $query = "INSERT INTO users (firstname, lastname, email, password, usertype) VALUES('$firstname', '$lastname', '$email', '$password', '$usertype')";
-mysqli_query($db, $query);
+$results= mysqli_query($db, $query);
 
 //Retrieve the ID of the inserted record
 $last_uid = $db->insert_id;
 
 //Check if the query is valid, if yes check for usertype=2 i.e mentee
-if (!$query) {
+if (!$results) {
      $error = array(
-            'data'=>'null', 'error'=>array('msg'=>'Error','code'=>'46')
+            'data'=>'null', 'error'=>array('msg'=>'Email already exists. Please use another email ID','code'=>'132')
             );
         echo json_encode($error);
     }
     else{
         //If Mentee, fire another query to map mentee to a mentor
+        
         if ($usertype == 2){
             $mentorid = mysqli_real_escape_string($db, $_GET['mentorId']);
             $mapquery = "INSERT INTO mentormapping (menteeid, mentorid) VALUES ('$last_uid', '$mentorid')";
             mysqli_query($db, $mapquery);
-       } 
+            if (!$query) {
+                $error = array(
+                    'data'=>'null', 'error'=>array('msg'=>'Email already exists. Please use another email ID','code'=>'645')
+                    );
+                echo json_encode($error);
+            }
+                else{
+                    $error = array(
+                    'data'=>'Registration successful', 'error'=>null
+                    );
+                }               
+            }
+        else{
+            $error = array(
+            'data'=>'Registration successful', 'error'=>null
+            );
+            echo json_encode($error);
+        } 
     }
 ?>

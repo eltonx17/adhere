@@ -23,7 +23,10 @@
                             <small class="pull-right text-info">Can't Login?</small>
                         </div>
                         <div class="form-group clearfix">
-                            <button type="submit" class="btn btn-success w-100">Login</button>
+                            <button type="submit" class="btn btn-success w-100">
+                                <span ng-hide="vm.logging">login</span>
+                                <i class="fa fa-refresh fa-spin" ng-show="vm.logging"></i>
+                            </button>
                         </div>
                     </form>
                     <div class="outer-div">

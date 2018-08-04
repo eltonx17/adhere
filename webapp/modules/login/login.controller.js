@@ -18,6 +18,10 @@
             vm.appTitle = appConfig.title; // binds app title from config  
             vm.formData = {};
 
+            if ($stateParams && $stateParams.email) {
+                vm.formData.username = $stateParams.email;
+            }
+
             // binds the resize event
             angular.element(window).bind('resize', function () {
                 if (document.activeElement) {
@@ -38,6 +42,7 @@
 
             if (vm.formData.username && vm.formData.password) {
                 var userInfo = {};
+                vm.logging = true;
                 // sent login request to server
                 apiService.serviceRequest({
                         method: 'POST',
@@ -46,30 +51,32 @@
                             email: vm.formData.username,
                             password: vm.formData.password
                         }
-                    }, function (data) {
+                    }, function (response) {
 
-                        if (data && data.error) { // error from server
-                            apiService.toast(data.error.message, {
+                        if (response && response.error && response.error.msg) { // error from server
+                            apiService.toast(response.error.msg, {
                                 type: 'f'
                             });
                             vm.logging = false;
                             vm.formData.password = undefined;
                         } else {
-
+                            var user = response.data;
+                            user.usertype = parseInt(user.usertype);
+                            window.localStorage.setItem('user', angular.toJson(user));
+                            if (user.usertype == 0) { // admin
+                                $state.go("app.adminHome");
+                            }
+                            if (user.usertype == 1) { // mentor
+                                $state.go("app.mentorHome");
+                            }
+                            if (user.usertype == 2) { // mentee
+                                $state.go("app.home");
+                            }
                         }
                     },
                     function (fail) { // service fails
                         vm.logging = false;
                     });
-                if (vm.formData.username == "admin") {
-                    userInfo.type = "admin";
-                    window.localStorage.setItem('user', angular.toJson(userInfo));
-                    $state.go("app.adminHome")
-                } else {
-                    userInfo.type = "user";
-                    window.localStorage.setItem('user', angular.toJson(userInfo));
-                    $state.go("app.home")
-                }
             }
         };
 

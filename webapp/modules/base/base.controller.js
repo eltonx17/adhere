@@ -37,7 +37,7 @@
          * set the center div height
          **/
         vm.setNav = function () {
-            if (vm.user.type == "admin") {
+            if (vm.user.usertype == 1) {
                 vm.navList = [{
                     title: "Home",
                     active: true,
