@@ -1,0 +1,29 @@
+.mentorHome {
+    padding: 15px 0;
+    .info-container {
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        padding: 12px;
+        text-align: center;
+        margin-top: 1.5em;
+    }
+    .comments {
+        margin-top: 2em;
+        hr {
+            margin-bottom: 1.5em;
+            margin-top: 0 !important;
+        }
+        .comment-item {
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 1.5em;
+            .stage-details {
+                border-radius: 12px;
+                padding: 12px;
+                margin-top: 1em;
+                background: #e9ecef;
+            }
+        }
+    }
+}

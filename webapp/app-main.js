@@ -34,9 +34,9 @@
                 controller: 'homeController',
                 controllerAs: 'vm'
             }).state('app.mentorHome', {
-                url: 'adminHome',
-                templateUrl: 'modules/adminHome/adminHome.html',
-                controller: 'adminHomeController',
+                url: 'mentorHome',
+                templateUrl: 'modules/mentorHome/mentorHome.html',
+                controller: 'mentorHomeController',
                 controllerAs: 'vm'
             }).state('app.workbook', {
                 url: 'workbook',

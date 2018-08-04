@@ -14,6 +14,7 @@
 
 
         function init() {
+            vm.user = window.localStorage.getItem('user') ? angular.fromJson(window.localStorage.getItem('user')) : undefined;
             vm.appTitle = appConfig.title; // binds app title from config
             vm.getComments();
         };
