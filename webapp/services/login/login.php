@@ -17,9 +17,10 @@ $email = mysqli_real_escape_string($db, $_GET['email']);
 $password = mysqli_real_escape_string($db, $_GET['password']);
 
   if (count($errors) == 0) {
-  	//$password = md5($password);
+    //Encrypt received pwd to match DB value
+  	$password_enc = md5($password);
   	
-    $query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+    $query = "SELECT * FROM users WHERE email='$email' AND password='$password_enc'";
   	$results = mysqli_query($db, $query);
   	
       if (mysqli_num_rows($results) == 1) {
