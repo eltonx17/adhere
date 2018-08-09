@@ -20,12 +20,19 @@
                             <input type="password" class="form-control" placeholder="Password" ng-model="vm.formData.password" required />
                         </div>
                         <div class="form-group clearfix">
-                            <small class="pull-right text-info">Can't Login?</small>
+                            <div class="row">
+                                <div class="col-8 text-left">
+                                    <small class="text-danger" ng-show="vm.loginErr"><b>{{vm.logErrMsg}}</b></small>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <small class="text-info">Can't Login?</small>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group clearfix">
                             <button type="submit" class="btn btn-success w-100">
-                                <span ng-hide="vm.logging">login</span>
-                                <i class="fa fa-refresh fa-spin" ng-show="vm.logging"></i>
+                                <span ng-hide="vm.logging">LOGIN</span>
+                                <span ng-show="vm.logging"><i class="fa fa-refresh fa-spin"></i></span>
                             </button>
                         </div>
                     </form>

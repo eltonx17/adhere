@@ -40,6 +40,8 @@
             if (ev)
                 ev.stopPropagation();
 
+            vm.loginErr = false;
+
             if (vm.formData.username && vm.formData.password) {
                 var userInfo = {};
                 vm.logging = true;
@@ -53,13 +55,15 @@
                         }
                     }, function (response) {
 
-                        if (response && response.error && response.error.msg) { // error from server
-                            apiService.toast(response.error.msg, {
-                                type: 'f'
+                        if (response && response.error && response.error.msg) { // error from server                                          
+                            $timeout(function () {
+                                vm.logging = false;
+                                vm.loginErr = true;
+                                vm.logErrMsg = response.error.msg || "Something went wrong, try again.";
                             });
-                            vm.logging = false;
                             vm.formData.password = undefined;
                         } else {
+                            vm.loginErr = false;
                             var user = response.data;
                             user.usertype = parseInt(user.usertype);
                             window.localStorage.setItem('user', angular.toJson(user));
@@ -76,7 +80,12 @@
                     },
                     function (fail) { // service fails
                         vm.logging = false;
+                        vm.loginErr = true;
+                        vm.logErrMsg = "Something went wrong, try again.";
                     });
+            } else {
+                vm.loginErr = true;
+                vm.logErrMsg = "Please fill in all details.";
             }
         };
 

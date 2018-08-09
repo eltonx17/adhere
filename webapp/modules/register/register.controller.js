@@ -57,9 +57,19 @@
                 ev.stopPropagation();
 
             if (vm.formData.firstName && vm.formData.lastName && vm.formData.email && vm.formData.password && vm.formData.cpassword && vm.formData.userType) {
+
+                if (vm.formData.userType == "2") {
+                    if (!vm.formData.mentorId) {
+                        vm.regoErr = true;
+                        vm.regoErrMsg = "Please select a mentor.";
+                        return;
+                    }
+                }
+
                 vm.registering = true;
-                
+                vm.regoErr = false;
                 var userInfo = {};
+
                 // sent login request to server
                 apiService.serviceRequest({
                         method: 'POST',
@@ -73,24 +83,29 @@
                             mentorId: vm.formData.mentorId
                         }
                     }, function (data) {
-
-                        if (data && data.error && data.error.msg) { // error from server
-                            apiService.toast(data.error.msg, {
-                                type: 'f'
-                            });                            
-                            vm.formData.password = undefined;
+                        if (data && data.error && data.error.msg) { // error from server                                                      
+                            $timeout(function () {
+                                vm.registering = false;
+                                vm.regoErr = true;
+                                vm.regoErrMsg = data.error.msg || "Something went wrong, try again.";
+                            });
                         } else {
                             apiService.toast(data.data, {
                                 type: 'f'
                             });
-                            $state.go('login',{
+                            $state.go('login', {
                                 email: vm.formData.email
                             });
                         }
                     },
                     function (fail) { // service fails
                         vm.registering = false;
+                        vm.regoErr = true;
+                        vm.regoErrMsg = "Something went wrong, try again.";
                     });
+            } else {
+                vm.regoErr = true;
+                vm.regoErrMsg = "Please fill all details.";
             }
         };
 
