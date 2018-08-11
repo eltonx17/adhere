@@ -10,12 +10,12 @@
     function appConfig() {
         var $self = this;
 
-        $self.title = "Ad-built Plus"; // app name     
+        $self.title = "Adhere"; // app name     
         $self.version = "1.0.0";
         $self.baseURL = 'services/'; // app service URL  
         $self.requestURL = {
             login: 'login/login.php',
-            mentorList: 'mentorList/mentorList.php',
+            mentorList: 'register/mentorList/mentorList.php',
             register: 'register/register.php'
         };
 
