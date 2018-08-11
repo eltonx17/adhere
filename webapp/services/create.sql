@@ -6,10 +6,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `usertype` int(1) DEFAULT NULL COMMENT '0 - Admin 1 - Mentor 2 - Mentee',
-  `status` int(1) DEFAULT NULL COMMENT '0 - Inactive 1 - Under Review 2 - Verified',
+  `userstatus` int(1) DEFAULT '0' COMMENT '0 - Inactive 1 - Under Review 2 - Verified',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 -- Create 'mentormapping' Table
 CREATE TABLE IF NOT EXISTS `mentormapping` (
