@@ -28,20 +28,25 @@
                 templateUrl: 'modules/register/register.html',
                 controller: 'registerController',
                 controllerAs: 'vm'
-            }).state('app.home', {
-                url: 'home',
-                templateUrl: 'modules/home/home.html',
-                controller: 'homeController',
+            }).state('app.admin', {
+                url: 'admin/home',
+                templateUrl: 'modules/admin/admin.html',
+                controller: 'adminController',
                 controllerAs: 'vm'
-            }).state('app.mentorHome', {
-                url: 'mentorHome',
-                templateUrl: 'modules/mentorHome/mentorHome.html',
-                controller: 'mentorHomeController',
+            }).state('app.mentee', {
+                url: 'mentee/home',
+                templateUrl: 'modules/mentee/mentee.html',
+                controller: 'menteeController',
                 controllerAs: 'vm'
             }).state('app.workbook', {
-                url: 'workbook',
-                templateUrl: 'modules/workbook/workbook.html',
+                url: 'mentee/workbook',
+                templateUrl: 'modules/mentee/workbook/workbook.html',
                 controller: 'workbookController',
+                controllerAs: 'vm'
+            }).state('app.mentor', {
+                url: 'mentor/home',
+                templateUrl: 'modules/mentor/mentor.html',
+                controller: 'mentorController',
                 controllerAs: 'vm'
             });
 

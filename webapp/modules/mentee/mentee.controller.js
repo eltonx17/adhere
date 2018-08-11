@@ -6,10 +6,10 @@
 
     angular
         .module('adhere')
-        .controller('homeController', homeController);
+        .controller('menteeController', menteeController);
 
     /* ngInject */
-    function homeController($scope, appConfig, $timeout, apiService, $rootScope, $state) {
+    function menteeController($scope, appConfig, $timeout, apiService, $rootScope, $state) {
         var vm = this;
 
 

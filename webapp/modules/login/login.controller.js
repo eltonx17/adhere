@@ -68,13 +68,13 @@
                             user.usertype = parseInt(user.usertype);
                             window.localStorage.setItem('user', angular.toJson(user));
                             if (user.usertype == 0) { // admin
-                                $state.go("app.adminHome");
+                                $state.go("app.admin");
                             }
                             if (user.usertype == 1) { // mentor
-                                $state.go("app.mentorHome");
+                                $state.go("app.mentor");
                             }
                             if (user.usertype == 2) { // mentee
-                                $state.go("app.home");
+                                $state.go("app.mentee");
                             }
                         }
                     },

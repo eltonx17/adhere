@@ -2,10 +2,10 @@
 @import "base/base.scss";
 @import "login/login.scss";
 @import "register/register.scss";
-@import "home/home.scss";
-@import "mentorHome/mentorHome.scss";
-@import "adminHome/adminHome.scss";
-@import "workbook/workbook.scss";
+@import "mentee/mentee.scss";
+@import "mentor/mentor.scss";
+@import "admin/admin.scss";
+@import "mentee/workbook/workbook.scss";
 @import "../node_modules/font-awesome/css/font-awesome.min.css";
 @import "../node_modules/angular-material/angular-material.min.css";
 @import "../vendor/styles/bootstrap.min.css";

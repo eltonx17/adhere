@@ -37,17 +37,23 @@
          * set the center div height
          **/
         vm.setNav = function () {
-            if (vm.user.usertype == 1) {
+            if (vm.user.usertype == 0) { // admin
                 vm.navList = [{
                     title: "Home",
                     active: true,
-                    href: "app.home"
-            }];
+                    href: "app.admin"
+                }];
+            } else if (vm.user.usertype == 1) { // mentor
+                vm.navList = [{
+                    title: "Home",
+                    active: true,
+                    href: "app.mentor"
+                }];
             } else {
                 vm.navList = [{
                     title: "Home",
                     active: true,
-                    href: "app.home"
+                    href: "app.mentee"
             }, {
                     title: "WorkBook",
                     active: false,
