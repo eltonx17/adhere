@@ -1,10 +1,9 @@
 <?php
 header('Content-type: application/json');
+require "../conn.php";
 
 $mentorList = "";
 $mentors = array();
-
-$db = new mysqli("localhost", "root", "", "adhere") or die($this->db->error);
 
 $query = "SELECT uid, CONCAT(firstname, ' ', lastname) AS fullname FROM users WHERE usertype = '1'";
 $results = mysqli_query($db, $query);

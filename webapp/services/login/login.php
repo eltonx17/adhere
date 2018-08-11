@@ -1,14 +1,12 @@
 <?php
 header('Content-type: application/json');
+require "../conn.php";
 
 // initializing variables
 $email    = "";
 $password = "";
 $userType = "";
 $errors = array(); 
-
-//Database connection string
-$db = new mysqli("localhost", "root", "", "adhere") or die($this->db->error);
 
 //Retrieve email and password 
 $email = mysqli_real_escape_string($db, $_GET['email']);

@@ -1,5 +1,6 @@
 <?php
 header('Content-type: application/json');
+require "../conn.php";
 
 // initializing variables
 $firstName = "";
@@ -7,9 +8,6 @@ $lastName = "";
 $email    = "";
 $userType = "";
 $mentorId = "";
-
-//db connection string
-$db = new mysqli("localhost", "root", "", "adhere") or die($this->db->error);
 
 // REGISTER USER
 // receive all input values from the form
