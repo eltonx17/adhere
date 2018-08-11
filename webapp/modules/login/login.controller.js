@@ -63,8 +63,13 @@
                             });
                             vm.formData.password = undefined;
                         } else {
-                            vm.loginErr = false;
+                            vm.logging = false;
                             var user = response.data;
+                            if (user.accountstatus == 0 || user.accountstatus == "0") {
+                                vm.loginErr = true;
+                                vm.logErrMsg = "Your account is inactive. Please check your email or contact admin@adhere.com";
+                                return;
+                            }
                             user.usertype = parseInt(user.usertype);
                             window.localStorage.setItem('user', angular.toJson(user));
                             if (user.usertype == 0) { // admin

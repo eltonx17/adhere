@@ -16,7 +16,9 @@
         $self.requestURL = {
             login: 'login/login.php',
             mentorList: 'register/mentorList/mentorList.php',
-            register: 'register/register.php'
+            register: 'register/register.php',
+            adminDashInfo: 'register/register.php',
+            mentorDashInfo: 'register/register.php'
         };
 
     }

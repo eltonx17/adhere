@@ -9,34 +9,33 @@
         .controller('mentorController', mentorController);
 
     /* ngInject */
-    function mentorController($scope, appConfig, $timeout, apiService, $rootScope, $state) {
+    function mentorController($scope, appConfig, $timeout, apiService, $state) {
         var vm = this;
 
         function init() {
             vm.user = window.localStorage.getItem('user') ? angular.fromJson(window.localStorage.getItem('user')) : undefined;
             vm.appTitle = appConfig.title; // binds app title from config
-            vm.getMentePList();
         };
 
-        vm.getMentePList = function () {
-            vm.progressList = [{
-                stageInfo: "Stage 1/6",
-                from : "Nidhin",
-                pic : "",
-                time : new Date(),
-                id : "123"
-            },{
-                 stageInfo: "Stage 3/6",
-                from : "Sourabh",
-                pic : "",
-                time : new Date(),
-                id : "864"
-            }];
+        function getDetails() {
+            apiService.serviceRequest({
+                    method: 'POST',
+                    url: appConfig.requestURL.mentorDashInfo
+                }, function (response) {
+                    if (response && response.error && response.error.msg) { // error from server                                         
+                        $timeout(function () {
+                            vm.loginErr = true;
+                            vm.logErrMsg = response.error.msg || "Something went wrong, try again.";
+                        });
+                    } else {
+
+                    }
+                },
+                function (fail) { // service fails                  
+                    vm.loginErr = true;
+                    vm.logErrMsg = "Something went wrong, try again.";
+                });
         };
-        
-        vm.showReplySection = function(id){
-            $("#comment-reply-"+id).slideToggle();
-        }
 
         init();
 
