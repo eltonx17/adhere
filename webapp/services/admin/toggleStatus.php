@@ -12,9 +12,8 @@ if(($action != "0") && ($action != "1")){
     return;
 }
 
-    $query="UPDATE users
-            SET userstatus = '$action'
-            WHERE uid = '$userId'";
+$query="UPDATE users SET `accountstatus`=".$action." WHERE `uid`=".$userId;
+echo $query;
     if(!$query){
         $error = array(
                  'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'401')
