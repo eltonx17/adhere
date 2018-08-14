@@ -17,8 +17,9 @@
             login: 'login/login.php',
             mentorList: 'register/mentorList/mentorList.php',
             register: 'register/register.php',
-            adminDashInfo: 'register/register.php',
-            mentorDashInfo: 'register/register.php'
+            adminDashInfo: 'admin/adminstats.php',
+            mentorDashInfo: 'mentor/mentorStats.php',
+            toggleUserStatus: 'admin/toggleStatus.php'
         };
 
     }

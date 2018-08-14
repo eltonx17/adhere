@@ -12,7 +12,7 @@ if(($action != "0") && ($action != "1")){
     return;
 }
 
-$query="UPDATE users SET `accountstatus`=".$action." WHERE `uid`=".$userId;
+$query="UPDATE users SET `accountstatus`=".$action." WHERE `uid`like ".$userId."";
 echo $query;
     if(!$query){
         $error = array(

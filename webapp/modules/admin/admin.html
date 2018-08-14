@@ -7,13 +7,13 @@
         <div class="row">
             <div class="col">
                 <div class="info-container">
-                    <h3>5</h3>
+                    <h3>{{vm.adminInfo.totalUsers}}</h3>
                     <small>Total Users</small>
                 </div>
             </div>
             <div class="col">
                 <div class="info-container">
-                    <h3>2</h3>
+                    <h3>{{vm.adminInfo.inactiveUsers}}</h3>
                     <small>Inactive Users</small>
                 </div>
             </div>
@@ -29,16 +29,21 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">UserType</th>
+                            <th scope="col">Account Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
+                        <tr ng-repeat="item in vm.adminInfo.listOfUsers">
+                            <td>{{$index+1}}</td>
+                            <td>{{item.firstname}} {{item.lastname}}</td>
+                            <td>
+                                <div class="animate-switch-container" ng-switch on="item.usertype">
+                                    <div class="animate-switch" ng-switch-when="1">Mentor</div>
+                                    <div class="animate-switch" ng-switch-default>Mentee</div>
+                                </div>
+                            </td>
                             <td><label class="switch">
                               <input type="checkbox" ng-model="te" ng-change="vm.toggleStatus();">
                               <span class="slider round"></span>

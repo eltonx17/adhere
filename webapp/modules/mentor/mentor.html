@@ -7,19 +7,19 @@
         <div class="row">
             <div class="col">
                 <div class="info-container">
-                    <h3>5</h3>
+                    <h3>{{vm.mentorInfo.totalMentees}}</h3>
                     <small>Total Mentee Reporting</small>
                 </div>
             </div>
             <div class="col">
                 <div class="info-container">
-                    <h3>2</h3>
+                    <h3>0</h3>
                     <small>Stage Approvals Pending</small>
                 </div>
             </div>
             <div class="col">
                 <div class="info-container">
-                    <h3>0</h3>
+                     <h3>{{vm.mentorInfo.inactiveMentees}}</h3>
                     <small>Mentee Requests</small>
                 </div>
             </div>
@@ -30,34 +30,26 @@
                 Mentee Approval List <br>
                 <small>Use <b>Send Message</b> to notify mentee for changes or <b>Approve</b> to approve the current stage.</small>
             </span>
-            <div class="comment-container">
-                <div class="comment-item" ng-repeat="item in vm.progressList">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <div class="row">
-                                <div class="col"><b>{{item.from}}</b> - <small>{{item.time | date:'h:mm a, MMMM d, y'}}</small></div>
-                            </div>
-                            <div class="row">
-                                <div class="col">{{item.stageInfo}}</div>
-                            </div>
-                        </div>
-                        <div class="col-6 text-right">
-                            <button class="btn btn-sm mr-1" ng-click="vm.showReplySection(item.id)">Send Message</button>
-                            <button class="btn btn-sm btn-success">Approve</button>
-                        </div>
-                    </div>
-                    <div class="reply-section mt-2 text-right" id="comment-reply-{{item.id}}" style="display: none;">
-                        <textarea class="form-control" placeholder="Please type your reply for {{item.from}}"></textarea>
-                        <button class="btn btn-sm btn-primary mt-2" ng-click="">Send</button>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="stage-details">
-                                Details of current stage to go here
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="user-list">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>                          
+                            <th scope="col">Approval Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in vm.mentorInfo.listOfMentees">
+                            <td>{{$index+1}}</td>
+                            <td>{{item.firstname}} {{item.lastname}}</td>
+                            <td><label class="switch">
+                              <input type="checkbox" ng-model="te" ng-change="vm.toggleStatus();">
+                              <span class="slider round"></span>
+                            </label></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

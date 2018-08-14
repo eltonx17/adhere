@@ -15,9 +15,10 @@
         function init() {
             vm.user = window.localStorage.getItem('user') ? angular.fromJson(window.localStorage.getItem('user')) : undefined;
             vm.appTitle = appConfig.title; // binds app title from config
+            vm.getDetails();
         };
 
-        function getDetails() {
+        vm.getDetails = function() {
             apiService.serviceRequest({
                     method: 'POST',
                     url: appConfig.requestURL.mentorDashInfo
@@ -28,7 +29,7 @@
                             vm.logErrMsg = response.error.msg || "Something went wrong, try again.";
                         });
                     } else {
-
+                        vm.mentorInfo = response;
                     }
                 },
                 function (fail) { // service fails                  
