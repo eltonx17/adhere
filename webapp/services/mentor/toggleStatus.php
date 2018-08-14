@@ -12,7 +12,7 @@ if(($action != "0") && ($action != "1")){
     return;
 }
 
-$query="UPDATE users SET users.accountstatus = '$action' WHERE users.uid = '$menteeId'";
+$query="UPDATE mentormapping SET mentormapping.mapstatus = '$action'           WHERE mentormapping.menteeid = '$menteeId'";
 $executeQuery= mysqli_query($db, $query);
 
 //required for now
