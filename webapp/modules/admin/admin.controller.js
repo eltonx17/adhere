@@ -17,7 +17,9 @@
             vm.appTitle = appConfig.title; // binds app title from config
             vm.getDetails();
         };
-
+        /**
+         *
+         */
         vm.getDetails = function () {
             apiService.serviceRequest({
                     method: 'POST',
@@ -30,6 +32,8 @@
                         });
                     } else {
                         vm.adminInfo = response;
+                        for (var i = 0; i < vm.adminInfo.listOfUsers.length; i++)
+                            vm.adminInfo.listOfUsers[i].accountstatus = (vm.adminInfo.listOfUsers[i].accountstatus == "1" || vm.adminInfo.listOfUsers[i].accountstatus == 1) ? true : false;
                     }
                 },
                 function (fail) { // service fails                  
@@ -37,14 +41,16 @@
                     vm.logErrMsg = "Something went wrong, try again.";
                 });
         };
-
-        vm.toggleStatus = function () {
+        /**
+         *
+         */
+        vm.toggleStatus = function (item) {
             apiService.serviceRequest({
                     method: 'POST',
                     url: appConfig.requestURL.toggleUserStatus,
                     params: {
-                        userID: 27,
-                        action: 1
+                        userID: item.uid,
+                        action: (item.accountstatus || item.accountstatus == "1" || item.accountstatus == 1) ? 1 : 0
                     }
                 }, function (response) {
                     if (response && response.error && response.error.msg) { // error from server                                         

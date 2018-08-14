@@ -45,7 +45,7 @@
                                 </div>
                             </td>
                             <td><label class="switch">
-                              <input type="checkbox" ng-model="te" ng-change="vm.toggleStatus();">
+                              <input type="checkbox" ng-model="item.accountstatus" ng-checked="item.accountstatus==1" ng-change="vm.toggleStatus(item);">
                               <span class="slider round"></span>
                             </label></td>
                         </tr>
