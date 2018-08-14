@@ -10,14 +10,14 @@ $inactiveUsers = 0;
 
 //Query to get all users from users table who are not admin
 $query = "SELECT * FROM `users` 
-WHERE users.usertype = 1 
-OR users.usertype = 2
-ORDER BY `usertype` ASC";
+          WHERE users.usertype = 1 
+          OR users.usertype = 2
+          ORDER BY `usertype` ASC";
 $executeQuery = mysqli_query($db,$query);
 
 if (!$executeQuery) {
      $error = array(
-            'data'=>'null', 'error'=>array('msg'=>'Email already exists. Please use another email ID','code'=>'100')
+            'data'=>'null', 'error'=>array('msg'=>'Failed to get users','code'=>'500')
             );
         echo json_encode($error);
 }
