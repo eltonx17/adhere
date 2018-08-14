@@ -15,23 +15,33 @@ OR users.usertype = 2
 ORDER BY `usertype` ASC";
 $executeQuery = mysqli_query($db,$query);
 
-//Fetch all rows into var $listOfUsers
-$listOfUsers = mysqli_fetch_all ($executeQuery, MYSQLI_ASSOC);
-
-foreach ($listOfUsers as $row){
-    
-    $totalUsers++;
-    
-    if($row['accountstatus']=="0" || $row['accountstatus']==0) 
-        $inactiveUsers++; 
-    
+if (!$executeQuery) {
+     $error = array(
+            'data'=>'null', 'error'=>array('msg'=>'Email already exists. Please use another email ID','code'=>'100')
+            );
+        echo json_encode($error);
 }
+else{
+    //Fetch all rows into var $listOfUsers
+    $listOfUsers = mysqli_fetch_all ($executeQuery, MYSQLI_ASSOC);
 
-$adminStats["totalUsers"] = $totalUsers;
-$adminStats["inactiveUsers"] = $inactiveUsers;
-$adminStats["listOfUsers"] = $listOfUsers;
-
-echo json_encode($adminStats);
-
+    foreach ($listOfUsers as $row){
+    
+        $totalUsers++;
+    
+        if($row['accountstatus']=="0" || $row['accountstatus']==0) 
+            $inactiveUsers++; 
+    
+    }
+    
+    $adminStats["totalUsers"] = $totalUsers;
+    $adminStats["inactiveUsers"] = $inactiveUsers;
+    $adminStats["listOfUsers"] = $listOfUsers;
+    echo json_encode($adminStats);
+    /*$success = array(
+                    'data'=>$adminStats, 'error'=>null
+                    );
+    echo json_encode($success);*/
+}
 
 ?>
