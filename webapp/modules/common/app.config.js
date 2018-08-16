@@ -19,7 +19,8 @@
             register: 'register/register.php',
             adminDashInfo: 'admin/adminstats.php',
             mentorDashInfo: 'mentor/mentorStats.php',
-            toggleUserStatus: 'admin/toggleStatus.php'
+            toggleUserStatus: 'admin/toggleStatus.php',
+            toggleMenteeStatus: 'mentor/toggleStatus.php'
         };
 
     }

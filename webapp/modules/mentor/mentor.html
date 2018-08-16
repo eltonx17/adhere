@@ -19,7 +19,7 @@
             </div>
             <div class="col">
                 <div class="info-container">
-                     <h3>{{vm.mentorInfo.inactiveMentees}}</h3>
+                    <h3>{{vm.mentorInfo.inactiveMentees}}</h3>
                     <small>Mentee Requests</small>
                 </div>
             </div>
@@ -27,15 +27,15 @@
         <div class="comments">
             <hr/>
             <span style="font-weight: normal;font-size: 1em;">
-                Mentee Approval List <br>
-                <small>Use <b>Send Message</b> to notify mentee for changes or <b>Approve</b> to approve the current stage.</small>
+                Mentee List <br>
+                <small>Use <b>Approval Status</b> option to accept/reject mentees.</small>
             </span>
             <div class="user-list">
                 <table class="table table-bordered">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Name</th>                          
+                            <th scope="col">Name</th>
                             <th scope="col">Approval Status</th>
                         </tr>
                     </thead>
@@ -44,7 +44,7 @@
                             <td>{{$index+1}}</td>
                             <td>{{item.firstname}} {{item.lastname}}</td>
                             <td><label class="switch">
-                              <input type="checkbox" ng-model="te" ng-change="vm.toggleStatus();">
+                              <input type="checkbox" ng-model="item.mapstatus" ng-checked="item.mapstatus" ng-change="vm.toggleStatus(item);">
                               <span class="slider round"></span>
                             </label></td>
                         </tr>

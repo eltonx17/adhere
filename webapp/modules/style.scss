@@ -28,7 +28,9 @@ body {
     background: transparent;
 }
 
-.center-content {
+.center-wrapper {
+    background: #f4f4f4;
+    margin-top: 2px;
     ui-view.ng-leave {}
     ui-view.ng-enter {
         transition: all .8s;

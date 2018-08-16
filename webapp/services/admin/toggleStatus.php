@@ -15,15 +15,12 @@ if(($action != "0") && ($action != "1")){
 $query="UPDATE users SET users.accountstatus = '$action' WHERE users.uid = '$userId'";
 $executeQuery= mysqli_query($db, $query);
 
-//required for now
-echo json_encode($executeQuery);
-
 if(!$executeQuery){
     $error = array(
              'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'401')
              );
+    echo json_encode($error);
 }
-
 else{
     $success = array(
                'data'=>'User status updated successfully', 'error'=>null

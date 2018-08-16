@@ -59,7 +59,7 @@
                             vm.logErrMsg = response.error.msg || "Something went wrong, try again.";
                         });
                     } else {
-                        vm.adminInfo = response;
+                        (item.accountstatus || item.accountstatus == "1" || item.accountstatus == 1) ? vm.adminInfo.inactiveUsers--: vm.adminInfo.inactiveUsers++;
                     }
                 },
                 function (fail) { // service fails                  
