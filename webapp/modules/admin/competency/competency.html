@@ -1,0 +1,25 @@
+<!-- MultiStep Form -->
+<div class="competency">
+
+    <div class="content">
+        <div class="com-list" ng-repeat="item in vm.competencyList">
+            <div class="com-header clearfix">
+                <div class="pull-left">
+                    <input type="text" ng-model="item.title"></div>
+                <div class="pull-right clearfix">
+                    <div class="pull-left pr-4" ng-click="vm.addQuestion(item);"><i class="fa fa-plus"></i></div>
+                    <div class="pull-left" ng-click="item.show=!item.show"><i class="fa fa-angle-down"></i></div>
+                </div>
+            </div>
+            <div class="com-body">
+                <div class="com-question-set" ng-repeat="question in item.questions" ng-show="item.show">
+                    <div class="com-question">
+                        <div><input type="text" ng-model="question.title" placeholder="Type competency here.."></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.MultiStep Form -->

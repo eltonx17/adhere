@@ -33,6 +33,11 @@
                 templateUrl: 'modules/admin/admin.html',
                 controller: 'adminController',
                 controllerAs: 'vm'
+            }).state('app.adminCompetency', {
+                url: 'admin/competency',
+                templateUrl: 'modules/admin/competency/competency.html',
+                controller: 'adminCompetencyController',
+                controllerAs: 'vm'
             }).state('app.mentee', {
                 url: 'mentee/home',
                 templateUrl: 'modules/mentee/mentee.html',

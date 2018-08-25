@@ -1,0 +1,15 @@
+.competency {
+    padding: 15px 0;
+    .com-list {
+        margin-bottom: 15px;
+        .com-header {
+            background: #ccc;
+            padding: 12px;
+            input {
+                width: 100%;
+                border: none;
+                background: #ccc;
+            }
+        }
+    }
+}

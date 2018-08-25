@@ -42,7 +42,11 @@
                     title: "Home",
                     active: true,
                     href: "app.admin"
-                }];
+                }, {
+                    title: "Competency Management",
+                    active: false,
+                    href: "app.adminCompetency"
+            }];
             } else if (vm.user.usertype == 1) { // mentor
                 vm.navList = [{
                     title: "Home",
