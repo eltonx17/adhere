@@ -10,7 +10,7 @@ $executeQuery = mysqli_query($db, $query);
 
 if($executeQuery){
     while($compList = mysqli_fetch_assoc($executeQuery)) {
-        $compData[] = $compList;       
+        $compData = $compList;       
     }
     echo json_encode($compData);
 } else {
