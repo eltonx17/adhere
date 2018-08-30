@@ -23,3 +23,12 @@ CREATE TABLE IF NOT EXISTS `mentormapping` (
   KEY `mentorID_idx` (`mentorid`),
   KEY `menteeFK_idx` (`menteeid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+
+-- Create 'competency' Table
+CREATE TABLE IF NOT EXISTS `competency` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `timestamp` timestamp NOT NULL,
+  `data` longtext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
