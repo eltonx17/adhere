@@ -10,6 +10,7 @@ $executeQuery = mysqli_query($db, $query);
 
 if($executeQuery){
     $compList = mysqli_fetch_assoc($executeQuery);
+    $compList["data"] = json_decode($compList["data"]);
     echo json_encode($compList);
 } else {
     $error = array(

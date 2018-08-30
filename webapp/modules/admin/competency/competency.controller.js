@@ -48,7 +48,8 @@
             }, {
                 title: "Com 11",
                 questions: []
-            }, ]
+            }, ];
+            vm.currentCompetency();
         };
         /**
          *
@@ -58,18 +59,13 @@
             apiService.serviceRequest({
                     method: 'GET',
                     url: appConfig.requestURL.getCompetencyData
-                }, function (data) {
-                    if (data && data.error && data.error.msg) { // error from server                                                      
+                }, function (response) {
+                    if (response && response.error && response.error.msg) { // error from server                                                 
                         $timeout(function () {
                             vm.regoErrMsg = data.error.msg || "Something went wrong, try again.";
                         });
                     } else {
-                        swal({
-                            title: "Good job!",
-                            text: "You clicked the button!",
-                            icon: "success",
-                            button: "Aww yiss!",
-                        });
+                        vm.competencyList = response.data;
                     }
                 },
                 function (fail) { // service fails
