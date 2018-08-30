@@ -20,7 +20,8 @@
             adminDashInfo: 'admin/adminstats.php',
             mentorDashInfo: 'mentor/mentorStats.php',
             toggleUserStatus: 'admin/toggleStatus.php',
-            toggleMenteeStatus: 'mentor/toggleStatus.php'
+            toggleMenteeStatus: 'mentor/toggleStatus.php',
+            getCompetencyData: 'admin/competency/competencyGet.php'
         };
 
     }

@@ -13,7 +13,7 @@ var appJs = ['app-main.js', 'app-route.js', 'modules/*/*.js', 'modules/*/*/*.js'
 
     htmlList = ['index.html', 'modules/*/*.html', 'modules/*/*/*.html'],
 
-    vendorJs = ['node_modules/angular/angular.min.js', 'node_modules/angular-ui-router/release/angular-ui-router.min.js', 'node_modules/angular-animate/angular-animate.min.js', 'node_modules/angular-aria/angular-aria.min.js', 'node_modules/angular-material/angular-material.min.js', 'node_modules/angular-messages/angular-messages.min.js', 'vendor/scripts/jquery-3.3.1.slim.min.js', 'vendor/scripts/popper.min.js', 'vendor/scripts/bootstrap.min.js'],
+    vendorJs = ['node_modules/angular/angular.min.js', 'node_modules/angular-ui-router/release/angular-ui-router.min.js', 'node_modules/angular-animate/angular-animate.min.js', 'node_modules/angular-aria/angular-aria.min.js', 'node_modules/angular-material/angular-material.min.js', 'node_modules/angular-messages/angular-messages.min.js', 'vendor/scripts/jquery-3.3.1.slim.min.js', 'vendor/scripts/popper.min.js', 'vendor/scripts/bootstrap.min.js','node_modules/sweetalert/dist/sweetalert.min.js'],
 
 
     appSass = ['modules/*.scss', 'modules/*/*.scss', 'modules/*/*/*.scss'],

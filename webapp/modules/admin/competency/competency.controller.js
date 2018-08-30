@@ -57,6 +57,38 @@
             item.questions.push({
 
             });
+            console.log(angular.toJson(vm.competencyList))
+        };
+        /**
+         *
+         */
+        vm.save = function (item) {
+            // sent login request to server
+            apiService.serviceRequest({
+                    method: 'POST',
+                    url: appConfig.requestURL.getCompetencyData,
+                    data: {
+                        competencyData: vm.competencyList
+                    }
+                }, function (data) {
+                    if (data && data.error && data.error.msg) { // error from server                                                      
+                        $timeout(function () {
+                            vm.regoErrMsg = data.error.msg || "Something went wrong, try again.";
+                        });
+                    } else {
+                        swal({
+                            title: "Good job!",
+                            text: "You clicked the button!",
+                            icon: "success",
+                            button: "Aww yiss!",
+                        });
+                    }
+                },
+                function (fail) { // service fails
+                    vm.registering = false;
+                    vm.regoErr = true;
+                    vm.regoErrMsg = "Something went wrong, try again.";
+                });
         };
         init();
 
