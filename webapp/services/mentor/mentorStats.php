@@ -15,7 +15,7 @@ $query = "SELECT *
           INNER JOIN mentormapping 
           ON mentormapping.menteeid = users.uid 
           AND mentormapping.mentorid = '$mentorId' 
-          AND users.accountstatus=0 
+          AND users.accountstatus=1 
           ORDER BY `users`.`firstname` ASC";
 $executeQuery = mysqli_query($db,$query);
 
