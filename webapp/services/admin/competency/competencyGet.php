@@ -1,14 +1,11 @@
 <?php
 header('Content-type: application/json');
 
-try {
-    if($db){
-        
-    }
-} catch (Exception $e) {
+if(isset($db)){
+    
+} else {
     require "../../conn.php";
 }
-
 
 $compList = "";
 $compArray = array();
@@ -18,6 +15,7 @@ $executeQuery = mysqli_query($db, $query);
 
 if($executeQuery){
     $compList = mysqli_fetch_assoc($executeQuery);
+    $compList["data"] = json_decode($compList["data"]);
     echo json_encode($compList);
 } else {
     $error = array(
