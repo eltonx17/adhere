@@ -23,3 +23,17 @@ CREATE TABLE IF NOT EXISTS `mentormapping` (
   KEY `mentorID_idx` (`mentorid`),
   KEY `menteeFK_idx` (`menteeid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `menteeworkbook` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menteeid` int(11) DEFAULT NULL,
+  `gst` int(11) NOT NULL DEFAULT '1' COMMENT 'Global Stage Tracker : Stage 1 - 5.',
+  `stage1` longtext,
+  `stage2` longtext,
+  `stage3` longtext,
+  `stage4` longtext,
+  `stage5` longtext,
+  `na` int(11) DEFAULT '0' COMMENT 'Needs Attention: 0 - Mentee needs to fill 1 - Mentor needs to verify',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `menteeid_UNIQUE` (`menteeid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='To indicate the stage mentee is in.';
