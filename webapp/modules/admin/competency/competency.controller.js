@@ -65,7 +65,8 @@
                             vm.regoErrMsg = data.error.msg || "Something went wrong, try again.";
                         });
                     } else {
-                        vm.competencyList = response.data;
+                        if (response && response.data && response.data.length > 0)
+                            vm.competencyList = response.data;
                     }
                 },
                 function (fail) { // service fails
