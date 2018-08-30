@@ -1,13 +1,17 @@
 <?php
 header('Content-type: application/json');
-require "../conn.php";
+require "../../conn.php";
 
 $date = new DateTime();
 $date->setTimeZone(new DateTimeZone('Australia/Sydney'));
 $timestamp = $date->format('Y-m-d H:i:s');
 
 //Retrieve Competency String
-$competencyData = mysqli_real_escape_string($db, $_GET['competencyData']);
+$competencyData = mysqli_real_escape_string($db, $_POST['competencyData']);
+$postdata = file_get_contents("php://input");
+//$request = json_decode($postdata);
+
+echo $postdata;
 
 $query = "INSERT INTO competency (timestamp, data) VALUES ('$timestamp', '$competencyData')";
 $executeQuery = mysqli_query($db, $query);

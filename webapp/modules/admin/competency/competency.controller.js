@@ -66,7 +66,7 @@
             // sent login request to server
             apiService.serviceRequest({
                     method: 'POST',
-                    url: appConfig.requestURL.getCompetencyData,
+                    url: appConfig.requestURL.saveCompetencyData,
                     data: {
                         competencyData: vm.competencyList
                     }
