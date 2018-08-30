@@ -2,7 +2,10 @@
 header('Content-type: application/json');
 require "../conn.php";
 require('../admin/competency/competencyGet.php');
-
+//echo $comData;
+/*$last_uid = 1;
+echo "INSERT INTO menteeworkbook (menteeid, stage2) VALUES ('$last_uid','$comData')";
+            return;*/
 // initializing variables
 $firstName = "";
 $lastName = "";
@@ -40,9 +43,13 @@ if (!$executeQuery) {
         //If Mentee, fire another query to map mentee to a mentor
         if ($userType == 2){
             $mentorId = mysqli_real_escape_string($db, $_GET['mentorId']);
-            $query = "INSERT INTO mentormapping (menteeid, mentorid) VALUES ('$last_uid', '$mentorId')";
-            $executeQuery= mysqli_query($db, $query);
-            if (!$executeQuery) {
+            
+            $queryA = "INSERT INTO mentormapping (menteeid, mentorid) VALUES ('$last_uid', '$mentorId')";
+            $queryB = "INSERT INTO menteeworkbook (menteeid, stage2) VALUES ('$last_uid','$comData')";
+            $executeQueryA= mysqli_multi_query($db, $queryA);
+            $executeQueryB= mysqli_multi_query($db, $queryB);
+            
+            if (!$executeQueryA && !$executeQueryB) {
                 $error = array(
                          'data'=>'null', 'error'=>array('msg'=>'Error selecting mentor','code'=>'101')
                          );
