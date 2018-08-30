@@ -37,3 +37,11 @@ CREATE TABLE IF NOT EXISTS `menteeworkbook` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `menteeid_UNIQUE` (`menteeid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='To indicate the stage mentee is in.';
+
+-- Create 'competency' Table
+CREATE TABLE IF NOT EXISTS `competency` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `timestamp` timestamp NOT NULL,
+  `data` longtext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
