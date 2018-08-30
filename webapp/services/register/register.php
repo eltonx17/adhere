@@ -1,6 +1,7 @@
 <?php
 header('Content-type: application/json');
 require "../conn.php";
+require('../admin/competency/competencyGet.php');
 
 // initializing variables
 $firstName = "";
