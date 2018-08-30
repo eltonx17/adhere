@@ -24,6 +24,8 @@ CREATE TABLE IF NOT EXISTS `mentormapping` (
   KEY `menteeFK_idx` (`menteeid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
+
+-- Create 'menteeworkbook' Table
 CREATE TABLE IF NOT EXISTS `menteeworkbook` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `menteeid` int(11) DEFAULT NULL,
