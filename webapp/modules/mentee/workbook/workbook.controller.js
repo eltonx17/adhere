@@ -14,7 +14,6 @@
 
 
         function init() {
-            debugger
             vm.appTitle = appConfig.title; // binds app title from config
             vm.user = window.localStorage.getItem('user') ? angular.fromJson(window.localStorage.getItem('user')) : undefined;
             vm.currentStageInfo();
@@ -36,28 +35,25 @@
                             vm.regoErrMsg = data.error.msg || "Something went wrong, try again.";
                         });
                     } else {
-                        debugger
+                        //debugger
                         //if (response && response.data && response.data.length > 0)
                         // vm.competencyList = response.data;
-                        var gst = (response.gst) ? parseInt(response.gst) : 1;
+                        var gst = (response.gst) ? parseInt(response.gst) : 1;                        
                         vm.stageList = [{
                             title: "Stage 1",
-                            active: true
+                            active: (gst >= 1) ? true : false
                             }, {
-                                            title: "Stage 2",
-                                            active: false
+                            title: "Stage 2",
+                            active: (gst >= 2) ? true : false
                             }, {
-                                            title: "Stage 3",
-                                            active: false
+                            title: "Stage 3",
+                            active: (gst >= 3) ? true : false
                             }, {
-                                            title: "Stage 4",
-                                            active: false
+                            title: "Stage 4",
+                            active: (gst >= 4) ? true : false
                             }, {
-                                            title: "Stage 5",
-                                            active: false
-                            }, {
-                                            title: "Stage 6",
-                                            active: false
+                            title: "Stage 5",
+                            active: (gst >= 5) ? true : false
                             }];
                     }
                 },
