@@ -25,7 +25,7 @@ $stageNum = "stage{$gstData}";
 //check if the submission is from mentee and update
 if($userType == '2'){
     if ($gstData <= 5){
-        $query = mysqli_query("UPDATE menteeworkbook
+        $query = ("UPDATE menteeworkbook
         SET ".($stageNum)."= ".json_encode($stageData).", na = '1'
         WHERE menteeid =".$menteeID);
         $executeQuery = mysqli_query($db,$query);
@@ -45,7 +45,7 @@ if($userType == '2'){
 elseif($userType == '1'){
     
     if ($gstData < 5){
-        $query = mysql_query("UPDATE menteeworkbook
+        $query = ("UPDATE menteeworkbook
         SET ".($stageNum)."= ".json_encode($stageData).", gst = ".++$gstData.", na = '0'
         WHERE gst = ".$gstData." AND menteeid =".$menteeID);        
         if(!executeQuery){
