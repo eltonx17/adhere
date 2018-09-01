@@ -10,8 +10,12 @@ $timestamp = $date->format('Y-m-d H:i:s');
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 $competencyData = json_encode($request->competencyData);
+$competencyData = base64_encode($competencyData);
 
-$query = "INSERT INTO competency (timestamp, data) VALUES ('$timestamp', '$competencyData')";
+
+$query = "INSERT INTO competency (timestamp, data) VALUES (".$timestamp.", '".$competencyData."')";
+echo $query;
+return;
 $executeQuery = mysqli_query($db, $query);
 
 if (!$executeQuery) {
