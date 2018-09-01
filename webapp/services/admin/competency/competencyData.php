@@ -13,9 +13,8 @@ $competencyData = json_encode($request->competencyData);
 $competencyData = base64_encode($competencyData);
 
 
-$query = "INSERT INTO competency (timestamp, data) VALUES (".$timestamp.", '".$competencyData."')";
-echo $query;
-return;
+$query = "INSERT INTO competency (timestamp, data) VALUES('$timestamp','".$competencyData."')";
+
 $executeQuery = mysqli_query($db, $query);
 
 if (!$executeQuery) {
