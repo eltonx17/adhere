@@ -3,44 +3,193 @@
 
     <div id="form_wrapper">
         <!-- progressbar -->
+
         <ul id="progressbar" class="row py-4">
             <li class="col-2" ng-class="{'active':item.active}" ng-repeat="item in vm.stageList">
                 {{item.title}}
             </li>
         </ul>
+        {{vm.stagesList}}
         <form>
             <div ng-show="vm.stageVisibility.stage1">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="stagesList.stage1.agreement.menteeName">Mentee Name
-                            <br> 
-                            <small id="stagesList.stage1.agreement.menteeName" class="form-text text-muted">description for sample input 3.</small>
+                            <label for="vm.stagesList.stage1.agreement.menteeName">Mentee Name
                         </label>
-                            <input type="text" class="form-control" ng-model="stagesList.stage1.agreement.menteeName" placeholder="Enter mentee name">
+                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.agreement.menteeName" placeholder="Enter mentee name">
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="stagesList.stage1.agreement.menteeRole">Mentee Role
-                            <br> 
-                            <small id="stagesList.stage1.agreement.menteeRole" class="form-text text-muted">description for sample input 3.</small>
+                            <label for="vm.stagesList.stage1.agreement.menteeRole">Mentee Role
                         </label>
-                            <input type="text" class="form-control" ng-model="stagesList.stage1.agreement.menteeRole" placeholder="Enter mentee role">
+                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.agreement.menteeRole" placeholder="Enter mentee role">
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="stagesList.stage1.agreement.menteeWorkPlace">Mentee Workplace
-                            <br> 
-                            <small id="stagesList.stage1.agreement.menteeWorkPlace" class="form-text text-muted">description for sample input 3.</small>
+                            <label for="vm.stagesList.stage1.agreement.menteeGoal">Mentee Workplace
                         </label>
-                            <input type="text" class="form-control" ng-model="stagesList.stage1.agreement.menteeWorkPlace" placeholder="Enter mentee workplace">
+                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.agreement.menteeWorkPlace" placeholder="Enter mentee workplace">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.agreement.menteeGoal">Mentee Goal
+                        </label>
+                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.agreement.menteeGoal" placeholder="Enter mentee agreement">
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.agreement.mentorName">Mentor Name
+                        </label>
+                            <input type="text" class="form-control" ng-model="vm.stagesList.stage1.agreement.mentorName" readonly placeholder="Enter mentee name">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.agreement.mentorRole">Mentor Role
+                        </label>
+                            <input type="text" class="form-control" ng-model="vm.stagesList.stage1.agreement.mentorRole" readonly placeholder="Enter mentee role">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.agreement.mentorWorkPlace">Mentor Workplace
+                        </label>
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.agreement.mentorWorkPlace" placeholder="Enter mentee workplace">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.agreement.mentorGoal">Mentor Goal
+                        </label>
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.agreement.mentorGoal" placeholder="Enter mentee workplace">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <b>Assessment activity </b>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.assesment.menteeNote">Mentee
+                        </label>
+                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.assesment.menteeNote" placeholder="Enter mentee name">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.assesment.mentorNote">Mentor
+                        </label>
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.assesment.mentorNote" placeholder="Enter mentee role">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <b>Mapping evidence activity </b>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.mappingEvidence.menteeNote">Mentee
+                        </label>
+                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.mappingEvidence.menteeNote" placeholder="Enter mentee name">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.mappingEvidence.mentorNote">Mentor
+                        </label>
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.mappingEvidence.mentorNote" placeholder="Enter mentee role">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <b>Action planning activity </b>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.actionPlan.menteeNote">Mentee
+                        </label>
+                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.actionPlan.menteeNote" placeholder="Enter mentee name">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.actionPlan.mentorNote">Mentor
+                        </label>
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.actionPlan.mentorNote" placeholder="Enter mentee role">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <b>Verification activity </b>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.verificationPlan.menteeNote">Mentee
+                        </label>
+                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.verificationPlan.menteeNote" placeholder="Enter mentee name">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.verificationPlan.mentorNote">Mentor
+                        </label>
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.verificationPlan.mentorNote" placeholder="Enter mentee role">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <b>Meeting Schedules </b>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.meetings.timeData">Meeting Time
+                        </label>
+                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.meetings.timeData" placeholder="Enter mentee name">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.meetings.methodToRecord">Method for recording and monitoring of meetings: (who will take minutes, etc)
+                        </label>
+                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.meetings.methodToRecord" placeholder="Enter mentee role">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.meetings.problemSolving">Strategies for addressing difficulties along the way
+                        </label>
+                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.meetings.problemSolving" placeholder="Enter mentee role">
+                        </div>
+                    </div>
+                    <br><b>Dates and format of meeting</b>
+                    <div class="col-12" ng-repeat="item in vm.stagesList.stage1.meetings.timing">
+                        <input ng-model="item.date" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" placeholder="date" />
+                        <input ng-model="item.format" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" placeholder="format" />
+                    </div>
+                    <br><b>Review dates</b>
+                    <div class="col-12" ng-repeat="item in vm.stagesList.stage1.meetings.reviewDate">
+                        <input ng-model="item.date" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" placeholder="date" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Agree - <input type="checkbox" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.confidentiality.menteeAgree" />
+                    </div>
+                </div>
                 <div class="text-right">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" ng-click="vm.saveStage1();">Submit</button>
                 </div>
             </div>
 
@@ -49,17 +198,18 @@
             <div ng-show="vm.stageVisibility.stage4">4</div>
             <div ng-show="vm.stageVisibility.stage5">5</div>
         </form>
+
     </div>
 
 </div>
 <!-- 
 <div class="col">
                         <div class="form-group">
-                            <label for="stagesList.stage1.agreement.menteeWorkPlace">Mentee Workplace
+                            <label for="vm.stagesList.stage1.agreement.menteeWorkPlace">Mentee Workplace
                             <br> 
-                            <small id="stagesList.stage1.agreement.menteeWorkPlace" class="form-text text-muted">description for sample input 3.</small>
+                            <small id="vm.stagesList.stage1.agreement.menteeWorkPlace" class="form-text text-muted">description for sample input 3.</small>
                         </label>
-                            <input type="text" class="form-control" ng-model="stagesList.stage1.agreement.menteeWorkPlace"placeholder="Enter mentee workplace">
+                            <input type="text" class="form-control" ng-model="vm.stagesList.stage1.agreement.menteeWorkPlace"placeholder="Enter mentee workplace">
                         </div>
                     </div>
 -->

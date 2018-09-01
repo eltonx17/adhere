@@ -23,7 +23,8 @@
             toggleMenteeStatus: 'mentor/toggleStatus.php',
             getCompetencyData: 'admin/competency/competencyGet.php',
             saveCompetencyData: 'admin/competency/competencyData.php',
-            currentMenteeStageInfo: 'admin/competency/menteeStageDetails.php'
+            currentMenteeStageInfo: 'admin/competency/menteeStageDetails.php',
+            updateWorkBook: 'admin/competency/competencyUpdate.php'
         };
 
     }

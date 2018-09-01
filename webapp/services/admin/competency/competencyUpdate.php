@@ -1,7 +1,7 @@
 <?php
 header('Content-type: application/json');
 
-require "../conn.php";
+require "../../conn.php";
 
 //variable creation
 $stageData = array();
@@ -13,25 +13,13 @@ $userType = 0;
 //$stageData = mysqli_real_escape_string($db, $_GET['stageData']);
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
-$stageData = json_encode($request->$stageData);
 
-//$gstData = mysqli_real_escape_string($db, $_GET['gstData']);
-$postdata = file_get_contents("php://input");
-$request = json_decode($postdata);
-$gstData = json_encode($request->$gstData);
+$stageData = ($request->stageData);
+$gstData = ($request->gstData);
+$menteeID = ($request->menteeID);
+$userType = ($request->usertype);
 
-
-//$menteeID = mysqli_real_escape_string($db, $_GET['menteeID']);
-$postdata = file_get_contents("php://input");
-$request = json_decode($postdata);
-$menteeID = json_encode($request->$menteeID);
-
-
-//$userType = mysqli_real_escape_string($db, $_GET['usertype']);
-$postdata = file_get_contents("php://input");
-$request = json_decode($postdata);
-$userType = json_encode($request->$userType);
-
+return;
 
 $stageNum = "stage{$gstData}";
 
@@ -39,7 +27,7 @@ $stageNum = "stage{$gstData}";
 if($userType == '2'){
     if ($gstData <= 5){
         $query = mysqli_query("UPDATE menteeworkbook
-        SET ". mysqli_real_escape_string($stageNum)."= ".$stageData.", na = '1'
+        SET ". mysqli_real_escape_string($stageNum)."= ".json_encode($stageData).", na = '1'
         WHERE gst = ".$gstData."AND menteeid =".$menteeID);
         $executeQuery = mysqli_query($db,$query);
         echo json_encode("update successful");
