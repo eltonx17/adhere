@@ -6,10 +6,11 @@ require "../../conn.php";
 $stageData = "";
 
 //Get menteeID
-$menteeId = mysqli_real_escape_string($db, $_GET['menteeID']);
+//$menteeId = mysqli_real_escape_string($db, $_GET['menteeID']);
 
 //Query to get mentee stage details
-$query = "SELECT menteeworkbook.menteeid,menteeworkbook.gst,menteeworkbook.stage1,menteeworkbook.stage2,menteeworkbook.stage3,menteeworkbook.stage4,menteeworkbook.stage5 FROM menteeworkbook WHERE menteeworkbook.menteeid = '$menteeId'";
+//$query = "SELECT menteeworkbook.menteeid,menteeworkbook.gst,menteeworkbook.stage1,menteeworkbook.stage2,menteeworkbook.stage3,menteeworkbook.stage4,menteeworkbook.stage5 FROM menteeworkbook WHERE menteeworkbook.menteeid = '$menteeId'";
+$query = "SELECT menteeworkbook.menteeid,menteeworkbook.gst,menteeworkbook.stage1,menteeworkbook.stage2,menteeworkbook.stage3,menteeworkbook.stage4,menteeworkbook.stage5 FROM menteeworkbook WHERE menteeworkbook.menteeid = 30";
 $executeQuery = mysqli_query($db, $query);
 
 if($executeQuery){
@@ -23,7 +24,10 @@ if($executeQuery){
     $stageData["stage5"] = json_decode($stageData['stage5']);
     $stageData["gst"] = $stageData['gst'];
     
-    echo json_encode($stageData);    
+    $stages["data"] = ($stageData);
+    $stages["error"] = "null";
+    
+    echo json_encode($stages);    
 
 } else {
     $error = array(
