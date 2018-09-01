@@ -19,7 +19,7 @@ if($executeQuery){
         $comData = json_encode($compList["data"]);
     }
     else{
-        $compList["data"] = json_decode($compList["data"]);
+        $compList["data"] = json_decode(base64_decode($compList["data"]));
         echo json_encode($compList);
     }
 } else {
