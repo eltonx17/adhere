@@ -19,16 +19,11 @@ $gstData = ($request->gstData);
 $menteeID = ($request->menteeID);
 $userType = ($request->usertype);
 
-
-$stageNum = "stage{$gstData}";
-$var = '';
-$var = base64_encode($stageData);
-
 //check if the submission is from mentee and update
 if($userType == '2'){
     if ($gstData <= 5){
         $query = ("UPDATE menteeworkbook
-        SET ".($stageNum)."='".$var."', na=1
+        SET ".($stageNum)."='".base64_encode($stageData)."', na=1
         WHERE menteeid=".$menteeID);
             
         $executeQuery = mysqli_query($db,$query);
