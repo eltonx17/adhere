@@ -9,13 +9,12 @@
                 {{item.title}}
             </li>
         </ul>
-        {{vm.stagesList}}
         <form>
             <div ng-show="vm.stageVisibility.stage1">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="vm.stagesList.stage1.agreement.menteeName">Mentee Name
+                            <label for="vm.stagesList.stage1.agreement.menteeName">Mentee Name {{vm.stagesList.stage1.rights.mentee.readOnly}}
                         </label>
                             <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.agreement.menteeName" placeholder="Enter mentee name">
                         </div>

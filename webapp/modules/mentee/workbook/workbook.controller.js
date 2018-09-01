@@ -149,7 +149,8 @@
          */
         vm.saveStage1 = function () {
             console.log(vm.stagesList.stage1);
-            vm.stagesList.stage1.rights.mentor.readOnly = true;
+            vm.stagesList.stage1.rights.mentee.readOnly = true;
+            debugger
             debugger
             apiService.serviceRequest({
                     method: 'POST',

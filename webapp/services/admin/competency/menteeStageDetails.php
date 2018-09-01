@@ -16,11 +16,11 @@ if($executeQuery){
     
     $stageData = mysqli_fetch_assoc($executeQuery);
                              
-    $stageData["stage1"] = json_decode($stageData['stage1']);
-    $stageData["stage2"] = json_decode($stageData['stage2']);    
-    $stageData["stage3"] = json_decode($stageData['stage3']);
-    $stageData["stage4"] = json_decode($stageData['stage4']);
-    $stageData["stage5"] = json_decode($stageData['stage5']);
+    $stageData["stage1"] = json_decode(base64_decode($stageData['stage1']));
+    $stageData["stage2"] = json_decode(base64_decode($stageData['stage2']));    
+    $stageData["stage3"] = json_decode(base64_decode($stageData['stage3']));
+    $stageData["stage4"] = json_decode(base64_decode($stageData['stage4']));
+    $stageData["stage5"] = json_decode(base64_decode($stageData['stage5']));
     $stageData["gst"] = $stageData['gst'];
     
     $stages["data"] = ($stageData);

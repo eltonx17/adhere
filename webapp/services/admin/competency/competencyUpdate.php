@@ -18,6 +18,8 @@ $stageData = json_encode($request->stageData);
 $gstData = ($request->gstData);
 $menteeID = ($request->menteeID);
 $userType = ($request->usertype);
+$stageNum = "stage".$gstData;
+
 
 //check if the submission is from mentee and update
 if($userType == '2'){
