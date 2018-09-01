@@ -19,7 +19,6 @@ $gstData = ($request->gstData);
 $menteeID = ($request->menteeID);
 $userType = ($request->usertype);
 
-return;
 
 $stageNum = "stage{$gstData}";
 
@@ -28,15 +27,17 @@ if($userType == '2'){
     if ($gstData <= 5){
         $query = mysqli_query("UPDATE menteeworkbook
         SET ". mysqli_real_escape_string($stageNum)."= ".json_encode($stageData).", na = '1'
-        WHERE gst = ".$gstData."AND menteeid =".$menteeID);
+        WHERE menteeid =".$menteeID);
         $executeQuery = mysqli_query($db,$query);
-        echo json_encode("update successful");
+        
         if(!executeQuery){
             $error = array(
                 'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'401')
                 );
             echo json_encode($error);
         }
+        
+       else echo json_encode("update successful");
     }
 }
 
