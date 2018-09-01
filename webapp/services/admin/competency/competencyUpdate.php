@@ -14,23 +14,26 @@ $userType = 0;
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
-$stageData = ($request->stageData);
+$stageData = json_encode($request->stageData);
 $gstData = ($request->gstData);
 $menteeID = ($request->menteeID);
 $userType = ($request->usertype);
 
 
 $stageNum = "stage{$gstData}";
+$var = '';
+$var = base64_encode($stageData);
 
 //check if the submission is from mentee and update
 if($userType == '2'){
     if ($gstData <= 5){
         $query = ("UPDATE menteeworkbook
-        SET ".($stageNum)."= ".json_encode($stageData).", na = '1'
-        WHERE menteeid =".$menteeID);
+        SET ".($stageNum)."='".$var."', na=1
+        WHERE menteeid=".$menteeID);
+            
         $executeQuery = mysqli_query($db,$query);
         
-        if(!executeQuery){
+        if(!$executeQuery){
             $error = array(
                 'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'401')
                 );
@@ -48,7 +51,7 @@ elseif($userType == '1'){
         $query = ("UPDATE menteeworkbook
         SET ".($stageNum)."= ".json_encode($stageData).", gst = ".++$gstData.", na = '0'
         WHERE gst = ".$gstData." AND menteeid =".$menteeID);        
-        if(!executeQuery){
+        if(!$executeQuery){
             $error = array(
                 'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'401')
                 );
