@@ -6,7 +6,7 @@ require "../../conn.php";
 $stageData = "";
 
 //Get menteeID
-//$menteeId = mysqli_real_escape_string($db, $_GET['menteeID']);
+$menteeId = mysqli_real_escape_string($db, $_GET['menteeID']);
 
 //Query to get mentee stage details
 $query = "SELECT menteeworkbook.menteeid,menteeworkbook.gst,menteeworkbook.stage1,menteeworkbook.stage2,menteeworkbook.stage3,menteeworkbook.stage4,menteeworkbook.stage5 FROM menteeworkbook WHERE menteeworkbook.menteeid = '$menteeId'";

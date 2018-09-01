@@ -15,40 +15,18 @@
 
         function init() {
             vm.appTitle = appConfig.title; // binds app title from config
-            vm.competencyList = [{
-                title: "Com 1",
-                questions: []
-            }, {
-                title: "Com 2",
-                questions: []
-            }, {
-                title: "Com 3",
-                questions: []
-            }, {
-                title: "Com 4",
-                questions: []
-            }, {
-                title: "Com 5",
-                questions: []
-            }, {
-                title: "Com 6",
-                questions: []
-            }, {
-                title: "Com 7",
-                questions: []
-            }, {
-                title: "Com 8",
-                questions: []
-            }, {
-                title: "Com 9",
-                questions: []
-            }, {
-                title: "Com 10",
-                questions: []
-            }, {
-                title: "Com 11",
-                questions: []
-            }, ];
+            vm.competencyList = [];
+            for (var i = 0; i < 11; i++) {
+                vm.competencyList.push({
+                    title: "Com " + (i + 1),
+                    section: [{
+                        heading: "",
+                        questions: [{
+                            text: ""
+                        }]
+                    }]
+                });
+            };
             vm.currentCompetency();
         };
         /**
@@ -78,11 +56,23 @@
         /**
          *
          */
+        vm.addSection = function (item) {
+            item.section.push({
+                heading: "",
+                questions: [{
+                    text: ""
+                        }]
+            });
+            $timeout();
+        };
+        /**
+         *
+         */
         vm.addQuestion = function (item) {
             item.questions.push({
-
+                text: ""
             });
-            console.log(angular.toJson(vm.competencyList))
+            $timeout();
         };
         /**
          *
