@@ -22,7 +22,8 @@
             toggleUserStatus: 'admin/toggleStatus.php',
             toggleMenteeStatus: 'mentor/toggleStatus.php',
             getCompetencyData: 'admin/competency/competencyGet.php',
-            saveCompetencyData: 'admin/competency/competencyData.php'
+            saveCompetencyData: 'admin/competency/competencyData.php',
+            currentMenteeStageInfo: 'admin/competency/menteeStageDetails.php'
         };
 
     }

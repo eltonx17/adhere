@@ -1,7 +1,7 @@
 <?php
 header('Content-type: application/json');
 
-require "../conn.php";
+require "../../conn.php";
 
 $stageData = "";
 
@@ -13,6 +13,7 @@ $query = "SELECT menteeworkbook.menteeid,menteeworkbook.gst,menteeworkbook.stage
 $executeQuery = mysqli_query($db, $query);
 
 if($executeQuery){
+    
     $stageData = mysqli_fetch_assoc($executeQuery);
                              
     $stageData["stage1"] = json_decode($stageData['stage1']);
