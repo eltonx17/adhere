@@ -10,10 +10,28 @@ $menteeID = 0;
 $userType = 0;
 
 //collecting input
-$stageData = mysqli_real_escape_string($db, $_GET['stageData']);
-$gstData = mysqli_real_escape_string($db, $_GET['gstData']);
-$menteeID = mysqli_real_escape_string($db, $_GET['menteeID']);
-$userType = mysqli_real_escape_string($db, $_GET['usertype']);
+//$stageData = mysqli_real_escape_string($db, $_GET['stageData']);
+$postdata = file_get_contents("php://input");
+$request = json_decode($postdata);
+$stageData = json_encode($request->$stageData);
+
+//$gstData = mysqli_real_escape_string($db, $_GET['gstData']);
+$postdata = file_get_contents("php://input");
+$request = json_decode($postdata);
+$gstData = json_encode($request->$gstData);
+
+
+//$menteeID = mysqli_real_escape_string($db, $_GET['menteeID']);
+$postdata = file_get_contents("php://input");
+$request = json_decode($postdata);
+$menteeID = json_encode($request->$menteeID);
+
+
+//$userType = mysqli_real_escape_string($db, $_GET['usertype']);
+$postdata = file_get_contents("php://input");
+$request = json_decode($postdata);
+$userType = json_encode($request->$userType);
+
 
 $stageNum = "stage{$gstData}";
 
