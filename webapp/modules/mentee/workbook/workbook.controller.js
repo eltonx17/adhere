@@ -222,7 +222,7 @@
          *
          */
         vm.setAnswer = function(question, ans){     
-            if(!vm.stagesList.stage1.rights.mentee.readOnly)
+            if(!vm.stagesList.stage2.rights.mentee.readOnly)
                 question.answer = ans;
                 $timeout();
         };

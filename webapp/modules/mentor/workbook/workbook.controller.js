@@ -77,7 +77,7 @@
                             vm.stageVisibility["stage" + vm.gst] = true;
 
                             vm.stagesList = {
-                                stage1: (resp.stage1) ? resp.stage1 : vm.getDefaults("stage1"),
+                                stage1: (resp.stage1) ? resp.stage1 : null,
                                 stage2: resp.stage2
                             };
                         }
