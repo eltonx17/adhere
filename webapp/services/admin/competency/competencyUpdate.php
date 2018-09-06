@@ -52,10 +52,9 @@ else if($userType == '1'){
         
         $executeQuery = mysqli_query($db,$query);
         
-        if(mysqli_affected_rows($db) >0 ){
-            echo json_encode("update successful");
+        if(mysqli_affected_rows($db) >0 ){            
             
-            else if($gstData =='5' || $gstData ==5){
+            if($gstData =='5' || $gstData ==5){
                 echo json_encode("successful completed all the stages");
                 } 
             else {

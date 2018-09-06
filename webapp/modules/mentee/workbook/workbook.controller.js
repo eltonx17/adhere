@@ -78,7 +78,7 @@
                                 stage1: (resp.stage1) ? resp.stage1 : vm.getDefaults("stage1"),
                                 stage2: resp.stage2
                             };
-                            
+
                             console.log(vm.stagesList);
                         }
                     }
@@ -156,19 +156,19 @@
          *
          */
         vm.saveStage = function (stage) {
-            
-            if(stage == 1){
+
+            if (stage == 1) {
                 vm.stagesList.stage1.rights.mentee.readOnly = true;
-            } else if (stage == 2){
-                 vm.stagesList.stage2.rights.mentee.readOnly = true;
+            } else if (stage == 2) {
+                vm.stagesList.stage2.rights.mentee.readOnly = true;
             }
-            
+
             apiService.serviceRequest({
                     method: 'POST',
                     url: appConfig.requestURL.updateWorkBook,
                     data: {
                         menteeID: vm.user.uid,
-                        stageData: vm.stagesList.stage2,
+                        stageData: vm.stagesList["stage" + vm.gst],
                         gstData: vm.gst,
                         usertype: vm.user.usertype,
                     }
@@ -218,6 +218,14 @@
 
             vm.stageVisibility["stage" + index] = true;
         }
+        /**
+         *
+         */
+        vm.setAnswer = function(question, ans){     
+            if(!vm.stagesList.stage1.rights.mentee.readOnly)
+                question.answer = ans;
+                $timeout();
+        };
         init();
 
     }

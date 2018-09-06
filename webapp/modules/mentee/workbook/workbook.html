@@ -219,19 +219,19 @@
                                         <div class="pl-2">
                                             <u>{{$parent.$parent.$index+1}}.{{$parent.$index+1}}.{{$index+1}}</u> {{question.text}} <br>
                                             <div class="row">
-                                                <div class="col" ng-click="vm.stagesList.stage2.rights.mentee.readOnly ? question.answer=1 : return false;" ng-class="{'active':question.answer==1}">
+                                                <div class="col" ng-click="vm.setAnswer(question,1)" ng-class="{'active':question.answer==1}">
                                                     <div class="bg-white text-center">1</div>
                                                 </div>
-                                                <div class="col" ng-click="vm.stagesList.stage2.rights.mentee.readOnly ? question.answer=2 : return false;" ng-class="{'active':question.answer==2}">
+                                                <div class="col" ng-click="vm.setAnswer(question,2)" ng-class="{'active':question.answer==2}">
                                                     <div class="bg-white text-center">2</div>
                                                 </div>
-                                                <div class="col" ng-click="vm.stagesList.stage2.rights.mentee.readOnly ? question.answer=3 : return false;" ng-class="{'active':question.answer==3}">
+                                                <div class="col" ng-click="vm.setAnswer(question,3)" ng-class="{'active':question.answer==3}">
                                                     <div class="bg-white text-center">3</div>
                                                 </div>
-                                                <div class="col" ng-click="vm.stagesList.stage2.rights.mentee.readOnly ? question.answer=4 : return false;" ng-class="{'active':question.answer==4}">
+                                                <div class="col" ng-click="vm.setAnswer(question,4)" ng-class="{'active':question.answer==4}">
                                                     <div class="bg-white text-center">4</div>
                                                 </div>
-                                                <div class="col" ng-click="vm.stagesList.stage2.rights.mentee.readOnly ? question.answer=5 : return false;" ng-class="{'active':question.answer==5}">
+                                                <div class="col" ng-click="vm.setAnswer(question,5)" ng-class="{'active':question.answer==5}">
                                                     <div class="bg-white text-center">5</div>
                                                 </div>
                                             </div>

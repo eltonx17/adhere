@@ -91,20 +91,19 @@
         /**
          *
          */
-        vm.saveStage = function (stage) {
-            
+        vm.saveStage = function (stage) {            
             if(stage == 1){
-                vm.stagesList.stage1.rights.mentee.readOnly = true;
+                vm.stagesList.stage1.rights.mentor.readOnly = true;
             } else if (stage == 2){
-                 vm.stagesList.stage2.rights.mentee.readOnly = true;
+                 vm.stagesList.stage2.rights.mentor.readOnly = true;
             }
             
             apiService.serviceRequest({
                     method: 'POST',
                     url: appConfig.requestURL.updateWorkBook,
                     data: {
-                        menteeID: vm.user.uid,
-                        stageData: vm.stagesList.stage2,
+                        menteeID: vm.menteeId,
+                        stageData: vm.stagesList["stage" + vm.gst],
                         gstData: vm.gst,
                         usertype: vm.user.usertype,
                     }

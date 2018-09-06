@@ -195,7 +195,7 @@
                     </div>
                 </div>
                 <div class="text-right">
-                    <button ng-show="!vm.stagesList.stage1.rights.mentor.readOnly" type="submit" class="btn btn-primary" ng-click="vm.saveStage(1);">Approve</button>
+                    <button ng-if="vm.stagesList.stage1.rights.mentor.readOnly == 0 && vm.stagesList.stage1.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.saveStage(1);">Approve</button>
                     <button ng-show="vm.stagesList.stage1.rights.mentor.readOnly == 1 && vm.stagesList.stage1.rights.mentor.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.nextStage()">Next</button>
                 </div>
             </div>
@@ -243,8 +243,8 @@
                     </div>
                 </div>
                 <div class="text-right">
-                    <button ng-show="!vm.stagesList.stage2.rights.mentor.readOnly" type="submit" class="btn btn-primary" ng-click="vm.saveStage(2);">Approve</button>
-                    <button ng-show="vm.stagesList.stage2.rights.mentor.readOnly == 1 && vm.stagesList.stage2.rights.mentor.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.nextStage()">Next</button>
+                    <button ng-if="vm.stagesList.stage2.rights.mentor.readOnly == 0 && vm.stagesList.stage2.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.saveStage(2);">Approve</button>
+                    <button ng-show="vm.stagesList.stage2.rights.mentee.readOnly == 1 && vm.stagesList.stage2.rights.mentor.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.nextStage()">Next</button>
                 </div>
             </div>
             <div ng-show="vm.stageVisibility.stage3">3</div>
