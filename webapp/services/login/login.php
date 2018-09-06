@@ -47,10 +47,12 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
           else{
               //if Mentee logs in, show Mentee details and Mentor details
               if ($userType==2){                  
-                  $query = "SELECT users.firstname AS mentorname,users.uid 
-                            FROM users,mentormapping 
+                  $query = "SELECT users.firstname AS
+                            mentorname,users.uid,mentormapping.mapstatus,menteeworkbook.gst 
+                            FROM users,mentormapping,menteeworkbook 
                             WHERE mentormapping.mentorid = users.uid 
-                            AND mentormapping.menteeid = '$menteeId'";
+                            AND mentormapping.menteeid = '$menteeId'
+                            AND menteeworkbook.menteeid = '$menteeId'";
   	              $executeQuery = mysqli_query($db, $query);
                   $fetchQuery = $executeQuery->fetch_all(MYSQLI_ASSOC); //Convert into array
                   
@@ -66,6 +68,8 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
                         //Append retrieved mentor details to 
                         $userDetails["mentorName"] = $mentorDetails["mentorname"];
                         $userDetails["mentorID"] = $mentorDetails["uid"];
+                        $userDetails["mapStatus"] = $mentorDetails["mapstatus"];
+                        $userDetails["gst"] = $mentorDetails["gst"];
                   
                         $success = array(
                                  'data'=>$userDetails, 'error'=>null
