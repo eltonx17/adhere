@@ -42,7 +42,7 @@
                     <tbody>
                         <tr ng-repeat="item in vm.mentorInfo.listOfMentees">
                             <td>{{$index+1}}</td>
-                            <td>{{item.firstname}} {{item.lastname}}</td>
+                            <td> <a ui-sref="app.mentorWorkBook({menteeId:item.menteeid})">{{item.firstname}} {{item.lastname}}</a></td>
                             <td><label class="switch">
                               <input type="checkbox" ng-model="item.mapstatus" ng-checked="item.mapstatus" ng-change="vm.toggleStatus(item);">
                               <span class="slider round"></span>

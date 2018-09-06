@@ -45,12 +45,12 @@
         /**
          *
          */
-        vm.toggleStatus = function (item) {
+        vm.toggleStatus = function (item) {            
             apiService.serviceRequest({
                     method: 'POST',
                     url: appConfig.requestURL.toggleMenteeStatus,
                     params: {
-                        menteeID: item.uid,
+                        menteeID: item.menteeid,
                         action: (item.mapstatus || item.mapstatus == "1" || item.mapstatus == 1) ? 1 : 0
                     }
                 }, function (response) {

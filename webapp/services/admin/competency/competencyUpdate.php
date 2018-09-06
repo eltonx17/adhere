@@ -32,7 +32,7 @@ if($userType == '2'){
         
         if(!$executeQuery){
             $error = array(
-                'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'401')
+                'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'754')
                 );
             echo json_encode($error);
         }   else {
@@ -42,18 +42,21 @@ if($userType == '2'){
 }
 
 //check if the submission is from mentor and update
-elseif($userType == '1'){
+else if($userType == '1'){
     
     if ($gstData < 5){
         $query = ("UPDATE menteeworkbook
-        SET ".($stageNum)."= ".json_encode($stageData).", gst = ".++$gstData.", na = '0'
-        WHERE gst = ".$gstData." AND menteeid =".$menteeID);        
+        SET ".($stageNum)."='".base64_encode($stageData)."', gst=".++$gstData.", na=0
+        WHERE menteeid=".$menteeID);     
+        
+        $executeQuery = mysqli_query($db,$query);
+        
         if(!$executeQuery){
             $error = array(
-                'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'401')
+                'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'875')
                 );
             echo json_encode($error);
-        } if($gstData =='5' || $gstData ==5){
+        } else if($gstData =='5' || $gstData ==5){
              echo json_encode("successful completed all the stages");
         } else {
             echo json_encode("update successful");

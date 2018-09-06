@@ -43,8 +43,8 @@
                             vm.regoErrMsg = data.error.msg || "Something went wrong, try again.";
                         });
                     } else {
-                        if (response && response.data && response.data.length > 0)
-                            vm.competencyList = response.data;
+                        if (response && response.data && response.data.items && response.data.items.length > 0)
+                            vm.competencyList = response.data.items;
                     }
                 },
                 function (fail) { // service fails
@@ -88,11 +88,22 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         // sent login request to server
+                        var comData = {
+                            items: angular.copy(vm.competencyList),
+                            rights: {
+                                mentor: {
+                                    readOnly: false
+                                },
+                                mentee: {
+                                    readOnly: false
+                                }
+                            }
+                        };
                         apiService.serviceRequest({
                                 method: 'POST',
                                 url: appConfig.requestURL.saveCompetencyData,
                                 data: {
-                                    competencyData: vm.competencyList
+                                    competencyData: comData
                                 }
                             }, function (data) {
                                 if (data && data.error && data.error.msg) { // error from server                                                      

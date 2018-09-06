@@ -17,9 +17,6 @@
                 controllerAs: 'vm'
             }).state('login', {
                 url: '/login',
-                params: {
-                    email: undefined
-                },
                 templateUrl: 'modules/login/login.html',
                 controller: 'loginController',
                 controllerAs: 'vm'
@@ -52,6 +49,14 @@
                 url: 'mentor/home',
                 templateUrl: 'modules/mentor/mentor.html',
                 controller: 'mentorController',
+                controllerAs: 'vm'
+            }).state('app.mentorWorkBook', {
+                url: 'mentor/workbook',
+                params: {
+                    menteeId: undefined
+                },
+                templateUrl: 'modules/mentor/workbook/workbook.html',
+                controller: 'mentorWorkbookController',
                 controllerAs: 'vm'
             });
 

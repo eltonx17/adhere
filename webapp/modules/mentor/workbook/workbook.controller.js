@@ -6,35 +6,37 @@
 
     angular
         .module('adhere')
-        .controller('workbookController', workbookController);
+        .controller('mentorWorkbookController', mentorWorkbookController);
 
     /* ngInject */
-    function workbookController($scope, appConfig, $timeout, apiService, $rootScope, $state) {
+    function mentorWorkbookController($scope, appConfig, $timeout, apiService, $rootScope, $state, $stateParams) {
         var vm = this;
 
 
         function init() {
             vm.appTitle = appConfig.title; // binds app title from config
             vm.user = window.localStorage.getItem('user') ? angular.fromJson(window.localStorage.getItem('user')) : undefined;
-            vm.currentStageInfo();
+            vm.menteeId = $stateParams.menteeId;
+            vm.currentStageInfo($stateParams.menteeId);
             vm.stageName = {
                 1: "Mentor - Mentee Agreement",
-                2: "Self - Assesment",
+                2: "Self - Assesments",
                 3: "Action Plan",
                 4: "Summary of Evidence",
                 5: "Feedback"
-            }
+            };
         };
         /**
          *
          */
-        vm.currentStageInfo = function (item) {
+        vm.currentStageInfo = function (id) {
+            console.log(id);
             // sent login request to server
             apiService.serviceRequest({
                     method: 'GET',
                     url: appConfig.requestURL.currentMenteeStageInfo,
                     params: {
-                        menteeID: vm.user.uid
+                        menteeID: id
                     }
                 }, function (response) {
                     if (response && response.error && response.error.msg) { // error from server                                                 
@@ -78,8 +80,6 @@
                                 stage1: (resp.stage1) ? resp.stage1 : vm.getDefaults("stage1"),
                                 stage2: resp.stage2
                             };
-                            
-                            console.log(vm.stagesList);
                         }
                     }
                 },
@@ -87,70 +87,6 @@
                     vm.regoErr = true;
                     vm.regoErrMsg = "Something went wrong, try again.";
                 });
-        };
-        /**
-         *
-         **/
-        vm.getDefaults = function (stage) {
-            var tmp = {
-                stage1: {
-                    agreement: {
-                        menteeName: "",
-                        mentorName: "",
-                        menteeWorkPlace: "",
-                        mentorWorkPlace: "",
-                        menteeRole: "",
-                        mentorRole: "",
-                        mentorGoal: "",
-                        menteeGoal: ""
-                    },
-                    assesment: {
-                        menteeNote: "",
-                        mentorNote: ""
-                    },
-                    mappingEvidence: {
-                        menteeNote: "",
-                        mentorNote: ""
-                    },
-                    actionPlan: {
-                        menteeNote: "",
-                        mentorNote: ""
-                    },
-                    verificationPlan: {
-                        menteeNote: "",
-                        mentorNote: ""
-                    },
-                    meetings: {
-                        timeData: "",
-                        methodToRecord: "",
-                        timing: [
-                            {
-                                date: "",
-                                format: ""
-                            }
-                        ],
-                        reviewDate: [
-                            {
-                                date: ""
-                            }
-                        ],
-                        problemSolving: ""
-                    },
-                    confidentiality: {
-                        menteeAgree: false,
-                        mentorAgree: false
-                    },
-                    rights: {
-                        mentor: {
-                            readOnly: false
-                        },
-                        mentee: {
-                            readOnly: false
-                        }
-                    }
-                }
-            }
-            return tmp[stage];
         };
         /**
          *
@@ -207,7 +143,7 @@
         /**
          *
          */
-        vm.showStage = function (index) {
+        vm.showStage = function (index) {            
             vm.stageVisibility = {
                 stage1: false,
                 stage2: false,
@@ -218,6 +154,7 @@
 
             vm.stageVisibility["stage" + index] = true;
         }
+
         init();
 
     }

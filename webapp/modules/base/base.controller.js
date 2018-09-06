@@ -61,6 +61,7 @@
             }, {
                     title: "WorkBook",
                     active: false,
+                    hide: (vm.user.mapStatus == "0" || vm.user.mapStatus == 0) ? true : false,
                     href: "app.workbook"
             }];
             }

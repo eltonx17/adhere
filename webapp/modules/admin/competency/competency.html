@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="com-body">
-                <div class="com-question-set" ng-repeat="section in item.section" ng-show="item.show">
+                <div class="com-question-set" ng-repeat="section in item.section" ng-init="item.show=false;" ng-show="item.show">
                     <div class="com-question">
                         <div>
                             <hr>
