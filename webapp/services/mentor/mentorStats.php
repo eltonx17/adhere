@@ -10,13 +10,18 @@ $inactiveMentees = 0;
 $mentorId = mysqli_real_escape_string($db, $_GET['mentorID']);
 
 //Query to get all users from users table who are not admin
-$query = "SELECT * 
-          FROM users 
-          INNER JOIN mentormapping 
-          ON mentormapping.menteeid = users.uid 
-          AND mentormapping.mentorid = '$mentorId' 
-          AND users.accountstatus=1 
-          ORDER BY `users`.`firstname` ASC";
+$query = "SELECT users.uid AS menteeid, users.firstname, users.lastname, users.email, mentormapping.mapstatus, menteeworkbook.gst, menteeworkbook.na
+FROM users
+
+ 	INNER JOIN mentormapping 
+    ON mentormapping.menteeid = users.uid 
+    
+    	INNER JOIN menteeworkbook
+        ON mentormapping.menteeid = menteeworkbook.menteeid
+          
+    AND mentormapping.mentorid = '$mentorId' 
+    AND users.accountstatus=1 
+    ORDER BY users.`firstname` ASC";
 $executeQuery = mysqli_query($db,$query);
 
 if (!$executeQuery) {
