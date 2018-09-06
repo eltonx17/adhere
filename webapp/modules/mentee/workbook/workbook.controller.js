@@ -76,7 +76,9 @@
 
                             vm.stagesList = {
                                 stage1: (resp.stage1) ? resp.stage1 : vm.getDefaults("stage1"),
-                                stage2: resp.stage2
+                                stage2: resp.stage2,
+                                stage3: (resp.stage3) ? resp.stage3 : vm.getDefaults("stage3"),
+                                stage4: (resp.stage4) ? resp.stage4 : vm.getDefaults("stage4")
                             };
 
                             console.log(vm.stagesList);
@@ -148,46 +150,80 @@
                             readOnly: false
                         }
                     }
-                }
-            }
-            return tmp[stage];
-        };
-        /**
-         *
-         */
-        vm.saveStage = function (stage) {
-
-            if (stage == 1) {
-                vm.stagesList.stage1.rights.mentee.readOnly = true;
-            } else if (stage == 2) {
-                vm.stagesList.stage2.rights.mentee.readOnly = true;
-            }
-
-            apiService.serviceRequest({
-                    method: 'POST',
-                    url: appConfig.requestURL.updateWorkBook,
-                    data: {
-                        menteeID: vm.user.uid,
-                        stageData: vm.stagesList["stage" + vm.gst],
-                        gstData: vm.gst,
-                        usertype: vm.user.usertype,
-                    }
-                }, function (response) {
-                    if (response && response.error && response.error.msg) { // error from server                                                 
-                        $timeout(function () {
-                            vm.regoErrMsg = response.error.msg || "Something went wrong, try again.";
-                        });
-                    } else {
-                        if (response && response.data) {
-
+                },
+                stage3: {
+                    items: [{
+                        term: "",
+                        goal: "",
+                        resource: "",
+                        review_date: "",
+                        due_date: ""
+                    }],
+                    rights: {
+                        mentor: {
+                            readOnly: false
+                        },
+                        mentee: {
+                            readOnly: false
                         }
                     }
                 },
-                function (fail) { // service fails                    
-                    vm.regoErr = true;
-                    vm.regoErrMsg = "Something went wrong, try again.";
-                });
-        };
+                stage4: {
+                    items: [{
+                        title: "",
+                        date_completed: "",
+                        evidence_category: "",
+                        knowledge: "",
+                        skills: "",
+                        attitude: "",
+                        competency: [{
+                            text : "Living well from older people across communities and groups",
+                            checked : false
+                        },{
+                            text : "Maximising health outcomes",
+                            checked : false
+                        },{
+                            text : "Communicating effectively",
+                            checked : false
+                        },{
+                            text : "Facilitating transitions in care",
+                            checked : false
+                        },{
+                            text : "Facilitating choices within legal and ethical frameworks",
+                            checked : false
+                        },{
+                            text : "Partnering with family carers",
+                            checked : false
+                        },{
+                            text : "Promoting mental health and psychological well-being",
+                            checked : false
+                        },{
+                            text : "Providing evidence-based dementia care",
+                            checked : false
+                        },{
+                            text : "Providing optimal pain management",
+                            checked : false
+                        },{
+                            text : "Providing palliative care",
+                            checked : false
+                        },{
+                            text : "Enabling access to technology",
+                            checked : false
+                        }],
+                        mentor_notify_date : ""
+                    }],
+                    rights: {
+                        mentor: {
+                            readOnly: false
+                        },
+                        mentee: {
+                            readOnly: false
+                        }
+                    }
+                }
+            }
+            return tmp[stage];
+        };      
         /**
          *
          */
@@ -221,10 +257,114 @@
         /**
          *
          */
-        vm.setAnswer = function(question, ans){     
-            if(!vm.stagesList.stage2.rights.mentee.readOnly)
+        vm.setAnswer = function (question, ans) {
+            if (!vm.stagesList.stage2.rights.mentee.readOnly)
                 question.answer = ans;
-                $timeout();
+            $timeout();
+        };
+        /**
+         *
+         */
+        vm.addGoal = function () {
+            if(vm.stagesList.stage3.rights.mentor.readOnly)
+                return;
+            
+            vm.stagesList.stage3.items.push({
+                term: "",
+                goal: "",
+                resource: "",
+                review_date: "",
+                due_date: ""
+            });
+        };
+         /**
+         *
+         */
+        vm.addSummary = function () {
+            if(vm.stagesList.stage4.rights.mentor.readOnly)
+                return;
+            
+            vm.stagesList.stage4.items.push({
+                        title: "",
+                        date_completed: "",
+                        evidence_category: "",
+                        knowledge: "",
+                        skills: "",
+                        attitude: "",
+                        competency: [{
+                            text : "Living well from older people across communities and groups",
+                            checked : false
+                        },{
+                            text : "Maximising health outcomes",
+                            checked : false
+                        },{
+                            text : "Communicating effectively",
+                            checked : false
+                        },{
+                            text : "Facilitating transitions in care",
+                            checked : false
+                        },{
+                            text : "Facilitating choices within legal and ethical frameworks",
+                            checked : false
+                        },{
+                            text : "Partnering with family carers",
+                            checked : false
+                        },{
+                            text : "Promoting mental health and psychological well-being",
+                            checked : false
+                        },{
+                            text : "Providing evidence-based dementia care",
+                            checked : false
+                        },{
+                            text : "Providing optimal pain management",
+                            checked : false
+                        },{
+                            text : "Providing palliative care",
+                            checked : false
+                        },{
+                            text : "Enabling access to technology",
+                            checked : false
+                        }],
+                        mentor_notify_date : ""
+                    });
+        };
+          /**
+         *
+         */
+        vm.saveStage = function (stage) {
+
+            if (stage == 1) {
+                vm.stagesList.stage1.rights.mentee.readOnly = true;
+            } else if (stage == 2) {
+                vm.stagesList.stage2.rights.mentee.readOnly = true;
+            } else if (stage == 3) {
+                vm.stagesList.stage3.rights.mentee.readOnly = true;
+            }
+
+            apiService.serviceRequest({
+                    method: 'POST',
+                    url: appConfig.requestURL.updateWorkBook,
+                    data: {
+                        menteeID: vm.user.uid,
+                        stageData: vm.stagesList["stage" + vm.gst],
+                        gstData: vm.gst,
+                        usertype: vm.user.usertype,
+                    }
+                }, function (response) {
+                    if (response && response.error && response.error.msg) { // error from server                                                 
+                        $timeout(function () {
+                            vm.regoErrMsg = response.error.msg || "Something went wrong, try again.";
+                        });
+                    } else {
+                        if (response && response.data) {
+
+                        }
+                    }
+                },
+                function (fail) { // service fails                    
+                    vm.regoErr = true;
+                    vm.regoErrMsg = "Something went wrong, try again.";
+                });
         };
         init();
 

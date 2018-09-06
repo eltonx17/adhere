@@ -78,8 +78,9 @@
 
                             vm.stagesList = {
                                 stage1: (resp.stage1) ? resp.stage1 : null,
-                                stage2: resp.stage2
-                            };
+                                stage2: resp.stage2,
+                                stage3: (resp.stage3) ? resp.stage3 : null,
+                            };                            
                         }
                     }
                 },
@@ -91,13 +92,15 @@
         /**
          *
          */
-        vm.saveStage = function (stage) {            
-            if(stage == 1){
+        vm.saveStage = function (stage) {
+            if (stage == 1) {
                 vm.stagesList.stage1.rights.mentor.readOnly = true;
-            } else if (stage == 2){
-                 vm.stagesList.stage2.rights.mentor.readOnly = true;
+            } else if (stage == 2) {
+                vm.stagesList.stage2.rights.mentor.readOnly = true;
+            } else if (stage == 3) {
+                vm.stagesList.stage3.rights.mentor.readOnly = true;
             }
-            
+
             apiService.serviceRequest({
                     method: 'POST',
                     url: appConfig.requestURL.updateWorkBook,
@@ -142,7 +145,7 @@
         /**
          *
          */
-        vm.showStage = function (index) {            
+        vm.showStage = function (index) {
             vm.stageVisibility = {
                 stage1: false,
                 stage2: false,

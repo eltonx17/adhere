@@ -191,7 +191,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        Agree - <input type="checkbox" ng-readonly="vm.stagesList.stage1.rights.mentor.readOnly" ng-model="vm.stagesList.stage1.confidentiality.mentorAgree" />
+                        Agree - <input type="checkbox" ng-disabled="vm.stagesList.stage1.rights.mentor.readOnly" ng-model="vm.stagesList.stage1.confidentiality.mentorAgree" />
                     </div>
                 </div>
                 <div class="text-right">
@@ -247,7 +247,40 @@
                     <button ng-show="vm.stagesList.stage2.rights.mentee.readOnly == 1 && vm.stagesList.stage2.rights.mentor.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.nextStage()">Next</button>
                 </div>
             </div>
-            <div ng-show="vm.stageVisibility.stage3">3</div>
+            <div ng-show="vm.stageVisibility.stage3">
+                <div class="text-right">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Competency (specific topic area for your learning)</th>
+                                    <th>Learning goal</th>
+                                    <th>Resources needed to achieve goals</th>
+                                    <th>Review date</th>
+                                    <th>Due date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in vm.stagesList.stage3.items">
+                                    <td><select ng-model="item.term" disabled>
+                                    <option value="Short term (3 months)">Short term (3 months)</option>
+                                    <option value="Intermediate (6 months)">Intermediate (6 months)</option>
+                                    <option value="Long term (1 year)">Long term (1 year)</option>
+                                    </select></td>
+                                    <td><input readonly type="text" ng-model="item.goal" /></td>
+                                    <td><input readonly type="text" ng-model="item.resource" /></td>
+                                    <td><input readonly type="text" ng-model="item.review_date" /></td>
+                                    <td><input readonly type="text" ng-model="item.due_date" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button ng-if="vm.stagesList.stage3.rights.mentor.readOnly == 0 && vm.stagesList.stage3.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.saveStage(3);">Approve</button>
+                    <button ng-show="vm.stagesList.stage3.rights.mentee.readOnly == 1 && vm.stagesList.stage3.rights.mentor.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.nextStage()">Next</button>
+                </div>
+            </div>
             <div ng-show="vm.stageVisibility.stage4">4</div>
             <div ng-show="vm.stageVisibility.stage5">5</div>
         </form>

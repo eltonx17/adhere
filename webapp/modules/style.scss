@@ -30,8 +30,7 @@ body {
     background: transparent;
 }
 
-.center-wrapper {
-    background: #f4f4f4;
+.center-wrapper {    
     margin-top: 2px;
     ui-view.ng-leave {}
     ui-view.ng-enter {
