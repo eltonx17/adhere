@@ -32,19 +32,20 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
                     WHERE email='$email' ";
   	      $executeQuery = mysqli_query($db, $query);
           
-          //Convert variables into int
-          $fetchQuery = $executeQuery->fetch_assoc();
-          $userType = (int) $fetchQuery['usertype'];
-          $menteeId = (int) $fetchQuery['uid'];
-          
+
           //Check if usertype and userID exists 
-          if (!$fetchQuery){
+          if (!$executeQuery){
               $error = array(
-                       'data'=>0, 'error'=>array('msg'=>'Could not fetch usertype.','code'=>'201')
+                       'data'=>0, 'error'=>array('msg'=>'Could not fetch usertype.','code'=>'703')
                        );
               echo json_encode($error);
           }
           else{
+                //Convert variables into int
+                $fetchQuery = $executeQuery->fetch_assoc();
+                $userType = (int) $fetchQuery['usertype'];
+                $menteeId = (int) $fetchQuery['uid'];
+          
               //if Mentee logs in, show Mentee details and Mentor details
               if ($userType==2){                  
                   $query = "SELECT users.firstname AS
@@ -54,15 +55,15 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
                             AND mentormapping.menteeid = '$menteeId'
                             AND menteeworkbook.menteeid = '$menteeId'";
   	              $executeQuery = mysqli_query($db, $query);
-                  $fetchQuery = $executeQuery->fetch_all(MYSQLI_ASSOC); //Convert into array
                   
-                  if (!$fetchQuery){
+                  if (!$executeQuery){
                         $error = array(
-                                 'data'=>0, 'error'=>array('msg'=>'Could not fetch mentor details.','code'=>'202')
+                                 'data'=>0, 'error'=>array('msg'=>'Could not fetch mentor details.','code'=>'704')
                                  );
                         echo json_encode($error);
                   }
                   else{
+                        $fetchQuery = $executeQuery->fetch_all(MYSQLI_ASSOC); //Convert into array
                         $mentorDetails = $fetchQuery[0];
                   
                         //Append retrieved mentor details to 
@@ -90,7 +91,7 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
       //If login fails
       else {
         $error = array(
-                 'data'=>0, 'error'=>array('msg'=>'Wrong username/password. Please try again.','code'=>'200')
+                 'data'=>0, 'error'=>array('msg'=>'Wrong username and password. Please try again.','code'=>'702')
                  );
         echo json_encode($error);
   	}

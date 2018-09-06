@@ -2,10 +2,7 @@
 header('Content-type: application/json');
 require "../conn.php";
 require('../admin/competency/competencyGet.php');
-//echo $comData;
-/*$last_uid = 1;
-echo "INSERT INTO menteeworkbook (menteeid, stage2) VALUES ('$last_uid','$comData')";
-            return;*/
+
 // initializing variables
 $firstName = "";
 $lastName = "";
@@ -35,7 +32,7 @@ $last_uid = $db->insert_id;
 //Check if the query is valid, if yes check for usertype=2 i.e mentee
 if (!$executeQuery) {
      $error = array(
-            'data'=>'null', 'error'=>array('msg'=>'Email already exists. Please use another email ID','code'=>'100')
+            'data'=>'null', 'error'=>array('msg'=>'Email already exists, please use another email.' ,'code'=>'701')
             );
         echo json_encode($error);
     }
@@ -51,7 +48,7 @@ if (!$executeQuery) {
             
             if (!$executeQueryA && !$executeQueryB) {
                 $error = array(
-                         'data'=>'null', 'error'=>array('msg'=>'Error selecting mentor','code'=>'101')
+                         'data'=>'null', 'error'=>array('msg'=>'Error selecting mentor','code'=>'801')
                          );
                 echo json_encode($error);
             }
