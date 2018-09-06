@@ -30,13 +30,14 @@ if($userType == '2'){
             
         $executeQuery = mysqli_query($db,$query);
         
-        if(!$executeQuery){
-            $error = array(
+        if(mysqli_affected_rows($db) >0 ){
+            echo json_encode("update successful");
+        }   
+        else {
+                $error = array(
                 'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'754')
                 );
-            echo json_encode($error);
-        }   else {
-            echo json_encode("update successful");
+                echo json_encode($error);
         }
     }
 }
@@ -51,16 +52,23 @@ else if($userType == '1'){
         
         $executeQuery = mysqli_query($db,$query);
         
-        if(!$executeQuery){
-            $error = array(
-                'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'875')
-                );
-            echo json_encode($error);
-        } else if($gstData =='5' || $gstData ==5){
-             echo json_encode("successful completed all the stages");
-        } else {
+        if(mysqli_affected_rows($db) >0 ){
             echo json_encode("update successful");
+            
+            else if($gstData =='5' || $gstData ==5){
+                echo json_encode("successful completed all the stages");
+                } 
+            else {
+                echo json_encode("update successful");
+            }
+        }   
+        else {
+             $error = array(
+                      'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'875')
+                      );
+             echo json_encode($error);
         }
+
     }
 }
 ?>
