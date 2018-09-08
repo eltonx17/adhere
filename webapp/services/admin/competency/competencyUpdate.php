@@ -48,7 +48,7 @@ if($userType == '2'){
 //check if the submission is from mentor and update
 else if($userType == '1'){
     
-    if ($gstData < 5){
+    if ($gstData < 6){
         $query = ("UPDATE menteeworkbook
         SET ".($stageNum)."='".base64_encode($stageData)."', gst=".++$gstData.", na=0
         WHERE menteeid=".$menteeID);     
@@ -57,8 +57,11 @@ else if($userType == '1'){
         
         if(mysqli_affected_rows($db) >0 ){            
             
-            if($gstData =='5' || $gstData ==5){
-                echo json_encode("successful completed all the stages");
+            if($gstData =='6' || $gstData == 6){
+                                $success = array(
+                       'data'=>'All stages completed', 'error'=>null
+                       );
+                echo json_encode($success);
                 } 
             else {
                 $success = array(
