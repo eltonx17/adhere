@@ -6,6 +6,7 @@ require "../conn.php";
 $mentorStats = array();
 $totalMentees = 0;
 $inactiveMentees = 0;
+$needsAttention = 0;
 
 $mentorId = mysqli_real_escape_string($db, $_GET['mentorID']);
 
@@ -38,14 +39,20 @@ else{
     foreach ($listOfMentees as $row){
     
         $totalMentees++;
-    
+        //To check number of inactive mentees; mapstatus=0
         if($row['mapstatus']=="0" || $row['mapstatus']==0) 
             $inactiveMentees++; 
+
+        //To check number of mentees who need attention; NA=1
+        if($row['na']=="1" || $row['na']==1) 
+            $needsAttention++; 
     }
 
     $mentorStats["totalMentees"] = $totalMentees;
     $mentorStats["inactiveMentees"] = $inactiveMentees;
+    $mentorStats["needsAttention"] = $needsAttention;
     $mentorStats["listOfMentees"] = $listOfMentees;
+
 
     echo json_encode($mentorStats);
 }
