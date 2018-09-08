@@ -24,7 +24,7 @@ if($executeQuery){
     }
 } else {
     $error = array(
-            'data'=>'null', 'error'=>array('msg'=>'Error retrieving competency data','code'=>'102')
+            'data'=>'null', 'error'=>array('msg'=>'Error retrieving competency data','code'=>'712')
         );
         echo json_encode($error);
 }

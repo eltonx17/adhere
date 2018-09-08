@@ -40,7 +40,7 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
           //Check if usertype and userID exists 
           if (!$fetchQuery){
               $error = array(
-                       'data'=>0, 'error'=>array('msg'=>'Could not fetch usertype.','code'=>'201')
+                       'data'=>'null', 'error'=>array('msg'=>'Could not fetch usertype.','code'=>'201')
                        );
               echo json_encode($error);
           }
@@ -58,7 +58,7 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
                   
                   if (!$fetchQuery){
                         $error = array(
-                                 'data'=>0, 'error'=>array('msg'=>'Could not fetch mentor details.','code'=>'202')
+                                 'data'=>'null', 'error'=>array('msg'=>'Could not fetch mentor details.','code'=>'202')
                                  );
                         echo json_encode($error);
                   }
@@ -90,7 +90,7 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
       //If login fails
       else {
         $error = array(
-                 'data'=>0, 'error'=>array('msg'=>'Wrong username/password. Please try again.','code'=>'200')
+                 'data'=>'null', 'error'=>array('msg'=>'Wrong username/password. Please try again.','code'=>'200')
                  );
         echo json_encode($error);
   	}

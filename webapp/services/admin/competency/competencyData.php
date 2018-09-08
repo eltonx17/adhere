@@ -19,7 +19,7 @@ $executeQuery = mysqli_query($db, $query);
 
 if (!$executeQuery) {
      $error = array(
-            'data'=>'null', 'error'=>array('msg'=>'Failed to insert','code'=>'100')
+            'data'=>'null', 'error'=>array('msg'=>'Failed to insert','code'=>'711')
             );
         echo json_encode($error);
     }

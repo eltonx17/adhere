@@ -38,7 +38,7 @@ if($userType == '2'){
         }   
         else {
                 $error = array(
-                'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'754')
+                'data'=>'null', 'error'=>array('msg'=>'Failed to update status','code'=>'713')
                 );
                 echo json_encode($error);
         }
@@ -72,7 +72,7 @@ else if($userType == '1'){
         }   
         else {
              $error = array(
-                      'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'875')
+                      'data'=>0, 'error'=>array('msg'=>'Failed to update status','code'=>'714')
                       );
              echo json_encode($error);
         }

@@ -27,7 +27,7 @@ $executeQuery = mysqli_query($db,$query);
 
 if (!$executeQuery) {
      $error = array(
-            'data'=>'null', 'error'=>array('msg'=>'Failed to get users','code'=>'500')
+            'data'=>'null', 'error'=>array('msg'=>'Failed to get users','code'=>'708')
             );
         echo json_encode($error);
 }
@@ -54,7 +54,9 @@ else{
     $mentorStats["needsAttention"] = $needsAttention;
     $mentorStats["listOfMentees"] = $listOfMentees;
 
-
-    echo json_encode($mentorStats);
+    $success = array(
+                    'data'=>$mentorStats, 'error'=>null
+                    );
+    echo json_encode($success);
 }
 ?>

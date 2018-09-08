@@ -14,7 +14,7 @@ $executeQuery = mysqli_query($db,$query);
 //Check for query error
 if (!$executeQuery) {
      $error = array(
-            'data'=>'null', 'error'=>array('msg'=>'Failed to get users','code'=>'500')
+            'data'=>'null', 'error'=>array('msg'=>'Failed to get users','code'=>'710')
             );
         echo json_encode($error);
 }
@@ -23,6 +23,11 @@ else{
     $usersNeedAttention["data"] =  mysqli_fetch_all ($executeQuery, MYSQLI_ASSOC);
     $usersNeedAttention["error"] =  "null";
     
-    echo json_encode($usersNeedAttention);
+    /*echo json_encode($usersNeedAttention);*/
+    
+    $success = array(
+                    'data'=>$usersNeedAttention, 'error'=>null
+                    );
+    echo json_encode($success);
     }
 ?>
