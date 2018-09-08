@@ -17,7 +17,7 @@ $executeQuery = mysqli_query($db,$query);
 
 if (!$executeQuery) {
      $error = array(
-            'data'=>'null', 'error'=>array('msg'=>'Failed to get users','code'=>'500')
+            'data'=>'null', 'error'=>array('msg'=>'Failed to get users','code'=>'706')
             );
         echo json_encode($error);
 }
@@ -37,11 +37,10 @@ else{
     $adminStats["totalUsers"] = $totalUsers;
     $adminStats["inactiveUsers"] = $inactiveUsers;
     $adminStats["listOfUsers"] = $listOfUsers;
-    echo json_encode($adminStats);
-    /*$success = array(
+    $success = array(
                     'data'=>$adminStats, 'error'=>null
                     );
-    echo json_encode($success);*/
+    echo json_encode($success);
 }
 
 ?>

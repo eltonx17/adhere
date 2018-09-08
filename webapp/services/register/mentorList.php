@@ -15,7 +15,7 @@ if($results){
     echo json_encode($mentors);
 } else {
     $error = array(
-            'data'=>'null', 'error'=>array('msg'=>'Error retrieving mentorlist details','code'=>'102')
+            'data'=>'null', 'error'=>array('msg'=>'Error retrieving mentorlist details','code'=>'705')
         );
         echo json_encode($error);
 }

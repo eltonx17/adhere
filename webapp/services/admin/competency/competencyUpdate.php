@@ -31,7 +31,10 @@ if($userType == '2'){
         $executeQuery = mysqli_query($db,$query);
         
         if(mysqli_affected_rows($db) >0 ){
-            echo json_encode("update successful");
+            $success = array(
+                       'data'=>'Update successful', 'error'=>null
+                       );
+            echo json_encode($success);
         }   
         else {
                 $error = array(
@@ -58,7 +61,10 @@ else if($userType == '1'){
                 echo json_encode("successful completed all the stages");
                 } 
             else {
-                echo json_encode("update successful");
+                $success = array(
+                       'data'=>'Update successful', 'error'=>null
+                       );
+                echo json_encode($success);
             }
         }   
         else {
