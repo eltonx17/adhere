@@ -5,22 +5,18 @@
             <h3 class="pull-left">Welcome, {{vm.user.firstname}} {{vm.user.lastname}} </h3>
         </div>
         <div class="row">
-            <div class="col">
-                <div class="info-container">
-                    <h3>{{vm.mentorInfo.totalMentees}}</h3>
-                    <small>Total Mentee Reporting</small>
+            <div class="col clearfix">
+                <div class="info-container clearfix text-center">
+                    <span><h3>{{vm.mentorInfo.totalMentees}}</h3>
+                    <small>Total Mentee Reporting</small></span>
+                    <span><h3>{{vm.mentorInfo.inactiveMentees}}</h3>
+                    <small>Mentee Requests Pending</small></span>
                 </div>
             </div>
             <div class="col">
-                <div class="info-container">
+                <div class="info-container" style="width: 100%;">
                     <h3>{{vm.mentorInfo.needsAttention}}</h3>
                     <small>Stage Approvals Pending</small>
-                </div>
-            </div>
-            <div class="col">
-                <div class="info-container">
-                    <h3>{{vm.mentorInfo.inactiveMentees}}</h3>
-                    <small>Mentee Requests</small>
                 </div>
             </div>
         </div>
@@ -37,16 +33,18 @@
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
                             <th scope="col">Approval Status</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in vm.mentorInfo.listOfMentees">
+                        <tr ng-repeat="item in vm.mentorInfo.listOfMentees" ng-class="{'bg-warning' : item.na == 1}">
                             <td>{{$index+1}}</td>
                             <td> <a ui-sref="app.mentorWorkBook({menteeId:item.menteeid})">{{item.firstname}} {{item.lastname}}</a></td>
                             <td><label class="switch">
-                              <input type="checkbox" ng-model="item.mapstatus" ng-checked="item.mapstatus" ng-change="vm.toggleStatus(item);">
+                              <input type="checkbox" ng-model="item.mapstatus" ng-disabled="item.mapstatus" ng-change="vm.toggleStatus(item);">
                               <span class="slider round"></span>
                             </label></td>
+                            <td><button class="btn btn-sm btn-danger" ui-sref="app.mentorWorkBook({menteeId:item.menteeid})">View</button></td>
                         </tr>
                     </tbody>
                 </table>

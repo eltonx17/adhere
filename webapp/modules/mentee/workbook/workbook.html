@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" ng-if="vm.stagesList.stage1.agreement.mentorGoal">
+                <div class="row" ng-if="vm.stagesList.stage1.agreement.mentorGoal && vm.stagesList.stage1.rights.mentee.readOnly">
                     <div class="col">
                         <div class="form-group">
                             <label for="vm.stagesList.stage1.agreement.mentorName">Mentor Name
@@ -197,13 +197,13 @@
                 <div class="text-right">
                     <button ng-show="!vm.stagesList.stage1.rights.mentee.readOnly" type="submit" class="btn btn-primary" ng-click="vm.saveStage(1);">Submit</button>
                     <button ng-show="vm.stagesList.stage1.rights.mentee.readOnly == 1 && vm.stagesList.stage1.rights.mentor.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.nextStage()">Next</button>
-                    <button ng-show="vm.stagesList.stage1.rights.mentee.readOnly == 1 && vm.stagesList.stage1.rights.mentor.readOnly == 0" type="submit" class="btn btn-primary">Under Review</button>
+                    <div ng-show="vm.stagesList.stage1.rights.mentee.readOnly == 1 && vm.stagesList.stage1.rights.mentor.readOnly == 0"  class="text-right text-danger"><b>Under Review.</b></div>
                 </div>
             </div>
 
             <div ng-show="vm.stageVisibility.stage2">
                 <div class="com-list" ng-repeat="item in vm.stagesList.stage2.items">
-                    <div class="com-header clearfix">
+                    <div class="com-header clearfix" ng-click="item.show=!item.show">
                         <div class="pull-left">
                             {{item.title}}</div>
                         <div class="pull-right clearfix">
@@ -219,19 +219,19 @@
                                         <div class="pl-2">
                                             <u>{{$parent.$parent.$index+1}}.{{$parent.$index+1}}.{{$index+1}}</u> {{question.text}} <br>
                                             <div class="row">
-                                                <div class="col" ng-click="vm.setAnswer(question,1)" ng-class="{'active':question.answer==1}">
+                                                <div class="col btn-answer" ng-click="vm.setAnswer(question,1)" ng-class="{'active':question.answer==1}">
                                                     <div class="bg-white text-center">1</div>
                                                 </div>
-                                                <div class="col" ng-click="vm.setAnswer(question,2)" ng-class="{'active':question.answer==2}">
+                                                <div class="col btn-answer" ng-click="vm.setAnswer(question,2)" ng-class="{'active':question.answer==2}">
                                                     <div class="bg-white text-center">2</div>
                                                 </div>
-                                                <div class="col" ng-click="vm.setAnswer(question,3)" ng-class="{'active':question.answer==3}">
+                                                <div class="col btn-answer" ng-click="vm.setAnswer(question,3)" ng-class="{'active':question.answer==3}">
                                                     <div class="bg-white text-center">3</div>
                                                 </div>
-                                                <div class="col" ng-click="vm.setAnswer(question,4)" ng-class="{'active':question.answer==4}">
+                                                <div class="col btn-answer" ng-click="vm.setAnswer(question,4)" ng-class="{'active':question.answer==4}">
                                                     <div class="bg-white text-center">4</div>
                                                 </div>
-                                                <div class="col" ng-click="vm.setAnswer(question,5)" ng-class="{'active':question.answer==5}">
+                                                <div class="col btn-answer" ng-click="vm.setAnswer(question,5)" ng-class="{'active':question.answer==5}">
                                                     <div class="bg-white text-center">5</div>
                                                 </div>
                                             </div>
@@ -252,7 +252,7 @@
 
             <div ng-show="vm.stageVisibility.stage3">
                 <div class="text-right">
-                    <button class="btn btn-danger" ng-click="vm.addGoal();" ng-hide="vm.stagesList.stage1.rights.mentor.readOnly">Add</button>
+                    <button class="btn btn-danger" ng-click="vm.addGoal();" ng-hide="vm.stagesList.stage3.rights.mentor.readOnly">Add</button>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>

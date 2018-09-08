@@ -17,22 +17,38 @@
             vm.user = window.localStorage.getItem('user') ? angular.fromJson(window.localStorage.getItem('user')) : undefined;
             vm.appTitle = appConfig.title; // binds app title from config
             vm.getComments();
+            vm.stageStatus = {           
+                1 : "Stage 1/5",
+                2 : "Completed Stage 1/5",
+                3 : "Completed Stage 2/5",
+                4 : "Completed Stage 3/5",
+                5 : "Completed Stage 4/5",
+                6 : "Completed"
+            };
+            vm.stagePercentage = {           
+                1 : 0,
+                2 : 20,
+                3 : 40,
+                4 : 60,
+                5 : 80,
+                6 : 100
+            };
         };
 
         vm.getComments = function () {
-            /*vm.commentList = [{
-                comment: "This is a test comment from Nidhin",
-                from: "Nidhin",
+            vm.commentList = [{
+                comment: "Log in with Adhere",
+                from: "Login",
                 pic: "",
                 time: new Date(),
                 id: "123"
             }, {
-                comment: "This is a test comment from Sourabh",
-                from: "Sourabh",
+                comment: "Registered with Adhere",
+                from: "Register",
                 pic: "",
                 time: new Date(),
                 id: "864"
-            }];*/
+            }];
         };
         vm.showReplySection = function (id) {
             $("#comment-reply-" + id).slideToggle();

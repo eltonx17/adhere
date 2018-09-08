@@ -7,6 +7,12 @@
         text-align: center;
         margin-top: 1.5em;
         background: #fff;
+        span {
+            display: block;
+            float: left;
+            text-align: center;
+            width: 50%;
+        }
     }
     .user-list {
         margin-top: 2em;

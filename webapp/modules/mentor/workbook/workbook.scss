@@ -67,6 +67,9 @@
                 background: #ccc;
             }
         }
+        .btn-answer .bg-white {
+            border: 1px solid #ccc;
+        }
         .active {
             div {
                 background-color: blue !important;
@@ -74,7 +77,7 @@
             }
         }
     }
-    .table thead th{
+    .table thead th {
         vertical-align: middle;
         text-align: center;
     }

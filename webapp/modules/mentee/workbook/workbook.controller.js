@@ -46,6 +46,8 @@
                         if (response && response.data) {
                             var resp = response.data;
                             vm.gst = (resp.gst) ? parseInt(resp.gst) : 1;
+                            if (vm.gst > 5)
+                                vm.gst = 5;
 
                             vm.stageList = [{
                                 title: "Stage 1",
@@ -98,7 +100,7 @@
             var tmp = {
                 stage1: {
                     agreement: {
-                        menteeName: "",
+                        menteeName: vm.user.firstname + " " + vm.user.lastname,
                         mentorName: "",
                         menteeWorkPlace: "",
                         mentorWorkPlace: "",
@@ -251,7 +253,7 @@
                             text: "My mentee demonstrated interest/concern towards me in my quest to offer assistance",
                             answer: ""
                         }, {
-                            text: "My mentee’s behaviour and attitude were professional and courteous",
+                            text: "My mentee's behaviour and attitude were professional and courteous",
                             answer: ""
                         }, {
                             text: "My mentee learnt at least one important new thing from me",
@@ -298,7 +300,7 @@
                             text: "My mentor demonstrated interest/concern towards me",
                             answer: ""
                         }, {
-                            text: "My mentor’s behaviour and attitude are an example of professionalism",
+                            text: "My mentor's behaviour and attitude are an example of professionalism",
                             answer: ""
                         }, {
                             text: "I learned at least one important new thing from my mentor",

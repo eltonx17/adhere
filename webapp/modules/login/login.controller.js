@@ -78,8 +78,13 @@
                             if (user.usertype == 1) { // mentor
                                 $state.go("app.mentor");
                             }
-                            if (user.usertype == 2) { // mentee
-                                $state.go("app.mentee");
+                            if (user.usertype == 2) { // mentee                                
+                                if (user.mapStatus == 0 || user.mapStatus == "0") {
+                                    vm.loginErr = true;
+                                    vm.logErrMsg = "Your account is pending approval with the mentor.";
+                                } else {
+                                    $state.go("app.mentee");
+                                }
                             }
                         }
                     },

@@ -48,7 +48,9 @@
                         if (response && response.data) {
                             var resp = response.data;
                             vm.gst = (resp.gst) ? parseInt(resp.gst) : 1;
-
+                            if(vm.gst > 5)
+                                vm.gst = 5;
+                            
                             vm.stageList = [{
                                 title: "Stage 1",
                                 active: (vm.gst >= 1) ? true : false
@@ -80,7 +82,8 @@
                                 stage1: (resp.stage1) ? resp.stage1 : null,
                                 stage2: resp.stage2,
                                 stage3: (resp.stage3) ? resp.stage3 : null,
-                                stage4: (resp.stage4) ? resp.stage4 : null
+                                stage4: (resp.stage4) ? resp.stage4 : null,
+                                stage5: (resp.stage5) ? resp.stage5 : null
                             };
                         }
                     }
@@ -111,6 +114,8 @@
                         vm.stagesList.stage3.rights.mentor.readOnly = true;
                     } else if (stage == 4) {
                         vm.stagesList.stage4.rights.mentor.readOnly = true;
+                    } else if (stage == 5) {
+                        vm.stagesList.stage5.rights.mentor.readOnly = true;
                     }
 
                     apiService.serviceRequest({
