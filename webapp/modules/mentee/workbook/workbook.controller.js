@@ -78,7 +78,8 @@
                                 stage1: (resp.stage1) ? resp.stage1 : vm.getDefaults("stage1"),
                                 stage2: resp.stage2,
                                 stage3: (resp.stage3) ? resp.stage3 : vm.getDefaults("stage3"),
-                                stage4: (resp.stage4) ? resp.stage4 : vm.getDefaults("stage4")
+                                stage4: (resp.stage4) ? resp.stage4 : vm.getDefaults("stage4"),
+                                stage5: (resp.stage5) ? resp.stage5 : vm.getDefaults("stage5")
                             };
 
                             console.log(vm.stagesList);
@@ -177,41 +178,145 @@
                         skills: "",
                         attitude: "",
                         competency: [{
-                            text : "Living well from older people across communities and groups",
-                            checked : false
-                        },{
-                            text : "Maximising health outcomes",
-                            checked : false
-                        },{
-                            text : "Communicating effectively",
-                            checked : false
-                        },{
-                            text : "Facilitating transitions in care",
-                            checked : false
-                        },{
-                            text : "Facilitating choices within legal and ethical frameworks",
-                            checked : false
-                        },{
-                            text : "Partnering with family carers",
-                            checked : false
-                        },{
-                            text : "Promoting mental health and psychological well-being",
-                            checked : false
-                        },{
-                            text : "Providing evidence-based dementia care",
-                            checked : false
-                        },{
-                            text : "Providing optimal pain management",
-                            checked : false
-                        },{
-                            text : "Providing palliative care",
-                            checked : false
-                        },{
-                            text : "Enabling access to technology",
-                            checked : false
+                            text: "Living well from older people across communities and groups",
+                            checked: false
+                        }, {
+                            text: "Maximising health outcomes",
+                            checked: false
+                        }, {
+                            text: "Communicating effectively",
+                            checked: false
+                        }, {
+                            text: "Facilitating transitions in care",
+                            checked: false
+                        }, {
+                            text: "Facilitating choices within legal and ethical frameworks",
+                            checked: false
+                        }, {
+                            text: "Partnering with family carers",
+                            checked: false
+                        }, {
+                            text: "Promoting mental health and psychological well-being",
+                            checked: false
+                        }, {
+                            text: "Providing evidence-based dementia care",
+                            checked: false
+                        }, {
+                            text: "Providing optimal pain management",
+                            checked: false
+                        }, {
+                            text: "Providing palliative care",
+                            checked: false
+                        }, {
+                            text: "Enabling access to technology",
+                            checked: false
                         }],
-                        mentor_notify_date : ""
+                        mentor_notify_date: ""
                     }],
+                    rights: {
+                        mentor: {
+                            readOnly: false
+                        },
+                        mentee: {
+                            readOnly: false
+                        }
+                    }
+                },
+                stage5: {
+                    mentor: {
+                        mentee_name: "",
+                        mentee_role: "",
+                        mentor_name: "",
+                        mentor_role: "",
+                        comments: "",
+                        questions: [{
+                            text: "My mentee was accessible and available",
+                            answer: ""
+                        }, {
+                            text: "My mentee communicated regularly with me",
+                            answer: ""
+                        }, {
+                            text: "My mentee was engaged and proactive in developing learning goals",
+                            answer: ""
+                        }, {
+                            text: "My mentee was concerned about clinical performance and worked to improve deficiencies",
+                            answer: ""
+                        }, {
+                            text: "My mentee contacted me regularly for feedback",
+                            answer: ""
+                        }, {
+                            text: "My mentee utilised other resources and learning experiences",
+                            answer: ""
+                        }, {
+                            text: "My mentee demonstrated interest/concern towards me in my quest to offer assistance",
+                            answer: ""
+                        }, {
+                            text: "My mentee’s behaviour and attitude were professional and courteous",
+                            answer: ""
+                        }, {
+                            text: "My mentee learnt at least one important new thing from me",
+                            answer: ""
+                        }, {
+                            text: "My mentee took into account gender, ethnic and cultural issues when interacting with me",
+                            answer: ""
+                        }, {
+                            text: "Overall my mentee participated in the mentoring activities",
+                            answer: ""
+                        }, {
+                            text: "I anticipate an extended future relationship with my mentee",
+                            answer: ""
+                        }]
+                    },
+                    mentee: {
+                        mentee_name: vm.user.firstname + " " + vm.user.lastname,
+                        mentee_role: "",
+                        mentor_name: "",
+                        mentor_role: "",
+                        comments: "",
+                        questions: [{
+                            text: "My mentor was accessible and available",
+                            answer: ""
+                        }, {
+                            text: "My mentor communicated regularly with me",
+                            answer: ""
+                        }, {
+                            text: "My mentor assisted me in development of learning goals",
+                            answer: ""
+                        }, {
+                            text: "My mentor assisted me with improving my clinical performance",
+                            answer: ""
+                        }, {
+                            text: "My mentor provided helpful and thoughtful feedback",
+                            answer: ""
+                        }, {
+                            text: "My mentor provided opportunities to me for further learning or educational experiences",
+                            answer: ""
+                        }, {
+                            text: "My mentor was able to guide and direct me to appropriate resources",
+                            answer: ""
+                        }, {
+                            text: "My mentor demonstrated interest/concern towards me",
+                            answer: ""
+                        }, {
+                            text: "My mentor’s behaviour and attitude are an example of professionalism",
+                            answer: ""
+                        }, {
+                            text: "I learned at least one important new thing from my mentor",
+                            answer: ""
+                        }, {
+                            text: "My mentor took into account gender, ethnic and cultural issues when interacting with me",
+                            answer: ""
+                        }, {
+                            text: "My mentor provided a sounding board for my ideas, goals and aspirations",
+                            answer: ""
+                        }, {
+                            text: "I anticipate an extended future relationship",
+                            answer: ""
+                        }, {
+                            text: "I would recommend this mentor to others",
+                            answer: ""
+                        }]
+                    },
                     rights: {
                         mentor: {
                             readOnly: false
@@ -223,7 +328,7 @@
                 }
             }
             return tmp[stage];
-        };      
+        };
         /**
          *
          */
@@ -266,9 +371,9 @@
          *
          */
         vm.addGoal = function () {
-            if(vm.stagesList.stage3.rights.mentor.readOnly)
+            if (vm.stagesList.stage3.rights.mentor.readOnly)
                 return;
-            
+
             vm.stagesList.stage3.items.push({
                 term: "",
                 goal: "",
@@ -277,95 +382,114 @@
                 due_date: ""
             });
         };
-         /**
+        /**
          *
          */
         vm.addSummary = function () {
-            if(vm.stagesList.stage4.rights.mentor.readOnly)
+            if (vm.stagesList.stage4.rights.mentor.readOnly)
                 return;
-            
+
             vm.stagesList.stage4.items.push({
-                        title: "",
-                        date_completed: "",
-                        evidence_category: "",
-                        knowledge: "",
-                        skills: "",
-                        attitude: "",
-                        competency: [{
-                            text : "Living well from older people across communities and groups",
-                            checked : false
-                        },{
-                            text : "Maximising health outcomes",
-                            checked : false
-                        },{
-                            text : "Communicating effectively",
-                            checked : false
-                        },{
-                            text : "Facilitating transitions in care",
-                            checked : false
-                        },{
-                            text : "Facilitating choices within legal and ethical frameworks",
-                            checked : false
-                        },{
-                            text : "Partnering with family carers",
-                            checked : false
-                        },{
-                            text : "Promoting mental health and psychological well-being",
-                            checked : false
-                        },{
-                            text : "Providing evidence-based dementia care",
-                            checked : false
-                        },{
-                            text : "Providing optimal pain management",
-                            checked : false
-                        },{
-                            text : "Providing palliative care",
-                            checked : false
-                        },{
-                            text : "Enabling access to technology",
-                            checked : false
+                title: "",
+                date_completed: "",
+                evidence_category: "",
+                knowledge: "",
+                skills: "",
+                attitude: "",
+                competency: [{
+                    text: "Living well from older people across communities and groups",
+                    checked: false
+                        }, {
+                    text: "Maximising health outcomes",
+                    checked: false
+                        }, {
+                    text: "Communicating effectively",
+                    checked: false
+                        }, {
+                    text: "Facilitating transitions in care",
+                    checked: false
+                        }, {
+                    text: "Facilitating choices within legal and ethical frameworks",
+                    checked: false
+                        }, {
+                    text: "Partnering with family carers",
+                    checked: false
+                        }, {
+                    text: "Promoting mental health and psychological well-being",
+                    checked: false
+                        }, {
+                    text: "Providing evidence-based dementia care",
+                    checked: false
+                        }, {
+                    text: "Providing optimal pain management",
+                    checked: false
+                        }, {
+                    text: "Providing palliative care",
+                    checked: false
+                        }, {
+                    text: "Enabling access to technology",
+                    checked: false
                         }],
-                        mentor_notify_date : ""
-                    });
+                mentor_notify_date: ""
+            });
         };
-          /**
+        /**
          *
          */
         vm.saveStage = function (stage) {
+            swal({
+                title: "Are you sure to submit Stage - " + vm.gst + " details?",
+                text: "This action cannot be reversed, are you sure to continue.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
 
-            if (stage == 1) {
-                vm.stagesList.stage1.rights.mentee.readOnly = true;
-            } else if (stage == 2) {
-                vm.stagesList.stage2.rights.mentee.readOnly = true;
-            } else if (stage == 3) {
-                vm.stagesList.stage3.rights.mentee.readOnly = true;
-            }
-
-            apiService.serviceRequest({
-                    method: 'POST',
-                    url: appConfig.requestURL.updateWorkBook,
-                    data: {
-                        menteeID: vm.user.uid,
-                        stageData: vm.stagesList["stage" + vm.gst],
-                        gstData: vm.gst,
-                        usertype: vm.user.usertype,
+                    if (stage == 1) {
+                        vm.stagesList.stage1.rights.mentee.readOnly = true;
+                    } else if (stage == 2) {
+                        vm.stagesList.stage2.rights.mentee.readOnly = true;
+                    } else if (stage == 3) {
+                        vm.stagesList.stage3.rights.mentee.readOnly = true;
+                    } else if (stage == 4) {
+                        vm.stagesList.stage4.rights.mentee.readOnly = true;
+                    } else if (stage == 5) {
+                        vm.stagesList.stage5.rights.mentee.readOnly = true;
                     }
-                }, function (response) {
-                    if (response && response.error && response.error.msg) { // error from server                                                 
-                        $timeout(function () {
-                            vm.regoErrMsg = response.error.msg || "Something went wrong, try again.";
+
+                    apiService.serviceRequest({
+                            method: 'POST',
+                            url: appConfig.requestURL.updateWorkBook,
+                            data: {
+                                menteeID: vm.user.uid,
+                                stageData: vm.stagesList["stage" + vm.gst],
+                                gstData: vm.gst,
+                                usertype: vm.user.usertype,
+                            }
+                        }, function (response) {
+                            if (response && response.error && response.error.msg) { // error from server                                         
+                                $timeout(function () {
+                                    vm.regoErrMsg = response.error.msg || "Something went wrong, try again.";
+                                });
+                            } else {
+                                swal({
+                                    title: "Done!",
+                                    text: "Data saved successfully.",
+                                    icon: "success",
+                                    button: "Okay",
+                                });
+                            }
+                        },
+                        function (fail) { // service fails                    
+                            vm.regoErr = true;
+                            vm.regoErrMsg = "Something went wrong, try again.";
                         });
-                    } else {
-                        if (response && response.data) {
+                }
+            });
 
-                        }
-                    }
-                },
-                function (fail) { // service fails                    
-                    vm.regoErr = true;
-                    vm.regoErrMsg = "Something went wrong, try again.";
-                });
         };
+
         init();
 
     }

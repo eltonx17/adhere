@@ -31,9 +31,11 @@
                             vm.logErrMsg = response.error.msg || "Something went wrong, try again.";
                         });
                     } else {
-                        vm.adminInfo = response;
-                        for (var i = 0; i < vm.adminInfo.listOfUsers.length; i++)
-                            vm.adminInfo.listOfUsers[i].accountstatus = (vm.adminInfo.listOfUsers[i].accountstatus == "1" || vm.adminInfo.listOfUsers[i].accountstatus == 1) ? true : false;
+                        if (response && response.data) {
+                            vm.adminInfo = response.data;
+                            for (var i = 0; i < vm.adminInfo.listOfUsers.length; i++)
+                                vm.adminInfo.listOfUsers[i].accountstatus = (vm.adminInfo.listOfUsers[i].accountstatus == "1" || vm.adminInfo.listOfUsers[i].accountstatus == 1) ? true : false;
+                        }
                     }
                 },
                 function (fail) { // service fails                  

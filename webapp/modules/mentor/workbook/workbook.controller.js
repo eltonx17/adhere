@@ -80,7 +80,8 @@
                                 stage1: (resp.stage1) ? resp.stage1 : null,
                                 stage2: resp.stage2,
                                 stage3: (resp.stage3) ? resp.stage3 : null,
-                            };                            
+                                stage4: (resp.stage4) ? resp.stage4 : null
+                            };
                         }
                     }
                 },
@@ -93,38 +94,54 @@
          *
          */
         vm.saveStage = function (stage) {
-            if (stage == 1) {
-                vm.stagesList.stage1.rights.mentor.readOnly = true;
-            } else if (stage == 2) {
-                vm.stagesList.stage2.rights.mentor.readOnly = true;
-            } else if (stage == 3) {
-                vm.stagesList.stage3.rights.mentor.readOnly = true;
-            }
+            swal({
+                title: "Confirm to approve Stage - " + vm.gst + " details?",
+                text: "This action cannot be reversed, are you sure to continue.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
 
-            apiService.serviceRequest({
-                    method: 'POST',
-                    url: appConfig.requestURL.updateWorkBook,
-                    data: {
-                        menteeID: vm.menteeId,
-                        stageData: vm.stagesList["stage" + vm.gst],
-                        gstData: vm.gst,
-                        usertype: vm.user.usertype,
+                    if (stage == 1) {
+                        vm.stagesList.stage1.rights.mentor.readOnly = true;
+                    } else if (stage == 2) {
+                        vm.stagesList.stage2.rights.mentor.readOnly = true;
+                    } else if (stage == 3) {
+                        vm.stagesList.stage3.rights.mentor.readOnly = true;
+                    } else if (stage == 4) {
+                        vm.stagesList.stage4.rights.mentor.readOnly = true;
                     }
-                }, function (response) {
-                    if (response && response.error && response.error.msg) { // error from server                                                 
-                        $timeout(function () {
-                            vm.regoErrMsg = response.error.msg || "Something went wrong, try again.";
+
+                    apiService.serviceRequest({
+                            method: 'POST',
+                            url: appConfig.requestURL.updateWorkBook,
+                            data: {
+                                menteeID: vm.menteeId,
+                                stageData: vm.stagesList["stage" + vm.gst],
+                                gstData: vm.gst,
+                                usertype: vm.user.usertype,
+                            }
+                        }, function (response) {
+                            if (response && response.error && response.error.msg) { // error from server                                                 
+                                $timeout(function () {
+                                    vm.regoErrMsg = response.error.msg || "Something went wrong, try again.";
+                                });
+                            } else {
+                                swal({
+                                    title: "Done!",
+                                    text: "Stage approved successfully.",
+                                    icon: "success",
+                                    button: "Okay",
+                                });
+                            }
+                        },
+                        function (fail) { // service fails                    
+                            vm.regoErr = true;
+                            vm.regoErrMsg = "Something went wrong, try again.";
                         });
-                    } else {
-                        if (response && response.data) {
-
-                        }
-                    }
-                },
-                function (fail) { // service fails                    
-                    vm.regoErr = true;
-                    vm.regoErrMsg = "Something went wrong, try again.";
-                });
+                }
+            });
         };
         /**
          *

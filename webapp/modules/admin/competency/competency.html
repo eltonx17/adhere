@@ -3,12 +3,12 @@
 
     <div class="content">        
         <div class="com-list" ng-repeat="item in vm.competencyList">
-            <div class="com-header clearfix">
-                <div class="pull-left">
-                    <input type="text" ng-model="item.title"></div>
-                <div class="pull-right clearfix">
-                    <div class="pull-left pr-4" ng-click="vm.addSection(item);"><i class="fa fa-plus"></i></div>
-                    <div class="pull-left" ng-click="item.show=!item.show"><i class="fa fa-angle-down"></i></div>
+            <div class="row com-header clearfix">
+                <div class="col-8">
+                    <textarea type="text" class="w-100" ng-model="item.title"></textarea></div>
+                <div class="col-4 text-right">
+                    <span class="pr-4" ng-click="vm.addSection(item);"><i class="fa fa-plus"></i></span>
+                    <span class="" ng-click="item.show=!item.show"><i class="fa fa-angle-down"></i></span>
                 </div>
             </div>
             <div class="com-body">
@@ -16,10 +16,10 @@
                     <div class="com-question">
                         <div>
                             <hr>
-                            <input type="text" ng-model="section.heading" placeholder="Type heading here.." />
+                            <input class="form-control" type="text" ng-model="section.heading" placeholder="Type heading here.." />
                             <button ng-click="vm.addQuestion(section);">add question</button>
                             <div ng-repeat="question in section.questions">
-                                <textarea type="text" ng-model="question.text" placeholder="Type competency here.."></textarea>
+                                <textarea class="form-control" type="text" ng-model="question.text" placeholder="Type competency here.."></textarea>
                             </div>
                              <hr>
                         </div>

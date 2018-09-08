@@ -20,7 +20,7 @@
         };
 
         vm.getComments = function () {
-            vm.commentList = [{
+            /*vm.commentList = [{
                 comment: "This is a test comment from Nidhin",
                 from: "Nidhin",
                 pic: "",
@@ -32,7 +32,7 @@
                 pic: "",
                 time: new Date(),
                 id: "864"
-            }];
+            }];*/
         };
         vm.showReplySection = function (id) {
             $("#comment-reply-" + id).slideToggle();

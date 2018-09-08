@@ -32,9 +32,11 @@
                             vm.logErrMsg = response.error.msg || "Something went wrong, try again.";
                         });
                     } else {
-                        vm.mentorInfo = response;
-                        for (var i = 0; i < vm.mentorInfo.listOfMentees.length; i++)
-                            vm.mentorInfo.listOfMentees[i].mapstatus = (vm.mentorInfo.listOfMentees[i].mapstatus == "1" || vm.mentorInfo.listOfMentees[i].mapstatus == 1) ? true : false;
+                        if (response && response.data) {
+                            vm.mentorInfo = response.data;
+                            for (var i = 0; i < vm.mentorInfo.listOfMentees.length; i++)
+                                vm.mentorInfo.listOfMentees[i].mapstatus = (vm.mentorInfo.listOfMentees[i].mapstatus == "1" || vm.mentorInfo.listOfMentees[i].mapstatus == 1) ? true : false;
+                        }
                     }
                 },
                 function (fail) { // service fails                  
@@ -45,7 +47,7 @@
         /**
          *
          */
-        vm.toggleStatus = function (item) {            
+        vm.toggleStatus = function (item) {
             apiService.serviceRequest({
                     method: 'POST',
                     url: appConfig.requestURL.toggleMenteeStatus,
