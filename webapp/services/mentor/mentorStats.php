@@ -35,10 +35,11 @@ else{
     //Fetch all rows into var $listOfMentees
     $listOfMentees = mysqli_fetch_all ($executeQuery, MYSQLI_ASSOC);
 
-    //Run through List of Users to check Number of Mentees ($totalMentees) and Inactive Mentees (inactiveMentees)
+    //Run through List of Users to check Number of Mentees ($totalMentees) and Inactive Mentees ($inactiveMentees)
     foreach ($listOfMentees as $row){
     
         $totalMentees++;
+        
         //To check number of inactive mentees; mapstatus=0
         if($row['mapstatus']=="0" || $row['mapstatus']==0) 
             $inactiveMentees++; 
