@@ -17,7 +17,7 @@
             login: 'login/login.php',
             mentorList: 'register/mentorList/mentorList.php',
             register: 'register/register.php',
-            adminDashInfo: 'admin/adminstats.php',
+            adminDashInfo: 'admin/adminStats.php',
             mentorDashInfo: 'mentor/mentorStats.php',
             toggleUserStatus: 'admin/toggleStatus.php',
             toggleMenteeStatus: 'mentor/toggleStatus.php',
