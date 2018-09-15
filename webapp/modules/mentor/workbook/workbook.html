@@ -4,8 +4,8 @@
     <div id="form_wrapper">
         <!-- progressbar -->
 
-        <ul id="progressbar" class="row py-4">
-            <li class="col-2" ng-class="{'active':item.active}" ng-repeat="item in vm.stageList" ng-click="vm.navigateToStage(item, ($index+1))">
+        <ul id="progressbar" class="row py-4 px-0">
+            <li class="col" ng-class="{'active':item.active}" ng-repeat="item in vm.stageList" ng-click="vm.navigateToStage(item, ($index+1))">
                 {{item.title}}
             </li>
         </ul>
@@ -15,34 +15,34 @@
         </div>
 
         <form>
-            <div ng-show="vm.stageVisibility.stage1">
+            <div class="stage-holder" ng-show="vm.stageVisibility.stage1">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
                             <label for="vm.stagesList.stage1.agreement.menteeName">Mentee Name 
                         </label>
-                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.agreement.menteeName" placeholder="Enter mentee name">
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.agreement.menteeName" placeholder="Enter mentee name">
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="vm.stagesList.stage1.agreement.menteeRole">Mentee Role
                         </label>
-                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.agreement.menteeRole" placeholder="Enter mentee role">
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.agreement.menteeRole" placeholder="Enter mentee role">
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="vm.stagesList.stage1.agreement.menteeGoal">Mentee Workplace
                         </label>
-                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.agreement.menteeWorkPlace" placeholder="Enter mentee workplace">
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.agreement.menteeWorkPlace" placeholder="Enter mentee workplace">
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
                             <label for="vm.stagesList.stage1.agreement.menteeGoal">Mentee Goal
                         </label>
-                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.agreement.menteeGoal" placeholder="Enter mentee agreement">
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.agreement.menteeGoal" placeholder="Enter mentee agreement">
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                         <div class="form-group">
                             <label for="vm.stagesList.stage1.assesment.menteeNote">Mentee
                         </label>
-                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.assesment.menteeNote" placeholder="Enter mentee name">
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.assesment.menteeNote" placeholder="Enter mentee name">
                         </div>
                     </div>
                     <div class="col">
@@ -103,7 +103,7 @@
                         <div class="form-group">
                             <label for="vm.stagesList.stage1.mappingEvidence.menteeNote">Mentee
                         </label>
-                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.mappingEvidence.menteeNote" placeholder="Enter mentee name">
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.mappingEvidence.menteeNote" placeholder="Enter mentee name">
                         </div>
                     </div>
                     <div class="col">
@@ -122,7 +122,7 @@
                         <div class="form-group">
                             <label for="vm.stagesList.stage1.actionPlan.menteeNote">Mentee
                         </label>
-                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.actionPlan.menteeNote" placeholder="Enter mentee name">
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.actionPlan.menteeNote" placeholder="Enter mentee name">
                         </div>
                     </div>
                     <div class="col">
@@ -141,7 +141,7 @@
                         <div class="form-group">
                             <label for="vm.stagesList.stage1.verificationPlan.menteeNote">Mentee
                         </label>
-                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.verificationPlan.menteeNote" placeholder="Enter mentee name">
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.verificationPlan.menteeNote" placeholder="Enter mentee name">
                         </div>
                     </div>
                     <div class="col">
@@ -160,33 +160,42 @@
                         <div class="form-group">
                             <label for="vm.stagesList.stage1.meetings.timeData">Meeting Time
                         </label>
-                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.meetings.timeData" placeholder="Enter mentee name">
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.meetings.timeData" placeholder="Enter mentee name">
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
                             <label for="vm.stagesList.stage1.meetings.methodToRecord">Method for recording and monitoring of meetings: (who will take minutes, etc)
                         </label>
-                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.meetings.methodToRecord" placeholder="Enter mentee role">
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.meetings.methodToRecord" placeholder="Enter mentee role">
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
                             <label for="vm.stagesList.stage1.meetings.problemSolving">Strategies for addressing difficulties along the way
                         </label>
-                            <input type="text" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" ng-model="vm.stagesList.stage1.meetings.problemSolving" placeholder="Enter mentee role">
+                            <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.meetings.problemSolving" placeholder="Enter mentee role">
                         </div>
                     </div>
                     <br>
                     <div class="col-12" ng-repeat="item in vm.stagesList.stage1.meetings.timing">
                         <b>Dates and format of meeting</b>
-                        <input ng-model="item.date" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" placeholder="date" />
-                        <input ng-model="item.format" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" placeholder="format" />
+                        <input ng-model="item.date" class="form-control" readonly placeholder="date" />
+                        <input ng-model="item.format" class="form-control" readonly placeholder="format" />
                     </div>
                     <br>
                     <div class="col-12" ng-repeat="item in vm.stagesList.stage1.meetings.reviewDate">
                         <b>Review dates</b>
-                        <input ng-model="item.date" class="form-control" ng-readonly="vm.stagesList.stage1.rights.mentee.readOnly" placeholder="date" />
+                        <input ng-model="item.date" class="form-control" readonly placeholder="date" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage1.mentorFeedback">Feedback for Mentee
+                        </label>
+                            <textarea type="text" class="form-control" ng-model="vm.stagesList.stage1.mentorFeedback" placeholder="Enter mentee feedback" ng-readonly="vm.stagesList.stage1.rights.mentor.readOnly"> </textarea>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -195,18 +204,24 @@
                     </div>
                 </div>
                 <div class="text-right">
-                    <button ng-if="vm.stagesList.stage1.rights.mentor.readOnly == 0 && vm.stagesList.stage1.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.saveStage(1);">Approve</button>
-                    <button ng-show="vm.stagesList.stage1.rights.mentor.readOnly == 1 && vm.stagesList.stage1.rights.mentor.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.nextStage()">Next</button>
+                    <button ng-if="vm.stagesList.stage1.rights.mentor.readOnly == 0 && vm.stagesList.stage1.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary mr-1" ng-click="vm.saveStage(1);">Approve</button>
+                    <button ng-if="vm.stagesList.stage1.rights.mentor.readOnly == 0 && vm.stagesList.stage1.rights.mentee.readOnly == 1" type="submit" class="btn btn-danger" ng-click="vm.requestChange(1);">Request Change</button>
+                    <button ng-show="vm.stagesList.stage1.rights.mentor.readOnly == 1 && vm.stagesList.stage1.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.nextStage()">Next</button>
                 </div>
             </div>
 
-            <div ng-show="vm.stageVisibility.stage2">
+            <div class="stage-holder" ng-show="vm.stageVisibility.stage2">
+                <div class="controls">
+                    <button class="btn btn-sm mr-1" ng-click="vm.openAllAccordion('sa',true)">Open All</button>
+                    <button class="btn btn-sm" ng-click="vm.openAllAccordion('sa',false)">Close All</button>
+                </div>
                 <div class="com-list" ng-repeat="item in vm.stagesList.stage2.items">
                     <div class="com-header clearfix" ng-click="item.show=!item.show">
                         <div class="pull-left">
                             {{item.title}}</div>
                         <div class="pull-right clearfix">
-                            <div class="pull-left" ng-click="item.show=!item.show"><i class="fa fa-angle-down"></i></div>
+                            <div class="pull-left" ng-if="item.show==false"><i class="fa fa-angle-down"></i></div>
+                            <div class="pull-left" ng-if="item.show==true"><i class="fa fa-angle-up"></i></div>
                         </div>
                     </div>
                     <div class="com-body">
@@ -242,13 +257,23 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage2.mentorFeedback">Feedback for Mentee
+                        </label>
+                            <textarea type="text" class="form-control" ng-model="vm.stagesList.stage2.mentorFeedback" placeholder="Enter mentee feedback" ng-readonly="vm.stagesList.stage2.rights.mentor.readOnly"> </textarea>
+                        </div>
+                    </div>
+                </div>
                 <div class="text-right">
-                    <button ng-if="vm.stagesList.stage2.rights.mentor.readOnly == 0 && vm.stagesList.stage2.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.saveStage(2);">Approve</button>
+                    <button ng-if="vm.stagesList.stage2.rights.mentor.readOnly == 0 && vm.stagesList.stage2.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary mr-1" ng-click="vm.saveStage(2);">Approve</button>
+                    <button ng-if="vm.stagesList.stage2.rights.mentor.readOnly == 0 && vm.stagesList.stage2.rights.mentee.readOnly == 1" type="submit" class="btn btn-danger" ng-click="vm.requestChange(2);">Request Change</button>
                     <button ng-show="vm.stagesList.stage2.rights.mentee.readOnly == 1 && vm.stagesList.stage2.rights.mentor.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.nextStage()">Next</button>
                 </div>
             </div>
 
-            <div ng-show="vm.stageVisibility.stage3">
+            <div class="stage-holder add-goals" ng-show="vm.stageVisibility.stage3">
                 <div class="text-right">
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -259,6 +284,7 @@
                                     <th>Resources needed to achieve goals</th>
                                     <th>Review date</th>
                                     <th>Due date</th>
+                                    <th>Competency</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -272,80 +298,122 @@
                                     <td><input readonly type="text" ng-model="item.resource" /></td>
                                     <td><input readonly type="text" ng-model="item.review_date" /></td>
                                     <td><input readonly type="text" ng-model="item.due_date" /></td>
+                                    <td>
+                                        <select ng-model="item.relatedCom" disabled>
+                                            <optgroup label="{{item.title}}" ng-repeat="item in vm.stagesList.stage2.items">
+                                                <option value="item.title" ng-repeat="section in item.section" ng-if="$first">All</option>
+                                                <option value="section.heading" ng-repeat="section in item.section">{{section.heading}}</option>
+                                            </optgroup>
+                                        </select>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage3.mentorFeedback">Feedback for Mentee
+                        </label>
+                            <textarea type="text" class="form-control" ng-model="vm.stagesList.stage3.mentorFeedback" placeholder="Enter mentee feedback" ng-readonly="vm.stagesList.stage3.rights.mentor.readOnly"> </textarea>
+                        </div>
+                    </div>
+                </div>
                 <div class="text-right">
-                    <button ng-if="vm.stagesList.stage3.rights.mentor.readOnly == 0 && vm.stagesList.stage3.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.saveStage(3);">Approve</button>
+                    <button ng-if="vm.stagesList.stage3.rights.mentor.readOnly == 0 && vm.stagesList.stage3.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary mr-1" ng-click="vm.saveStage(3);">Approve</button>
+                    <button ng-if="vm.stagesList.stage3.rights.mentor.readOnly == 0 && vm.stagesList.stage3.rights.mentee.readOnly == 1" type="submit" class="btn btn-danger" ng-click="vm.requestChange(3);">Request Change</button>
                     <button ng-show="vm.stagesList.stage3.rights.mentee.readOnly == 1 && vm.stagesList.stage3.rights.mentor.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.nextStage()">Next</button>
                 </div>
             </div>
 
-            <div ng-show="vm.stageVisibility.stage4">
-                <div ng-repeat="item in vm.stagesList.stage4.items">
-                    <div class="row">
-                        <div class="col-4">Evidence title</div>
-                        <div class="col-8"><input readonly disabled type="text" ng-model="item.title" /></div>
+            <div class="stage-holder sum-evidence" ng-show="vm.stageVisibility.stage4">
+                <div class="text-right">
+                    <button class="btn btn-sm mr-1" ng-click="vm.openAllAccordion('es',true)">Open All</button>
+                    <button class="btn btn-sm" ng-click="vm.openAllAccordion('es',false)">Close All</button>
+                </div>
+                <div class="my-4" ng-repeat="item in vm.stagesList.stage4.items">
+                    <div class="com-header clearfix" ng-click="item.show=!item.show">
+                        <div class="pull-left">
+                            Evidence {{$index+1}}</div>
+                        <div class="pull-right clearfix">
+                            <div class="pull-left" ng-if="!item.show"><i class="fa fa-angle-down"></i></div>
+                            <div class="pull-left" ng-if="item.show==true"><i class="fa fa-angle-up"></i></div>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-4">Date completed</div>
-                        <div class="col-8"><input readonly disabled type="text" ng-model="item.date_completed" /></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">Evidence category</div>
-                        <div class="col-8">
-                            <select readonly disabled ng-disabled="vm.stagesList.stage4.rights.mentee.readOnly" ng-model="item.evidence_category">
+                    <div ng-show="item.show">
+                        <div class="row">
+                            <div class="col-4">Evidence title</div>
+                            <div class="col-8"><input readonly disabled type="text" ng-model="item.title" /></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">Date completed</div>
+                            <div class="col-8"><input readonly disabled type="text" ng-model="item.date_completed" /></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">Evidence category</div>
+                            <div class="col-8">
+                                <select readonly disabled ng-disabled="vm.stagesList.stage4.rights.mentee.readOnly" ng-model="item.evidence_category">
                                 <option value="Clinical">Clinical</option>
                                 <option value="Education">Education</option>
                                 <option value="Leadership">Leadership</option>
                                 <option value="Policy">Policy</option>
                                 <option value="Research">Research</option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col"><b>Continuing Professional Development (CPD) points/ hrs</b> associated with this evidence</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4"><b>Knowledge</b> (Provide a narrative of your evidence and experience gained)</div>
-                        <div class="col-8"><input readonly disabled type="text" ng-model="item.knowledge" /></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4"><b>Skills</b> (Document the skills you gained through this experience)</div>
-                        <div class="col-8"><input readonly disabled type="text" ng-model="item.skills" /></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4"><b>Attitudes</b> (Have your attitudes changed as a result of this experience?)</div>
-                        <div class="col-8"><input readonly disabled type="text" ng-model="item.attitude" /></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4"><b>Competencies and domains of practice</b> (Highlight competencies relevant for this piece of evidence)</div>
-                        <div class="col-8">
-                            <div ng-repeat="com in item.competency">
-                                <input readonly disabled ng-disabled="vm.stagesList.stage4.rights.mentee.readOnly" type="checkbox" ng-model="com.checked" /> {{com.text}}
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col"><b>Continuing Professional Development (CPD) points/ hrs</b> associated with this evidence</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"><b>Knowledge</b> (Provide a narrative of your evidence and experience gained)</div>
+                            <div class="col-8"><input readonly disabled type="text" ng-model="item.knowledge" /></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"><b>Skills</b> (Document the skills you gained through this experience)</div>
+                            <div class="col-8"><input readonly disabled type="text" ng-model="item.skills" /></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"><b>Attitudes</b> (Have your attitudes changed as a result of this experience?)</div>
+                            <div class="col-8"><input readonly disabled type="text" ng-model="item.attitude" /></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"><b>Competencies and domains of practice</b> (Highlight competencies relevant for this piece of evidence)</div>
+                            <div class="col-8">
+                                <div ng-repeat="com in item.competency">
+                                    <input readonly disabled ng-disabled="vm.stagesList.stage4.rights.mentee.readOnly" type="checkbox" ng-model="com.checked" /> {{com.text}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">Notify mentor (date)</div>
+                            <div class="col-8"><input readonly disabled type="text" ng-model="item.mentor_notify_date" /></div>
+                        </div>
+                        <div class="mb-4">
+                            <hr>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-4">Notify mentor (date)</div>
-                        <div class="col-8"><input readonly disabled type="text" ng-model="item.mentor_notify_date" /></div>
-                    </div>
-                    <div class="mb-4">
-                        <hr>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="vm.stagesList.stage4.mentorFeedback">Feedback for Mentee
+                        </label>
+                            <textarea type="text" class="form-control" ng-model="vm.stagesList.stage4.mentorFeedback" placeholder="Enter mentee feedback" ng-readonly="vm.stagesList.stage4.rights.mentor.readOnly"> </textarea>
+                        </div>
                     </div>
                 </div>
                 <div class="text-right">
-                    <button ng-if="vm.stagesList.stage4.rights.mentor.readOnly == 0 && vm.stagesList.stage4.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.saveStage(4);">Approve</button>
+                    <button ng-if="vm.stagesList.stage4.rights.mentor.readOnly == 0 && vm.stagesList.stage4.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary mr-1" ng-click="vm.saveStage(4);">Approve</button>
+                    <button ng-if="vm.stagesList.stage4.rights.mentor.readOnly == 0 && vm.stagesList.stage4.rights.mentee.readOnly == 1" type="submit" class="btn btn-danger" ng-click="vm.requestChange(4);">Request Change</button>
                     <button ng-show="vm.stagesList.stage4.rights.mentee.readOnly == 1 && vm.stagesList.stage4.rights.mentor.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.nextStage()">Next</button>
                 </div>
             </div>
 
-            <div ng-show="vm.stageVisibility.stage5">
+            <div class="stage-holder" ng-show="vm.stageVisibility.stage5">
                 <div class="row form-group align-items-center">
                     <div class="col">Mentee Name</div>
-                    <div class="col"><input ng-readonly="vm.stagesList.stage5.rights.mentor.readOnly" class="form-control" type="text" ng-model="vm.stagesList.stage5.mentor.mentee_name"/></div>
+                    <div class="col"><input ng-readonly="vm.stagesList.stage5.rights.mentor.readOnly" class="form-control" type="text" ng-model="vm.stagesList.stage5.mentor.mentee_name" /></div>
                 </div>
                 <div class="row form-group align-items-center">
                     <div class="col">Mentee Role</div>
@@ -377,7 +445,7 @@
                     </div>
                 </div>
                 <div class="text-right">
-                     <button ng-if="vm.stagesList.stage5.rights.mentor.readOnly == 0 && vm.stagesList.stage5.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.saveStage(5);">Submit</button>
+                    <button ng-if="vm.stagesList.stage5.rights.mentor.readOnly == 0 && vm.stagesList.stage5.rights.mentee.readOnly == 1" type="submit" class="btn btn-primary" ng-click="vm.saveStage(5);">Submit</button>
                 </div>
             </div>
         </form>

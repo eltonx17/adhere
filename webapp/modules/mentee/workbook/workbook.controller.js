@@ -21,7 +21,7 @@
                 1: "Mentor - Mentee Agreement",
                 2: "Self - Assesment",
                 3: "Action Plan",
-                4: "Summary of Evidence",
+                4: "Generation of Evidence",
                 5: "Feedback"
             }
         };
@@ -50,19 +50,19 @@
                                 vm.gst = 5;
 
                             vm.stageList = [{
-                                title: "Stage 1",
+                                title: "Step 1",
                                 active: (vm.gst >= 1) ? true : false
                             }, {
-                                title: "Stage 2",
+                                title: "Step 2",
                                 active: (vm.gst >= 2) ? true : false
                             }, {
-                                title: "Stage 3",
+                                title: "Step 3",
                                 active: (vm.gst >= 3) ? true : false
                             }, {
-                                title: "Stage 4",
+                                title: "Step 4",
                                 active: (vm.gst >= 4) ? true : false
                             }, {
-                                title: "Stage 5",
+                                title: "Step 5",
                                 active: (vm.gst >= 5) ? true : false
                             }];
 
@@ -152,7 +152,9 @@
                         mentee: {
                             readOnly: false
                         }
-                    }
+                    },
+                    mentorFeedback : "",
+                    changeRequest: false
                 },
                 stage3: {
                     items: [{
@@ -160,7 +162,8 @@
                         goal: "",
                         resource: "",
                         review_date: "",
-                        due_date: ""
+                        due_date: "",
+                        relatedCom: ""
                     }],
                     rights: {
                         mentor: {
@@ -169,7 +172,9 @@
                         mentee: {
                             readOnly: false
                         }
-                    }
+                    },
+                    mentorFeedback : "",
+                    changeRequest: false
                 },
                 stage4: {
                     items: [{
@@ -222,7 +227,9 @@
                         mentee: {
                             readOnly: false
                         }
-                    }
+                    },
+                    mentorFeedback : "",
+                    changeRequest: false
                 },
                 stage5: {
                     mentor: {
@@ -326,7 +333,7 @@
                         mentee: {
                             readOnly: false
                         }
-                    }
+                    }                    
                 }
             }
             return tmp[stage];
@@ -381,7 +388,8 @@
                 goal: "",
                 resource: "",
                 review_date: "",
-                due_date: ""
+                due_date: "",
+                relatedCom: ""
             });
         };
         /**
@@ -436,6 +444,20 @@
             });
         };
         /**
+        *
+        */
+        vm.openAllAccordion = function(item, action){
+            if(item=="sa"){
+                for(var i=0; i< vm.stagesList.stage2.items.length;i++)
+                    vm.stagesList.stage2.items[i].show = action;
+                $timeout();
+            } else if(item=="es"){
+                for(var i=0; i< vm.stagesList.stage4.items.length;i++)
+                    vm.stagesList.stage4.items[i].show = action;
+                $timeout();
+            } 
+        };
+        /**
          *
          */
         vm.saveStage = function (stage) {
@@ -450,14 +472,24 @@
 
                     if (stage == 1) {
                         vm.stagesList.stage1.rights.mentee.readOnly = true;
+                        vm.stagesList.stage1.rights.mentor.readOnly = false;
+                        vm.stagesList.stage1.changeRequest = false;
                     } else if (stage == 2) {
                         vm.stagesList.stage2.rights.mentee.readOnly = true;
+                        vm.stagesList.stage2.rights.mentor.readOnly = false;
+                        vm.stagesList.stage2.changeRequest = false;
                     } else if (stage == 3) {
                         vm.stagesList.stage3.rights.mentee.readOnly = true;
+                        vm.stagesList.stage3.rights.mentor.readOnly = false;
+                        vm.stagesList.stage3.changeRequest = false;
                     } else if (stage == 4) {
                         vm.stagesList.stage4.rights.mentee.readOnly = true;
+                        vm.stagesList.stage4.rights.mentor.readOnly = false;
+                        vm.stagesList.stage4.changeRequest = false;
                     } else if (stage == 5) {
                         vm.stagesList.stage5.rights.mentee.readOnly = true;
+                        vm.stagesList.stage5.rights.mentor.readOnly = false;
+                        vm.stagesList.stage5.changeRequest = false;
                     }
 
                     apiService.serviceRequest({
@@ -468,6 +500,7 @@
                                 stageData: vm.stagesList["stage" + vm.gst],
                                 gstData: vm.gst,
                                 usertype: vm.user.usertype,
+                                review: 0,
                             }
                         }, function (response) {
                             if (response && response.error && response.error.msg) { // error from server                                         

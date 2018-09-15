@@ -15,7 +15,7 @@
         $self.baseURL = 'services/'; // app service URL  
         $self.requestURL = {
             login: 'login/login.php',
-            mentorList: 'register/mentorList/mentorList.php',
+            mentorList: 'register/mentorList.php',
             register: 'register/register.php',
             adminDashInfo: 'admin/adminStats.php',
             mentorDashInfo: 'mentor/mentorStats.php',

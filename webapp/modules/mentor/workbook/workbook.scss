@@ -56,10 +56,18 @@
             }
         }
     }
+    .stage-holder {
+        position: relative;
+    }
+    .controls {
+        position: absolute;
+        right: 0;
+        top: -45px;
+    }
     .com-list {
         margin-bottom: 15px;
         .com-header {
-            background: #ccc;
+            background: #d99594;
             padding: 12px;
             input {
                 width: 100%;
@@ -75,6 +83,23 @@
                 background-color: blue !important;
                 color: #fff;
             }
+        }
+    }
+    .add-goals {
+        th {
+            background: #c2d69b;
+            color: #000;
+            border-bottom: 1px solid #32383e;
+        }
+        tbody {
+            background: #eaf1dd;
+        }
+    }
+    .sum-evidence {
+        .com-header {
+            background: #d99594;
+            padding: 12px;
+            cursor: pointer;
         }
     }
     .table thead th {

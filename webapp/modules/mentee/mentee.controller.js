@@ -18,11 +18,11 @@
             vm.appTitle = appConfig.title; // binds app title from config
             vm.getComments();
             vm.stageStatus = {           
-                1 : "Stage 1/5",
-                2 : "Completed Stage 1/5",
-                3 : "Completed Stage 2/5",
-                4 : "Completed Stage 3/5",
-                5 : "Completed Stage 4/5",
+                1 : "Step 1/5",
+                2 : "Completed Step 1/5",
+                3 : "Completed Step 2/5",
+                4 : "Completed Step 3/5",
+                5 : "Completed Step 4/5",
                 6 : "Completed"
             };
             vm.stagePercentage = {           

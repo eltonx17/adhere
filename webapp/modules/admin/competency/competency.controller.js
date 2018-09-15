@@ -97,7 +97,9 @@
                                 mentee: {
                                     readOnly: false
                                 }
-                            }
+                            },
+                            mentorFeedback: "",
+                            changeRequest: false
                         };
                         apiService.serviceRequest({
                                 method: 'POST',
