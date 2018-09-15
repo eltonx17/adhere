@@ -20,6 +20,8 @@ $menteeID = ($request->menteeID);
 $userType = ($request->usertype);
 $stageNum = "stage".$gstData;
 
+//Collect REVIEW Flag
+$review = ($request->review);
 
 //check if the submission is from mentee and update
 if($userType == '2'){
@@ -49,8 +51,11 @@ if($userType == '2'){
 else if($userType == '1'){
     
     if ($gstData < 6){
+        
+        $currentGST = (($review==1 || $review=="1") ? $gstData : ++$gstData);
+        
         $query = ("UPDATE menteeworkbook
-        SET ".($stageNum)."='".base64_encode($stageData)."', gst=".++$gstData.", na=0
+        SET ".($stageNum)."='".base64_encode($stageData)."', gst=".$currentGST.", na=0
         WHERE menteeid=".$menteeID);     
         
         $executeQuery = mysqli_query($db,$query);
