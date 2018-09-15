@@ -24,9 +24,12 @@ $userType = mysqli_real_escape_string($db, $_GET['userType']);
 //Encrypt the password before saving in the database
 $passwordEnc = md5($password);
 
+//To check if user is Mentee to set firstlogin to 1
+$firstLogin = (($userType==2)? 1 : 0);
+
 //Query to register user info into db
-$query = "INSERT INTO users (firstname, lastname, email, password, usertype) 
-          VALUES('$firstName', '$lastName','$email', '$passwordEnc', '$userType')";
+$query = "INSERT INTO users (firstname, lastname, email, password, usertype,firstlogin) 
+          VALUES('$firstName', '$lastName','$email', '$passwordEnc', '$userType', '$firstLogin' )";        
 $executeQuery= mysqli_query($db, $query);
 
 //Retrieve the ID of the inserted record

@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(100) NOT NULL,
   `usertype` int(1) DEFAULT NULL COMMENT '0 - Admin 1 - Mentor 2 - Mentee',
   `accountstatus` int(1) DEFAULT '0' COMMENT '0 - Inactive 1 - Active',
+  `firstlogin` int(1) DEFAULT '0',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;

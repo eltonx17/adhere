@@ -26,16 +26,12 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
           //Converting mentee details into array
           $fetchQuery = $executeQuery->fetch_all(MYSQLI_ASSOC);
           $userDetails = $fetchQuery[0];
-          
-          //Fetch userType and userID
-          $query = "SELECT users.usertype, users.uid FROM users
-                    WHERE email='$email' ";
-  	      $executeQuery = mysqli_query($db, $query);
-          
+                    
           //Convert variables into int
-          $fetchQuery = $executeQuery->fetch_assoc();
-          $userType = (int) $fetchQuery['usertype'];
-          $menteeId = (int) $fetchQuery['uid'];
+          $userType = (int) $userDetails['usertype'];
+          $menteeId = (int) $userDetails['uid'];
+          $firstLogin = (int) $userDetails['firstlogin'];
+          $accountStatus = (int) $userDetails["accountstatus"];
           
           //Check if usertype and userID exists 
           if (!$fetchQuery){
@@ -48,13 +44,14 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
               //if Mentee logs in, show Mentee details and Mentor details
               if ($userType==2){                  
                   $query = "SELECT users.firstname AS
-                            mentorname,users.uid,mentormapping.mapstatus,menteeworkbook.gst 
+                            mentorname,users.uid,users.firstlogin,mentormapping.mapstatus,menteeworkbook.gst 
                             FROM users,mentormapping,menteeworkbook 
                             WHERE mentormapping.mentorid = users.uid 
                             AND mentormapping.menteeid = '$menteeId'
                             AND menteeworkbook.menteeid = '$menteeId'";
   	              $executeQuery = mysqli_query($db, $query);
                   $fetchQuery = $executeQuery->fetch_all(MYSQLI_ASSOC); //Convert into array
+                  
                   
                   if (!$fetchQuery){
                         $error = array(
@@ -70,8 +67,17 @@ $password = mysqli_real_escape_string($db, $_GET['password']);
                         $userDetails["mentorID"] = $mentorDetails["uid"];
                         $userDetails["mapStatus"] = $mentorDetails["mapstatus"];
                         $userDetails["gst"] = $mentorDetails["gst"];
-                  
-                        $success = array(
+                      
+                        $mapStatus = (int) $mentorDetails["mapstatus"];
+                        
+                        //Update firstlogin of Mentee to 0 after first login
+                        if($firstLogin == 1 && $accountStatus == 1 && $mapStatus == 1){
+                            $query = "UPDATE users SET users.firstlogin = 0 WHERE users.uid = '$menteeId'";
+                            $executeQuery = mysqli_query($db, $query);
+                        }
+
+                      
+                      $success = array(
                                  'data'=>$userDetails, 'error'=>null
                                  );
                         echo json_encode($success);
