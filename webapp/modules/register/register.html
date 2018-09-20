@@ -37,6 +37,7 @@
                         <div class="form-group" ng-show="vm.formData.userType == 2">
                             <select ng-model="vm.formData.mentorId" class="form-control">
                                 <option value="" disabled>Select your mentor</option>
+                                <option value="0">Independent Mentee</option>
                                 <option ng-repeat="mentor in vm.mentorList" value="{{mentor.uid}}">{{mentor.fullname}}</option>
                             </select>
                         </div>
