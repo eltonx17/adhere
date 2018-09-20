@@ -61,7 +61,7 @@
         $self.toast = function (text, param) {
             $mdToast.show(
                 $mdToast.simple()
-                .textContent(text || 'Take2')
+                .textContent(text || 'Action completed successfully.')
                 .hideDelay(1500)
             );
         };
