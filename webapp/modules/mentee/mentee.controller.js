@@ -33,7 +33,8 @@
                 5: 80,
                 6: 100
             };
-            vm.showDialog();
+            if (vm.user.firstlogin == 1 || vm.user.firstlogin == "1" || vm.user.firstlogin == true)
+                vm.showDialog();
         };
 
         vm.getComments = function () {
@@ -82,7 +83,7 @@
             });
 
             function DialogController($scope, $mdDialog, items) {
-                $scope.items = [1,2,43];
+                $scope.items = [1, 2, 43];
                 $scope.closeDialog = function () {
                     $mdDialog.hide();
                 }

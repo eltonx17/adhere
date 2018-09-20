@@ -1,10 +1,12 @@
 <?php
 
-header('Content-type: application/json');
+//header('Content-type: application/json');
 require "../../conn.php";
+print_r($_FILES);
+return;
+$menteeId = $_GET["menteeId"];
+$workbookId = $_GET["workbookId"];
 
-$menteeId = $_POST["menteeId"];
-$workbookId = $_POST["workbookId"];
 /*$menteeId = '22';
 $workbookId = '13';*/
 $uploadsDir = "../../../uploads/";
@@ -41,9 +43,11 @@ else{
 $date=date_create();
 $date->setTimeZone(new DateTimeZone('Australia/Sydney'));
 $date = date_timestamp_get($date);
+ //$tmpFilePath = $_FILES['upload']['tmp_name'];
+    //$fName = $_FILES['upload']['name'];
 
 // Count # of uploaded files in array
-$total = count($_FILES['upload']['name']);
+$total = count(['name']);
 $counter = 0;
 $errorCount = 0;
 

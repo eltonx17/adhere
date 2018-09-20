@@ -21,7 +21,7 @@ $email = mysqli_real_escape_string($db, $_GET['email']);
 $password = mysqli_real_escape_string($db, $_GET['password']);
 $userType = mysqli_real_escape_string($db, $_GET['userType']);
 $mentorId = mysqli_real_escape_string($db, $_GET['mentorId']);
-$userType = mysqli_real_escape_string($db, $_GET['userType']);
+$mentorUserType = mysqli_real_escape_string($db, $_GET['mentorUserType']);
 
     
 //Encrypt the password before saving in the database
@@ -50,14 +50,15 @@ if (!$executeQuery) {
         if ($userType == 2){
 
             //To check for independent user (usertype==0)
-            $independentUser = (($userType==0 || $userType=="0")? 1:0);
+            $independentUser = (($mentorUserType==0 || $mentorUserType=="0")? 1:0);
 
             $queryA = "INSERT INTO mentormapping (menteeid, mentorid,mapstatus) VALUES ('$last_uid', '$mentorId','$independentUser')";
             $queryB = "INSERT INTO menteeworkbook (menteeid, stage2) VALUES ('$last_uid','$comData')";
+
             $executeQueryA= mysqli_multi_query($db, $queryA);
             $executeQueryB= mysqli_multi_query($db, $queryB);
             
-            if (!$executeQueryA && !$executeQueryB) {
+            if (!$executeQueryA || !$executeQueryB) {
                 $error = array(
                          'data'=>'null', 'error'=>array('msg'=>'Error selecting mentor','code'=>'101')
                          );

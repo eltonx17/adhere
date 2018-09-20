@@ -24,7 +24,8 @@
             getCompetencyData: 'admin/competency/competencyGet.php',
             saveCompetencyData: 'admin/competency/competencyData.php',
             currentMenteeStageInfo: 'admin/competency/menteeStageDetails.php',
-            updateWorkBook: 'admin/competency/competencyUpdate.php'
+            updateWorkBook: 'admin/competency/competencyUpdate.php',
+            uploadFile: 'admin/competency/upload.php'
         };
 
     }

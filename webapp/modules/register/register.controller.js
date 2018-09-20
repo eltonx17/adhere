@@ -81,7 +81,7 @@
                 var userInfo = {};
 
                 var mentee = angular.fromJson(vm.formData.mentorId);
-
+               
                 // sent login request to server
                 apiService.serviceRequest({
                         method: 'POST',
@@ -91,8 +91,9 @@
                             lastName: vm.formData.lastName,
                             email: vm.formData.email,
                             password: vm.formData.password,
-                            userType: mentee.usertype,
-                            mentorId: mentee.id
+                            userType: vm.formData.userType,
+                            mentorId: mentee.id,
+                            mentorUserType: mentee.usertype
                         }
                     }, function (data) {
                         if (data && data.error && data.error.msg) { // error from server                                                      

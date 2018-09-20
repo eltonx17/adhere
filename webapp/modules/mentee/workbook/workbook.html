@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" ng-hide='vm.user.mentorUserType==0 || vm.user.mentorUserType=="0"'>
                     <div class="col">
                         <div class="form-group">
                             <label for="vm.stagesList.stage1.agreement.mentorName">Mentor Name
@@ -96,7 +96,7 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="form-group">
+                        <div class="form-group" ng-hide='vm.user.mentorUserType==0 || vm.user.mentorUserType=="0"'>
                             <label for="vm.stagesList.stage1.assesment.mentorNote">Mentor
                         </label>
                             <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.assesment.mentorNote" placeholder="Enter mentee role">
@@ -114,7 +114,7 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="form-group">
+                        <div class="form-group" ng-hide='vm.user.mentorUserType==0 || vm.user.mentorUserType=="0"'>
                             <label for="vm.stagesList.stage1.mappingEvidence.mentorNote">Mentor
                         </label>
                             <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.mappingEvidence.mentorNote" placeholder="Enter mentee role">
@@ -132,7 +132,7 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="form-group">
+                        <div class="form-group" ng-hide='vm.user.mentorUserType==0 || vm.user.mentorUserType=="0"'>
                             <label for="vm.stagesList.stage1.actionPlan.mentorNote">Mentor
                         </label>
                             <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.actionPlan.mentorNote" placeholder="Enter mentee role">
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="form-group">
+                        <div class="form-group" ng-hide='vm.user.mentorUserType==0 || vm.user.mentorUserType=="0"'>
                             <label for="vm.stagesList.stage1.verificationPlan.mentorNote">Mentor
                         </label>
                             <input type="text" class="form-control" readonly ng-model="vm.stagesList.stage1.verificationPlan.mentorNote" placeholder="Enter mentee role">
@@ -397,6 +397,12 @@
                             <hr>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <form action="upload.php" method="post" enctype="multipart/form-data">
+                      <input name="upload[]" type="file" onchange="angular.element(this).scope().vm.onFileSelect(this)" />                     
+                      <input type="submit" value="Send files" />
+                    </form>
                 </div>
                 <div class="text-right">
                     <button ng-show="!vm.stagesList.stage4.rights.mentee.readOnly" type="submit" class="btn btn-primary" ng-click="vm.saveStage(4);">Submit</button>

@@ -45,6 +45,7 @@
 
                         if (response && response.data) {
                             var resp = response.data;
+                            vm.workbookid = resp.workbookid;
                             vm.gst = (resp.gst) ? parseInt(resp.gst) : 1;
                             if (vm.gst > 5)
                                 vm.gst = 5;
@@ -153,7 +154,7 @@
                             readOnly: false
                         }
                     },
-                    mentorFeedback : "",
+                    mentorFeedback: "",
                     changeRequest: false
                 },
                 stage3: {
@@ -173,7 +174,7 @@
                             readOnly: false
                         }
                     },
-                    mentorFeedback : "",
+                    mentorFeedback: "",
                     changeRequest: false
                 },
                 stage4: {
@@ -228,7 +229,7 @@
                             readOnly: false
                         }
                     },
-                    mentorFeedback : "",
+                    mentorFeedback: "",
                     changeRequest: false
                 },
                 stage5: {
@@ -333,7 +334,7 @@
                         mentee: {
                             readOnly: false
                         }
-                    }                    
+                    }
                 }
             }
             return tmp[stage];
@@ -444,18 +445,59 @@
             });
         };
         /**
-        *
-        */
-        vm.openAllAccordion = function(item, action){
-            if(item=="sa"){
-                for(var i=0; i< vm.stagesList.stage2.items.length;i++)
+         *
+         */
+        vm.openAllAccordion = function (item, action) {
+            if (item == "sa") {
+                for (var i = 0; i < vm.stagesList.stage2.items.length; i++)
                     vm.stagesList.stage2.items[i].show = action;
                 $timeout();
-            } else if(item=="es"){
-                for(var i=0; i< vm.stagesList.stage4.items.length;i++)
+            } else if (item == "es") {
+                for (var i = 0; i < vm.stagesList.stage4.items.length; i++)
                     vm.stagesList.stage4.items[i].show = action;
                 $timeout();
-            } 
+            }
+        };
+        /**
+         *
+         */
+        vm.onFileSelect = function (input) {
+            vm.saveFile(input.files[0]);
+        };
+        /**
+         *
+         */
+        vm.saveFile = function (file) {
+
+            var fd = new FormData();
+            fd.append("upload", file);
+
+            apiService.serviceRequest({
+                    method: 'POST',
+                    url: appConfig.requestURL.uploadFile,
+                    transformRequest: angular.identity,
+                    headers: {
+                        'Content-Type': undefined,
+                        'Process-data': false
+                    },
+                    data: fd,
+                    params: {
+                        menteeId: vm.user.uid,
+                        workbookId: vm.workbookid
+                    }
+                }, function (response) {
+                    if (response && response.error && response.error.msg) { // error from server                                         
+                        $timeout(function () {
+                            vm.regoErrMsg = response.error.msg || "Something went wrong, try again.";
+                        });
+                    } else {
+
+                    }
+                },
+                function (fail) { // service fails                    
+                    vm.regoErr = true;
+                    vm.regoErrMsg = "Something went wrong, try again.";
+                });
         };
         /**
          *
@@ -472,23 +514,23 @@
 
                     if (stage == 1) {
                         vm.stagesList.stage1.rights.mentee.readOnly = true;
-                        vm.stagesList.stage1.rights.mentor.readOnly = false;
+                        vm.stagesList.stage1.rights.mentor.readOnly = (vm.user.mentorUserType == 0 || vm.user.mentorUserType == "0") ? true : false;
                         vm.stagesList.stage1.changeRequest = false;
                     } else if (stage == 2) {
                         vm.stagesList.stage2.rights.mentee.readOnly = true;
-                        vm.stagesList.stage2.rights.mentor.readOnly = false;
+                        vm.stagesList.stage2.rights.mentor.readOnly = (vm.user.mentorUserType == 0 || vm.user.mentorUserType == "0") ? true : false;
                         vm.stagesList.stage2.changeRequest = false;
                     } else if (stage == 3) {
                         vm.stagesList.stage3.rights.mentee.readOnly = true;
-                        vm.stagesList.stage3.rights.mentor.readOnly = false;
+                        vm.stagesList.stage3.rights.mentor.readOnly = (vm.user.mentorUserType == 0 || vm.user.mentorUserType == "0") ? true : false;
                         vm.stagesList.stage3.changeRequest = false;
                     } else if (stage == 4) {
                         vm.stagesList.stage4.rights.mentee.readOnly = true;
-                        vm.stagesList.stage4.rights.mentor.readOnly = false;
+                        vm.stagesList.stage4.rights.mentor.readOnly = (vm.user.mentorUserType == 0 || vm.user.mentorUserType == "0") ? true : false;
                         vm.stagesList.stage4.changeRequest = false;
                     } else if (stage == 5) {
                         vm.stagesList.stage5.rights.mentee.readOnly = true;
-                        vm.stagesList.stage5.rights.mentor.readOnly = false;
+                        vm.stagesList.stage5.rights.mentor.readOnly = (vm.user.mentorUserType == 0 || vm.user.mentorUserType == "0") ? true : false;
                         vm.stagesList.stage5.changeRequest = false;
                     }
 
@@ -499,7 +541,7 @@
                                 menteeID: vm.user.uid,
                                 stageData: vm.stagesList["stage" + vm.gst],
                                 gstData: vm.gst,
-                                usertype: vm.user.usertype,
+                                usertype: (vm.user.mentorUserType == 0 || vm.user.mentorUserType == "0") ? 1 : vm.user.usertype,
                                 review: 0,
                             }
                         }, function (response) {
@@ -508,6 +550,10 @@
                                     vm.regoErrMsg = response.error.msg || "Something went wrong, try again.";
                                 });
                             } else {
+
+                                if (vm.user.mentorUserType == 0 || vm.user.mentorUserType == "0") // independent mentee 
+                                    vm.currentStageInfo();
+
                                 swal({
                                     title: "Done!",
                                     text: "Data saved successfully.",
