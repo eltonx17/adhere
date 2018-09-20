@@ -5,7 +5,7 @@ require "../conn.php";
 $mentorList = "";
 $mentors = array();
 
-$query = "SELECT uid, CONCAT(firstname, ' ', lastname) AS fullname FROM users WHERE usertype = '1'";
+$query = "(SELECT * FROM users WHERE usertype=1) UNION (SELECT * from users where usertype = 0 LIMIT 1)";
 $results = mysqli_query($db, $query);
 
 if($results){
