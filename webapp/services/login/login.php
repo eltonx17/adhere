@@ -47,7 +47,7 @@ if (count($errors) == 0) {
             //if Mentee logs in, show Mentee details and Mentor details
             if ($userType == 2) {
                 $query        = "SELECT users.firstname AS
-                            mentorname,users.uid,users.firstlogin,mentormapping.mapstatus,menteeworkbook.gst 
+                            mentorname,users.uid,users.firstlogin,mentormapping.mapstatus,menteeworkbook.gst,users.usertype AS mentorusertype 
                             FROM users,mentormapping,menteeworkbook 
                             WHERE mentormapping.mentorid = users.uid 
                             AND mentormapping.menteeid = '$menteeId'
@@ -73,6 +73,7 @@ if (count($errors) == 0) {
                     $userDetails["mentorID"]   = $mentorDetails["uid"];
                     $userDetails["mapStatus"]  = $mentorDetails["mapstatus"];
                     $userDetails["gst"]        = $mentorDetails["gst"];
+                    $userDetails["mentorUserType"]        = $mentorDetails["mentorusertype"];
                     
                     $mapStatus = (int) $mentorDetails["mapstatus"];
                     
