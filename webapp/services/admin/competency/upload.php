@@ -72,7 +72,9 @@ $tmpFilePath = $_FILES['upload']['tmp_name'];
             if(mysqli_affected_rows($db) > 0 ){
                 $query = "SELECT filepath FROM `evidence` WHERE id = $last_uid";        
                 $executeQuery= mysqli_query($db, $query);
-                $success = array('data'=>$executeQuery, 'error'=>null);
+                $fetchQuery = $executeQuery->fetch_all(MYSQLI_ASSOC);
+                
+                $success = array('data'=>$fetchQuery, 'error'=>null);
                 echo json_encode($success);
             }
             else{
