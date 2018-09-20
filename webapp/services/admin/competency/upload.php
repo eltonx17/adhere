@@ -50,7 +50,7 @@ $errorCount = 0;
 
 $tmpFilePath = $_FILES['upload']['tmp_name'];
     $fName = $_FILES['upload']['name'];
-    //$fName = mb_strimwidth($fName, 0, 50, "...");
+    $fName = mb_strimwidth($fName, 0, 50, "...");
 
     //extract extension and append it along with the date
     $ext = pathinfo($fName, PATHINFO_EXTENSION);
@@ -64,21 +64,22 @@ $tmpFilePath = $_FILES['upload']['tmp_name'];
 
         //Upload the file into the temp dir
         if(move_uploaded_file($tmpFilePath, $newFilePath)) {
-            echo "in2";
             $query = "INSERT INTO evidence (menteeid, workbookid, filepath, filename) 
                       VALUES('$menteeId','$workbookId','$dbFilePath','".base64_encode($fName)."')";        
             $executeQuery= mysqli_query($db, $query);
-            echo $executeQuery;
-            echo "in1";
+            $last_uid = $db->insert_id;
+
             if(mysqli_affected_rows($db) > 0 ){
-                $success = array('data'=>"Successfully uploaded files", 'error'=>null);
-    echo json_encode($success);
+                $query = "SELECT filepath FROM `evidence` WHERE id = $last_uid";        
+                $executeQuery= mysqli_query($db, $query);
+                $success = array('data'=>$executeQuery, 'error'=>null);
+                echo json_encode($success);
             }
             else{
                $error = array(
-    'data'=>'null', 'error'=>array('msg'=>"Error uploading files",'code'=>'000')
-    );
-    echo json_encode($error);
+                        'data'=>'null', 'error'=>array('msg'=>"Error uploading files",'code'=>'000')
+                        );
+                echo json_encode($error);
             }
         }
     }
