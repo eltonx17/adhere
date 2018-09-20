@@ -48,3 +48,14 @@ CREATE TABLE IF NOT EXISTS `competency` (
   `data` longtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Create 'evidence' Table
+DROP TABLE IF EXISTS `evidence`;
+CREATE TABLE IF NOT EXISTS `evidence` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menteeid` int(11) NOT NULL,
+  `workbookid` int(11) NOT NULL,
+  `filepath` varchar(260) NOT NULL,
+  `filename` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
