@@ -9,7 +9,7 @@
         .controller('workbookController', workbookController);
 
     /* ngInject */
-    function workbookController($scope, appConfig, $timeout, apiService, $rootScope, $state) {
+    function workbookController($scope, appConfig, $timeout, apiService, $rootScope, $state, $http) {
         var vm = this;
 
 
@@ -472,9 +472,9 @@
             var fd = new FormData();
             fd.append("upload", file);
 
-            apiService.serviceRequest({
+            $http({
                     method: 'POST',
-                    url: appConfig.requestURL.uploadFile,
+                    url: appConfig.baseURL + appConfig.requestURL.uploadFile,
                     transformRequest: angular.identity,
                     headers: {
                         'Content-Type': undefined,
@@ -485,7 +485,7 @@
                         menteeId: vm.user.uid,
                         workbookId: vm.workbookid
                     }
-                }, function (response) {
+                }).then(function (response) {
                     if (response && response.error && response.error.msg) { // error from server                                         
                         $timeout(function () {
                             vm.regoErrMsg = response.error.msg || "Something went wrong, try again.";
