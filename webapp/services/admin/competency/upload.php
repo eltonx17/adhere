@@ -74,7 +74,7 @@ $tmpFilePath = $_FILES['upload']['tmp_name'];
                 $executeQuery= mysqli_query($db, $query);
                 $fetchQuery = $executeQuery->fetch_all(MYSQLI_ASSOC);
                 
-                $success = array('data'=>$fetchQuery, 'error'=>null);
+                $success = array('data'=>$fetchQuery[0], 'error'=>null);
                 echo json_encode($success);
             }
             else{

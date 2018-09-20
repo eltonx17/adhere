@@ -230,7 +230,8 @@
                         }
                     },
                     mentorFeedback: "",
-                    changeRequest: false
+                    changeRequest: false,
+                    files: []
                 },
                 stage5: {
                     mentor: {
@@ -473,25 +474,36 @@
             fd.append("upload", file);
 
             $http({
-                    method: 'POST',
-                    url: appConfig.baseURL + appConfig.requestURL.uploadFile,
-                    transformRequest: angular.identity,
-                    headers: {
-                        'Content-Type': undefined,
-                        'Process-data': false
-                    },
-                    data: fd,
-                    params: {
-                        menteeId: vm.user.uid,
-                        workbookId: vm.workbookid
-                    }
-                }).then(function (response) {
+                method: 'POST',
+                url: appConfig.baseURL + appConfig.requestURL.uploadFile,
+                transformRequest: angular.identity,
+                headers: {
+                    'Content-Type': undefined,
+                    'Process-data': false
+                },
+                data: fd,
+                params: {
+                    menteeId: vm.user.uid,
+                    workbookId: vm.workbookid
+                }
+            }).then(function (response) {
+                    response = response.data.data;
                     if (response && response.error && response.error.msg) { // error from server                                         
                         $timeout(function () {
                             vm.regoErrMsg = response.error.msg || "Something went wrong, try again.";
                         });
                     } else {
-
+                        
+                        document.getElementById('evidence-upload').value = ""; // clear file input field
+                        
+                        if (!vm.stagesList.stage4.files)
+                            vm.stagesList.stage4.files = [];
+                        
+                        vm.stagesList.stage4.files.push({
+                            name: file.name,
+                            path: response.filepath
+                        });
+                        
                     }
                 },
                 function (fail) { // service fails                    
