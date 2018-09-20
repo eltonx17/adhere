@@ -10,6 +10,7 @@ $workbookId = '13';*/
 $uploadsDir = "../../../uploads/";
 $directory = "../../../uploads/" . $menteeId . "/";
 $evidence = "../../../uploads/" . $menteeId . "/evidence/";
+$dbFilePath = "/uploads/".$menteeId."/evidence"; //to store in db without "../"
 
 //check if menteeId is received and accordingly check and create required directories
 if(!$menteeId){
@@ -61,11 +62,12 @@ for( $i=0 ; $i < $total ; $i++ ) {
     if ($tmpFilePath != ""){
         //Setup our new file path with new file name
         $newFilePath = $evidence.$fileName;
+        $dbFilePath = $dbFilePath.$fileName;
+
         //Upload the file into the temp dir
         if(move_uploaded_file($tmpFilePath, $newFilePath)) {
-            echo $fName;
             $query = "INSERT INTO evidence (menteeid, workbookid, filepath, filename) 
-                      VALUES('$menteeId','$workbookId','$newFilePath','".base64_encode($fName)."')";        
+                      VALUES('$menteeId','$workbookId','$dbFilePath','".base64_encode($fName)."')";        
             $executeQuery= mysqli_query($db, $query);
             if(mysqli_affected_rows($db) > 0 ){
                 $counter++;
@@ -83,7 +85,7 @@ if ($counter>0 && $errorCount==0 ){
 }
 else{
     $error = array(
-    'data'=>'null', 'error'=>array('msg'=>"Error uploading ".$errorCounter." files",'code'=>'000')
+    'data'=>'null', 'error'=>array('msg'=>"Error uploading ".$errorCount." files",'code'=>'000')
     );
     echo json_encode($error);
 }
