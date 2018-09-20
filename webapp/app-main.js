@@ -17,6 +17,9 @@
                 controllerAs: 'vm'
             }).state('login', {
                 url: '/login',
+                params: {
+                    email: undefined
+                },
                 templateUrl: 'modules/login/login.html',
                 controller: 'loginController',
                 controllerAs: 'vm'

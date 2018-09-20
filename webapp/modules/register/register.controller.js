@@ -38,7 +38,17 @@
                         });
                     } else {
                         if (data && data.length && data.length > 0) {
-                            vm.mentorList = data;
+                            vm.mentorList = [];
+                            for (var i = 0; i < data.length; i++) {
+                                data[i].fullname = data[i].firstname + " " + data[i].lastname;
+                                if (data[i].usertype == 0 || data[i].usertype == "0")
+                                    data[i].fullname = "Independent Mentee";
+                                data[i].menteedDetails = {
+                                    id: data[i].uid,
+                                    usertype: data[i].usertype
+                                };
+                                vm.mentorList.push(data[i]);
+                            }
                         } else {
                             // false condition goes here
                         }
@@ -70,6 +80,8 @@
                 vm.regoErr = false;
                 var userInfo = {};
 
+                var mentee = angular.fromJson(vm.formData.mentorId);
+
                 // sent login request to server
                 apiService.serviceRequest({
                         method: 'POST',
@@ -79,8 +91,8 @@
                             lastName: vm.formData.lastName,
                             email: vm.formData.email,
                             password: vm.formData.password,
-                            userType: vm.formData.userType,
-                            mentorId: vm.formData.mentorId
+                            userType: mentee.usertype,
+                            mentorId: mentee.id
                         }
                     }, function (data) {
                         if (data && data.error && data.error.msg) { // error from server                                                      
