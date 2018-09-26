@@ -16,9 +16,10 @@
         /**
          * exection starts here
          **/
-        function init() {
+        function init() { 
             vm.user = window.localStorage.getItem('user') ? angular.fromJson(window.localStorage.getItem('user')) : undefined;
-
+            vm.appConfig = appConfig;
+            
             /** set the center div height **/
             vm.setCenterheight();
 
