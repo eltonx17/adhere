@@ -20,9 +20,18 @@ $lastName = mysqli_real_escape_string($db, $_GET['lastName']);
 $email = mysqli_real_escape_string($db, $_GET['email']);
 $password = mysqli_real_escape_string($db, $_GET['password']);
 $userType = mysqli_real_escape_string($db, $_GET['userType']);
-$mentorId = mysqli_real_escape_string($db, $_GET['mentorId']);
-$mentorUserType = mysqli_real_escape_string($db, $_GET['mentorUserType']);
 
+if(isset($_GET['mentorId'])){
+    $mentorId = mysqli_real_escape_string($db, $_GET['mentorId']);
+} else {
+    $mentorId = 0;
+}
+
+if(isset($_GET['mentorUserType'])){
+    $mentorUserType = mysqli_real_escape_string($db, $_GET['mentorUserType']);
+} else {
+    $mentorUserType = 2;
+}
     
 //Encrypt the password before saving in the database
 $passwordEnc = md5($password);
@@ -50,7 +59,11 @@ if (!$executeQuery) {
         if ($userType == 2){
 
             //To check for independent user (usertype==0)
-            $independentUser = (($mentorUserType==0 || $mentorUserType=="0")? 1:0);
+            if(isset($mentorUserType)){
+                $independentUser = (($mentorUserType==0 || $mentorUserType=="0")? 1:0);
+            } else {
+                $independentUser = 0;
+            }            
 
             $queryA = "INSERT INTO mentormapping (menteeid, mentorid,mapstatus) VALUES ('$last_uid', '$mentorId','$independentUser')";
             $queryB = "INSERT INTO menteeworkbook (menteeid, stage2) VALUES ('$last_uid','$comData')";

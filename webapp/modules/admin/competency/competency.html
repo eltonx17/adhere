@@ -1,7 +1,7 @@
 <!-- MultiStep Form -->
 <div class="competency">
 
-    <div class="content">        
+    <div class="content">
         <div class="com-list" ng-repeat="item in vm.competencyList">
             <div class="row com-header clearfix">
                 <div class="col-8">
@@ -15,13 +15,16 @@
                 <div class="com-question-set" ng-repeat="section in item.section" ng-init="item.show=false;" ng-show="item.show">
                     <div class="com-question">
                         <div>
-                            <hr>
                             <input class="form-control" type="text" ng-model="section.heading" placeholder="Type heading here.." />
                             <button ng-click="vm.addQuestion(section);">add question</button>
+                            <select ng-model="section.lop">
+                                <option value="Essential" selected>Essential</option>
+                                <option value="Enhanced">Enhanced</option>
+                            </select>
                             <div ng-repeat="question in section.questions">
                                 <textarea class="form-control" type="text" ng-model="question.text" placeholder="Type competency here.."></textarea>
                             </div>
-                             <hr>
+                            <hr>
                         </div>
                     </div>
                 </div>

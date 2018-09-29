@@ -11,7 +11,7 @@
         var $self = this;
 
         $self.title = "Adhere"; // app name     
-        $self.version = "0.0.550";
+        $self.version = "1.0.0";
         $self.baseURL = 'services/'; // app service URL  
         $self.requestURL = {
             login: 'login/login.php',

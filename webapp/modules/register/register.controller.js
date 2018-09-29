@@ -92,8 +92,8 @@
                             email: vm.formData.email,
                             password: vm.formData.password,
                             userType: vm.formData.userType,
-                            mentorId: mentee.id,
-                            mentorUserType: mentee.usertype
+                            mentorId: (typeof(mentee) != "undefined") ? mentee.id : 0,
+                            mentorUserType: (typeof(mentee) != "undefined") ? mentee.mentorUserType : 2
                         }
                     }, function (data) {
                         if (data && data.error && data.error.msg) { // error from server                                                      

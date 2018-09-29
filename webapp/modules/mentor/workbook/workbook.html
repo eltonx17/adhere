@@ -228,7 +228,9 @@
                         <div class="com-question-set" ng-repeat="section in item.section" ng-init="item.show=false;" ng-show="item.show">
                             <div class="com-question">
                                 <div>
-                                    <b>{{$parent.$index+1}}.{{$index+1}}. {{section.heading}}</b>
+                                    <b class="mr-1">{{$parent.$index+1}}.{{$index+1}}. {{section.heading}}</b>
+                                     <span ng-if='section.lop == "Essential"' class="badge bg-info">{{section.lop}}</span>
+                                    <span ng-if='section.lop == "Enhanced"' class="badge bg-danger">{{section.lop}}</span>
                                     <div ng-repeat="question in section.questions">
                                         <div class="pl-2">
                                             <u>{{$parent.$parent.$index+1}}.{{$parent.$index+1}}.{{$index+1}}</u> {{question.text}} <br>
@@ -256,6 +258,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                
+                <div>
+                    Mentee has selected <span class="badge text-danger">{{vm.stagesList.stage2.lop}}</span>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -393,6 +399,9 @@
                             <hr>
                         </div>
                     </div>
+                </div>
+                <div ng-repeat="file in vm.stagesList.stage4.files">
+                    <a href="{{file.path}}">{{file.name}}</a>
                 </div>
                 <div class="row">
                     <div class="col-12">

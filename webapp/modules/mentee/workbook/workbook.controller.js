@@ -9,7 +9,7 @@
         .controller('workbookController', workbookController);
 
     /* ngInject */
-    function workbookController($scope, appConfig, $timeout, apiService, $rootScope, $state, $http) {
+    function workbookController($scope, appConfig, $timeout, apiService, $rootScope, $state, $http, $mdDialog) {
         var vm = this;
 
 
@@ -470,6 +470,15 @@
          */
         vm.saveFile = function (file) {
 
+            $mdDialog.show({
+                parent: angular.element(document.body),
+                template: '<md-dialog aria-label="List dialog">' +
+                    '  <md-dialog-content class="p-4">' +
+                    '       <b>Saving file...</b>' +
+                    '  </md-dialog-content>' +
+                    '</md-dialog>'
+            });
+            
             var fd = new FormData();
             fd.append("upload", file);
 
@@ -487,23 +496,24 @@
                     workbookId: vm.workbookid
                 }
             }).then(function (response) {
+                    $mdDialog.hide();
                     response = response.data.data;
                     if (response && response.error && response.error.msg) { // error from server                                         
                         $timeout(function () {
                             vm.regoErrMsg = response.error.msg || "Something went wrong, try again.";
                         });
                     } else {
-                        
+
                         document.getElementById('evidence-upload').value = ""; // clear file input field
-                        
+
                         if (!vm.stagesList.stage4.files)
                             vm.stagesList.stage4.files = [];
-                        
+
                         vm.stagesList.stage4.files.push({
                             name: file.name,
                             path: response.filepath
                         });
-                        
+
                     }
                 },
                 function (fail) { // service fails                    
